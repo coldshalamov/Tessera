@@ -1,0 +1,130 @@
+{
+  "accounts": [
+    {
+      "account": "DeploymentConfig",
+      "allocated_bytes": 106,
+      "bytes_hex": "0d7039512b1a9c1201424242424242424242424242424242424242424242424242424242424242424227a477b229235a6f6a9f9c8ff3fde950981a7231f24a3b74b141dc1d9f43b914a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1ff",
+      "discriminator_hex": "0d7039512b1a9c12",
+      "field_order": [
+        "discriminator:8",
+        "state_version:u8",
+        "network_genesis:32",
+        "program_id:32",
+        "authority:32",
+        "bump:u8"
+      ],
+      "serialized_len": 106
+    },
+    {
+      "account": "ProjectAccount",
+      "allocated_bytes": 346,
+      "bytes_hex": "b36e52b2d023ab74010102fe424242424242424242424242424242424242424242424242424242424242424227a477b229235a6f6a9f9c8ff3fde950981a7231f24a3b74b141dc1d9f43b91431cbd20c58dd23f0e1cb72a899eace1c172170f8f45e7aa5bb3dd70759422fde01c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0013e20ef0a29b8c87bff8a9105aacaaf652e041258fcf26db06e0f666b0c15597f0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a10000000546865204c616e7465726e20526f6f6d07070707070707070707070707070707070707070707070707070707070707070010a5d4e80000002a000000000000004083a46a00000000",
+      "discriminator_hex": "b36e52b2d023ab74",
+      "field_order": [
+        "discriminator:8",
+        "state_version:u8",
+        "economic_rule:u8",
+        "extension_policy:u8",
+        "bump:u8",
+        "network_genesis:32",
+        "program_id:32",
+        "creator:32",
+        "controller:option<32>",
+        "root_node:option<32>",
+        "project_nonce:16",
+        "title:u32len+bytes<=96",
+        "terms_sha256:32",
+        "total_units:u64",
+        "created_slot:u64",
+        "created_unix_time:i64"
+      ],
+      "serialized_len": 266
+    },
+    {
+      "account": "ContributionNode",
+      "allocated_bytes": 759,
+      "bytes_hex": "9f223aef8a771923010101fd0100dc0503138048a415af6e17f6391874822d677059f8890fdd8856fe60f7624f03e684ea013e20ef0a29b8c87bff8a9105aacaaf652e041258fcf26db06e0f666b0c15597f31cbd20c58dd23f0e1cb72a899eace1c172170f8f45e7aa5bb3dd70759422fde010000003333333333333333333333333333333333333333333333333333333333333333000102030405060708090a0b0c0d0e0f04000000416c65781a000000546865204c616e7465726e20526f6f6d207465737420736565647de807a322acfdd7f57d493465d7c69e6f087a8a3c318454637577a9b8114f15fd02088635b4bf27a9779a6aac03cd48258cb128d54f41948f052931f4127c1d0112cc1c1f597a4173d43b0f4b553cf588785f15d0ad0e5df3d327cd9064dc0a0407070707070707070707070707070707070707070707070707070707070707074083a46a0000000092100000000000004183a46a0000000000b4f2e7c5000000009b97af1d00000000195b38a800000000f7499c40000000009b97af1d00000000f7499c40000000",
+      "discriminator_hex": "9f223aef8a771923",
+      "field_order": [
+        "discriminator:8",
+        "state_version:u8",
+        "economic_rule:u8",
+        "node_state:u8",
+        "bump:u8",
+        "depth:u16",
+        "claim_bps:u16",
+        "custody_mode:u8",
+        "project:32",
+        "economic_parent:option<32>",
+        "contributor:32",
+        "references:u32count+<=8x32",
+        "nonce:16",
+        "name:u32len+bytes<=64",
+        "title:u32len+bytes<=96",
+        "intent_digest:32",
+        "artifact_sha256:32",
+        "metadata_sha256:option<32>",
+        "terms_sha256:32",
+        "declared_at:i64",
+        "observed_slot:u64",
+        "observed_unix_time:i64",
+        "residual_in_units:u64",
+        "effective_units:u64",
+        "residual_out_units:u64",
+        "issued_total_units:u64",
+        "own_payout_numerator_units:u64",
+        "own_payout_denominator_units:u64"
+      ],
+      "serialized_len": 405
+    },
+    {
+      "account": "StatementRecord",
+      "allocated_bytes": 295,
+      "bytes_hex": "435b4a3b2317cb14010301fc424242424242424242424242424242424242424242424242424242424242424227a477b229235a6f6a9f9c8ff3fde950981a7231f24a3b74b141dc1d9f43b91401138048a415af6e17f6391874822d677059f8890fdd8856fe60f7624f03e684ea31cbd20c58dd23f0e1cb72a899eace1c172170f8f45e7aa5bb3dd70759422fde013e20ef0a29b8c87bff8a9105aacaaf652e041258fcf26db06e0f666b0c15597f0077777777777777777777777777777777777777777777777777777777777777778888888888888888888888888888888888888888888888888888888888888888a483a46a00000000cc10000000000000a483a46a00000000",
+      "discriminator_hex": "435b4a3b2317cb14",
+      "field_order": [
+        "discriminator:8",
+        "state_version:u8",
+        "statement_type:u8",
+        "custody_mode:u8",
+        "bump:u8",
+        "network_genesis:32",
+        "program_id:32",
+        "project:option<32>",
+        "author:32",
+        "subject_ref:option<32>",
+        "aux_key:option<32>",
+        "payload_sha256:32",
+        "statement_digest:32",
+        "declared_at:i64",
+        "observed_slot:u64",
+        "observed_unix_time:i64"
+      ],
+      "serialized_len": 263
+    }
+  ],
+  "format_version": 1,
+  "notice": "Golden account-layout vectors for the tessera program (T03). Borsh+discriminator encoding; allocated_bytes is the fixed account allocation (rent basis), serialized_len the bytes used by this example.",
+  "pda_seeds": {
+    "ContributionNode": [
+      "tessera_node",
+      "project:32",
+      "contributor:32",
+      "nonce:16"
+    ],
+    "DeploymentConfig": [
+      "tessera_config"
+    ],
+    "ProjectAccount": [
+      "tessera_project",
+      "creator:32",
+      "project_nonce:16"
+    ],
+    "StatementRecord_proposed": [
+      "tessera_statement",
+      "author:32",
+      "statement_digest:32"
+    ]
+  },
+  "program_id": "3fkMf7oJhVkiJF3Q7N6TzbRs16gsDFrJWXHNZcSFvytX"
+}

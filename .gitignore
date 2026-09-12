@@ -24,6 +24,11 @@ browser-state*.json
 # Local data; store approved artifact manifests, not production media
 .local/
 .tmp/
+# Anchor/Solana program build & local validator state (T03)
+.anchor/
+test-ledger/
+*.so
+
 *.mp3
 *.m4a
 *.wav

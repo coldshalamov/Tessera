@@ -1,0 +1,35 @@
+# Rust-only test crate for the Tessera on-chain program (T03).
+#
+# Deliberately NOT a pnpm workspace package: this directory contains no
+# package.json, so `pnpm -r` ignores it and pnpm-lock.yaml is untouched.
+# Tests run against LiteSVM (executes the real compiled SBF binary) plus an
+# optional live `solana-test-validator` e2e gated on TESSERA_LOCALNET_RPC.
+#
+# Prerequisite: `anchor build` (or `cargo build-sbf`) must have produced
+# target/deploy/tessera.so — or set TESSERA_SO=/path/to/tessera.so.
+
+[package]
+name = "tessera-program-tests"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+name = "tessera_testkit"
+path = "src/lib.rs"
+
+[dependencies]
+tessera = { path = "../../programs/tessera", features = ["no-entrypoint"] }
+anchor-lang = "1.2.0"
+litesvm = "0.10.0"
+solana-keypair = "3"
+solana-signer = "3"
+solana-transaction = "3"
+solana-pubkey = "3"
+solana-instruction = "3"
+solana-account = "3"
+solana-transaction-error = "3"
+solana-rpc-client = "3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+bincode = "1"

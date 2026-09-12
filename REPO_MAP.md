@@ -121,15 +121,18 @@ tools/validate_seed.py
 tsconfig.base.json
 ```
 
-Implementation paths added by T01/T02 (see "Implementation tree" below for the
-full future layout — the T01/T02 rows are the only ones that exist today):
+Implementation paths added by T01/T02/T03 (see "Implementation tree" below for the
+full future layout — the marked rows are the ones that exist today):
 
 ```text
 packages/types/     Portable record types, semantic validators, wire codecs+decoders (T01/T02)
 packages/math/      Exact bigint economics + LocalTesseraPort simulator (T01)
 packages/identity/  IdentityPort, LocalTestSigner, provider boundary, continuity (T02)
+programs/tessera/   Anchor program: deployment config, projects, root+child nodes (T03)
 tests/math/         Vitest conformance/property/rejection/local-port suite (T01)
 tests/signatures/   Golden/mutation/replay/boundary/consent/continuity suite (T02)
+tests/program/      LiteSVM + solana-test-validator program suite (T03)
+generated/          Committed IDL + golden account-layout vectors (T03)
 ```
 
 `REPO_MAP.md` and `DELIVERY_MANIFEST.json` are generated last and are additional root files. The manifest contains hashes of all files except itself. Specification files, reference tools and fixtures are not a completed production app.
@@ -137,7 +140,7 @@ tests/signatures/   Golden/mutation/replay/boundary/consent/continuity suite (T0
 ## Implementation tree
 
 ```text
-programs/tessera/       Rust/Anchor economic state transitions        (target)
+programs/tessera/       Rust/Anchor economic state transitions        (T03 DONE)
 packages/math/          Pure integer economics + local TesseraPort    (T01 DONE)
 packages/types/         Record types, validators, binary codecs/decoders (T01/T02 DONE)
 packages/identity/      IdentityPort signing/consent/export adapters  (T02 DONE)
@@ -146,11 +149,15 @@ packages/evidence/      Portable evidence and recovery                (target)
 services/relayer/       Bounded sponsor submission                    (target)
 apps/cli/               Independent verification/export tools         (target)
 apps/explorer/          Generic read-only explorer                    (target)
-ops/                    Deployment, quotes and recovery               (target)
+ops/                    Deployment, quotes and recovery               (T03 started: localnet-t03.sh)
 tests/math/             Economics/types conformance suite             (T01 DONE)
 tests/signatures/       Signing/consent/continuity adversarial suite  (T02 DONE)
+tests/program/          Rust LiteSVM + live-localnet program tests    (T03 DONE)
+generated/idl/          Committed Anchor IDL for the program          (T03 DONE)
+generated/vectors/      Golden account-layout vectors                 (T03 DONE)
 reports/math-conformance.md  T01 evidence                             (T01 DONE)
 reports/identity-spike.md    T02 provider research + signer evidence  (T02 DONE)
+reports/program-footprint.md T03 measured footprint + test evidence   (T03 DONE)
 ```
 
 Rows marked `(target)` are future code destinations in the work packets, not

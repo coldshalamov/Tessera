@@ -1,0 +1,21 @@
+# Anchor workspace config for the Tessera program (T03).
+# The program keypair lives at target/deploy/tessera-keypair.json
+# (gitignored); the pubkey below is this development deployment's ID,
+# produced by `anchor keys sync` semantics for the localnet keypair.
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+tessera = "3fkMf7oJhVkiJF3Q7N6TzbRs16gsDFrJWXHNZcSFvytX"
+
+[provider]
+cluster = "Localnet"
+wallet = "/root/.config/solana/id.json"
+
+[scripts]
+# Tests are Rust crates (litesvm + optional live localnet RPC); no Node.js
+# required. `anchor test` wraps build + local validator; the test binary
+# itself does not need the external validator unless TESSERA_LOCALNET_RPC
+# is set (see tests/program).
+test = "cargo test -p tessera-program-tests"

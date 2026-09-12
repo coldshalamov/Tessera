@@ -1,5 +1,28 @@
 # Work log
 
+## Session 6 — 2026-09-12 — T03 Solana/Anchor provenance program
+
+Date / agent / branch / packet: 2026-09-12 / Devin implementation agent / `packet/t03` (from `main` at T02 commit) / T03.
+
+Actual files and behavior implemented:
+- `programs/tessera` (new Anchor program, program id `3fkMf7oJhVkiJF3Q7N6TzbRs16gsDFrJWXHNZcSFvytX`, localnet dev keypair only): `initialize_deployment` (one-time immutable DeploymentConfig committing the cluster genesis hash as the intent `network_genesis` domain — programs cannot read genesis from a sysvar), `create_project`, `publish_root`, `append_contribution`. Manual init-or-compare PDA creation (transfer/allocate/assign CPIs) gives the required idempotent semantics: same nonce + same intent digest → success without state change (`NodeReplayed` event); same nonce + different digest → `NonceReuseMismatch`/`ProjectConflict`. `ContributionNode` and `ProjectAccount` are immutable — no mutation, close, or admin path exists; parent accounts are strictly read-only during appends (verified byte-identical after sibling appends). OPEN and REVIEWED extension policies implemented; REVIEWED requires the recorded `project.controller` key to co-sign. On-chain IntentV1 wire recomputation + SHA-256 digest (`intent.rs` encodes the exact 18-field layout; 348-byte golden fixture verified). residual-v1 economics in u64/u128 checked math; `StatementRecord` layout committed but `publish_statement` deferred to a later packet.
+- `tests/program` (new pure-Cargo crate, NOT a pnpm package): `litesvm_suite.rs` — 18 tests against the real compiled `tessera.so` in LiteSVM 0.10 (happy paths incl. chain+siblings, REVIEWED co-sign, zero/100% claims, max strings+8 refs, idempotent replay; adversarial incl. wrong signer, cross-project parent, wrong genesis/program/project domain, terms mismatch, claim>10000, rounds-to-zero, nonce conflict, system-owned lookalike + malformed + non-canonical parents, depth bound, garbage/truncated ix data, missing/wrong controller, uninitialized config). `golden_vectors.rs` emits `generated/vectors/account-layout-v1.json`. `footprint.rs` prints measured CU/tx-size/sig-count table. `localnet_e2e.rs` — live `solana-test-validator` e2e gated on `TESSERA_LOCALNET_RPC`.
+- Root `Anchor.toml` + `Cargo.toml` workspace (outside pnpm), root `Cargo.lock` committed for version lock. `.gitignore` extended for `target/`, `.anchor/`, `test-ledger/`, `*.so`, `*keypair*.json`. `.gitattributes` pins LF + marks `*.so` binary. `ops/localnet-t03.sh`: one-shot build→validator→deploy→rent-quote→e2e script. `generated/idl/tessera.json` committed. `reports/program-footprint.md` — all measured values.
+- BACKLOG T03→DONE; REPO_MAP implementation paths updated.
+
+Commands run and exact results (all inside WSL2 `wsl -d Ubuntu-24.04`, `CARGO_TARGET_DIR=/root/tessera-target`, explicit toolchain PATH):
+- `anchor build --arch v2` → `tessera.so` 229,064 B (SBPF v2, `e_flags=0x2`; **note:** default `--arch v3` produces an artifact LiteSVM 0.10 cannot load — documented in the footprint report).
+- `cargo test -p tessera` → 3/3 pass (348-B golden intent bytes; digest `17ec8005…f5cc93d`; residual-v1 vector + boundary rules).
+- `cargo test -p tessera-program-tests --test litesvm_suite` → **18/18 pass**; `golden_vectors` 1/1; `footprint` 1/1 (CU: init 10,783 / create_project 14,584 / publish_root 17,978 / append 23,333 / append zero-claim 20,249 / root 100% 21,039 / max-envelope append 35,714; worst tx 1,122 B / 2 sigs).
+- `solana-test-validator --reset` + `solana program deploy` → program deployed, `solana program show` confirms 229,064 B, 1.59548952 SOL program account.
+- `TESSERA_LOCALNET_RPC=http://127.0.0.1:8899 cargo test -p tessera-program-tests --test localnet_e2e` → **pass**: genesis `Hk3MKZ1AZ8nTaZVQ3UaHAZYGQLi5PQ9H7N1VHs9teuRV`; rent quotes 106 B→1,628,640 / 346 B→3,299,040 / 759 B→6,173,520 / 295 B→2,944,080 lamports; live append CU 24,586; observed fee 5,000 lamports/sig.
+
+Contract/migration/security implications: no change to `docs/`, `schemas/`, `shared/`, `fixtures/`, `packages/` — T01/T02 wire contract consumed read-only and verified byte-for-byte (the on-chain digest equals the golden fixture digest for identical fields). Program id is a dev keypair; a devnet/mainnet id is a T09 deployment decision. Upgrade authority retained on localnet only (disposable key).
+
+External gates and smallest needed founder action: none for T03. Rust/Solana builds require WSL2 (Windows host has no Node/Solana toolchain); `ops/localnet-t03.sh` encodes the whole flow.
+
+Saved commit/artifact and next ready packet: single commit on `packet/t03` (not merged to `main`); **T04 is ready** — it consumes `generated/idl/tessera.json`, the instruction surface, and `IdentityPort` from T02.
+
 ## Session 5 — 2026-09-12 — T02 identity, intent signing and exportable consent
 
 Date / agent / branch / packet: 2026-09-12 / Devin implementation agent / `packet/t02` / T02.

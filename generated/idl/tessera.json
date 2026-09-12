@@ -1,0 +1,1381 @@
+{
+  "address": "3fkMf7oJhVkiJF3Q7N6TzbRs16gsDFrJWXHNZcSFvytX",
+  "metadata": {
+    "name": "tessera",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Tessera residual-v1 economic provenance program (T03)"
+  },
+  "instructions": [
+    {
+      "name": "append_contribution",
+      "docs": [
+        "Append a child contribution under an existing node. Parent account is",
+        "strictly read-only: children are alternative branches, not",
+        "withdrawals from a shared balance (docs/04)."
+      ],
+      "discriminator": [
+        19,
+        74,
+        24,
+        219,
+        22,
+        237,
+        233,
+        7
+      ],
+      "accounts": [
+        {
+          "name": "project"
+        },
+        {
+          "name": "parent",
+          "docs": [
+            "Economic parent: program-owned, same project, FINALIZED.",
+            "Read-only — sibling appends never touch parent economic state."
+          ]
+        },
+        {
+          "name": "node",
+          "docs": [
+            "`mut` required: the account is allocated via CPI on first creation."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  101,
+                  115,
+                  115,
+                  101,
+                  114,
+                  97,
+                  95,
+                  110,
+                  111,
+                  100,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project"
+              },
+              {
+                "kind": "account",
+                "path": "contributor"
+              },
+              {
+                "kind": "arg",
+                "path": "intent.nonce"
+              }
+            ]
+          }
+        },
+        {
+          "name": "contributor",
+          "docs": [
+            "Must equal intent.contributor (native signer == contributor)."
+          ],
+          "signer": true
+        },
+        {
+          "name": "controller",
+          "docs": [
+            "Required iff project.extension_policy == REVIEWED; must equal",
+            "project.controller. Pass the program id (None) under OPEN."
+          ],
+          "signer": true,
+          "optional": true
+        },
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "intent",
+          "type": {
+            "defined": {
+              "name": "IntentV1Fields"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_project",
+      "docs": [
+        "Create an immutable project. The network domain is committed from the",
+        "deployment config; rule, capacity and policy are fixed for v1.",
+        "Re-running with the same nonce AND identical parameters is idempotent;",
+        "the same nonce with different parameters is rejected."
+      ],
+      "discriminator": [
+        148,
+        219,
+        181,
+        42,
+        221,
+        114,
+        145,
+        190
+      ],
+      "accounts": [
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  101,
+                  115,
+                  115,
+                  101,
+                  114,
+                  97,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "project",
+          "docs": [
+            "`mut` required: the account is allocated via CPI on first creation."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  101,
+                  115,
+                  115,
+                  101,
+                  114,
+                  97,
+                  95,
+                  112,
+                  114,
+                  111,
+                  106,
+                  101,
+                  99,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "arg",
+                "path": "args.project_nonce"
+              }
+            ]
+          }
+        },
+        {
+          "name": "creator",
+          "signer": true
+        },
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "args",
+          "type": {
+            "defined": {
+              "name": "CreateProjectArgs"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "initialize_deployment",
+      "docs": [
+        "One-time immutable deployment configuration: commits the target",
+        "cluster genesis hash (the intent `network_genesis` domain). Programs",
+        "cannot read the genesis hash from a sysvar, so the reviewed value is",
+        "committed here once (docs/14 \"Network binding\"). Re-running with the",
+        "same parameters is idempotent; conflicting parameters are rejected."
+      ],
+      "discriminator": [
+        170,
+        47,
+        77,
+        172,
+        226,
+        183,
+        47,
+        224
+      ],
+      "accounts": [
+        {
+          "name": "config",
+          "docs": [
+            "the handler manually creates it or performs an idempotent compare.",
+            "`mut` required: the account is allocated via CPI on first creation."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  101,
+                  115,
+                  115,
+                  101,
+                  114,
+                  97,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "Recorded as config.authority; confers no power in v1."
+          ],
+          "signer": true
+        },
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "network_genesis",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "publish_root",
+      "docs": [
+        "Publish the unique project root (residual_in = U, depth 0).",
+        "Signer must be the project creator and intent.contributor."
+      ],
+      "discriminator": [
+        50,
+        189,
+        35,
+        212,
+        180,
+        100,
+        87,
+        25
+      ],
+      "accounts": [
+        {
+          "name": "project",
+          "writable": true
+        },
+        {
+          "name": "node",
+          "docs": [
+            "`mut` required: the account is allocated via CPI on first creation."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  101,
+                  115,
+                  115,
+                  101,
+                  114,
+                  97,
+                  95,
+                  110,
+                  111,
+                  100,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project"
+              },
+              {
+                "kind": "account",
+                "path": "contributor"
+              },
+              {
+                "kind": "arg",
+                "path": "intent.nonce"
+              }
+            ]
+          }
+        },
+        {
+          "name": "contributor",
+          "docs": [
+            "Must equal project.creator and intent.contributor."
+          ],
+          "signer": true
+        },
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "intent",
+          "type": {
+            "defined": {
+              "name": "IntentV1Fields"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "ContributionNode",
+      "discriminator": [
+        159,
+        34,
+        58,
+        239,
+        138,
+        119,
+        25,
+        35
+      ]
+    },
+    {
+      "name": "DeploymentConfig",
+      "discriminator": [
+        13,
+        112,
+        57,
+        81,
+        43,
+        26,
+        156,
+        18
+      ]
+    },
+    {
+      "name": "ProjectAccount",
+      "discriminator": [
+        179,
+        110,
+        82,
+        178,
+        208,
+        35,
+        171,
+        116
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "DeploymentInitialized",
+      "discriminator": [
+        82,
+        74,
+        68,
+        101,
+        6,
+        30,
+        33,
+        220
+      ]
+    },
+    {
+      "name": "NodePublished",
+      "discriminator": [
+        90,
+        42,
+        167,
+        61,
+        56,
+        14,
+        80,
+        153
+      ]
+    },
+    {
+      "name": "NodeReplayed",
+      "discriminator": [
+        236,
+        80,
+        230,
+        174,
+        185,
+        180,
+        88,
+        0
+      ]
+    },
+    {
+      "name": "ProjectCreated",
+      "discriminator": [
+        192,
+        10,
+        163,
+        29,
+        185,
+        31,
+        67,
+        168
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NetworkMismatch",
+      "msg": "network_genesis does not match the project's committed deployment domain"
+    },
+    {
+      "code": 6001,
+      "name": "ProgramMismatch",
+      "msg": "program_id does not match the executing program"
+    },
+    {
+      "code": 6002,
+      "name": "ProjectMismatch",
+      "msg": "project_address does not match the supplied project account"
+    },
+    {
+      "code": 6003,
+      "name": "SignerMismatch",
+      "msg": "intent contributor must equal the native transaction signer"
+    },
+    {
+      "code": 6004,
+      "name": "TermsMismatch",
+      "msg": "terms_sha256 must equal the project's immutable master terms digest"
+    },
+    {
+      "code": 6005,
+      "name": "NameOutOfRange",
+      "msg": "name must be 1..=64 UTF-8 bytes"
+    },
+    {
+      "code": 6006,
+      "name": "TitleOutOfRange",
+      "msg": "title must be <= 96 UTF-8 bytes"
+    },
+    {
+      "code": 6007,
+      "name": "ReferencesOutOfRange",
+      "msg": "references allows at most 8 entries"
+    },
+    {
+      "code": 6008,
+      "name": "InvalidCustodyMode",
+      "msg": "custody_mode must be 1 (user), 2 (embedded) or 3 (server)"
+    },
+    {
+      "code": 6009,
+      "name": "ClaimOutOfRange",
+      "msg": "claim_bps must be an integer in 0..=10000"
+    },
+    {
+      "code": 6010,
+      "name": "ResidualOutOfRange",
+      "msg": "residual_in outside 0..=U"
+    },
+    {
+      "code": 6011,
+      "name": "BranchCapacityExhausted",
+      "msg": "positive claim on a fully consumed residual"
+    },
+    {
+      "code": 6012,
+      "name": "ClaimRoundsToZero",
+      "msg": "positive claim rounds to zero effective units"
+    },
+    {
+      "code": 6013,
+      "name": "ArithmeticOverflow",
+      "msg": "checked arithmetic overflow"
+    },
+    {
+      "code": 6014,
+      "name": "AccountNotFresh",
+      "msg": "PDA account is not owned by the system program or is not empty"
+    },
+    {
+      "code": 6015,
+      "name": "InvalidPda",
+      "msg": "PDA seeds do not derive the supplied account address"
+    },
+    {
+      "code": 6016,
+      "name": "NonceReuseMismatch",
+      "msg": "nonce already used with a different intent digest (replay with identical intent is idempotent)"
+    },
+    {
+      "code": 6017,
+      "name": "ProjectConflict",
+      "msg": "project PDA already exists with different parameters"
+    },
+    {
+      "code": 6018,
+      "name": "DeploymentConflict",
+      "msg": "deployment config PDA already exists with different parameters"
+    },
+    {
+      "code": 6019,
+      "name": "RootMustHaveNoParent",
+      "msg": "publish_root intents must carry economic_parent = none"
+    },
+    {
+      "code": 6020,
+      "name": "ProjectRootExists",
+      "msg": "project root node already set"
+    },
+    {
+      "code": 6021,
+      "name": "CreatorRequired",
+      "msg": "publish_root signer must be the project creator"
+    },
+    {
+      "code": 6022,
+      "name": "ParentMismatch",
+      "msg": "intent.economic_parent must equal the supplied parent account"
+    },
+    {
+      "code": 6023,
+      "name": "ParentProjectMismatch",
+      "msg": "parent node belongs to a different project"
+    },
+    {
+      "code": 6024,
+      "name": "ParentNotAppendable",
+      "msg": "parent node is not in an appendable state"
+    },
+    {
+      "code": 6025,
+      "name": "ParentNotCanonicalPda",
+      "msg": "parent address is not the canonical node PDA for its stored project/contributor/nonce"
+    },
+    {
+      "code": 6026,
+      "name": "DepthOutOfRange",
+      "msg": "resulting depth would exceed MAX_DEPTH (1024)"
+    },
+    {
+      "code": 6027,
+      "name": "ControllerConsentRequired",
+      "msg": "REVIEWED project requires the recorded controller to co-sign"
+    },
+    {
+      "code": 6028,
+      "name": "ControllerMismatch",
+      "msg": "supplied controller does not match project.controller"
+    },
+    {
+      "code": 6029,
+      "name": "InvalidExtensionPolicy",
+      "msg": "invalid extension policy; expected 1 (OPEN) or 2 (REVIEWED)"
+    },
+    {
+      "code": 6030,
+      "name": "MissingController",
+      "msg": "REVIEWED policy requires a non-null controller key"
+    },
+    {
+      "code": 6031,
+      "name": "InvalidGenesis",
+      "msg": "network_genesis must be a real genesis hash (non-zero)"
+    },
+    {
+      "code": 6032,
+      "name": "ProjectTitleOutOfRange",
+      "msg": "project title must be <= 96 UTF-8 bytes"
+    }
+  ],
+  "types": [
+    {
+      "name": "ContributionNode",
+      "docs": [
+        "Immutable finalized contribution node. Never mutated, never closed.",
+        "All seven economic fields are stored per docs/01 (\"validated caches\")."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "state_version",
+            "docs": [
+              "Layout/state version; always 1."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "economic_rule",
+            "docs": [
+              "Economic rule id; 1 = \"residual-v1\"."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "node_state",
+            "docs": [
+              "Node lifecycle state; 1 = FINALIZED (the only on-chain state in v1 —",
+              "restricted/disputed are application annotations, never chain state)."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Canonical PDA bump."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "depth",
+            "docs": [
+              "parent.depth + 1; root depth 0; bound MAX_DEPTH = 1024."
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "claim_bps",
+            "docs": [
+              "Claimed basis points of the incoming residual, 0..=10000."
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "custody_mode",
+            "docs": [
+              "Disclosed signing context; 1 user, 2 embedded, 3 server."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "project",
+            "docs": [
+              "Owning project."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "economic_parent",
+            "docs": [
+              "Single economic parent; None for the project root."
+            ],
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "contributor",
+            "docs": [
+              "Native signer and beneficiary (v1 beneficiary == contributor)."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "references",
+            "docs": [
+              "Non-economic descriptive ancestry refs (<= 8)."
+            ],
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "nonce",
+            "docs": [
+              "16-byte contribution nonce (also a PDA seed)."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "docs": [
+              "Self-chosen label (1..=64 UTF-8 bytes)."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "docs": [
+              "Artifact label (<= 96 UTF-8 bytes)."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "intent_digest",
+            "docs": [
+              "SHA-256 of the IntentV1 wire bytes, recomputed on-chain."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "artifact_sha256",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "metadata_sha256",
+            "type": {
+              "option": {
+                "array": [
+                  "u8",
+                  32
+                ]
+              }
+            }
+          },
+          {
+            "name": "terms_sha256",
+            "docs": [
+              "Must equal project.terms_sha256."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "declared_at",
+            "docs": [
+              "Untrusted client-declared time."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "observed_slot",
+            "docs": [
+              "Network-observed slot / unix time."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "observed_unix_time",
+            "type": "i64"
+          },
+          {
+            "name": "residual_in_units",
+            "type": "u64"
+          },
+          {
+            "name": "effective_units",
+            "type": "u64"
+          },
+          {
+            "name": "residual_out_units",
+            "type": "u64"
+          },
+          {
+            "name": "issued_total_units",
+            "type": "u64"
+          },
+          {
+            "name": "own_payout_numerator_units",
+            "type": "u64"
+          },
+          {
+            "name": "own_payout_denominator_units",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CreateProjectArgs",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "project_nonce",
+            "docs": [
+              "16-byte PDA nonce; seeds [\"tessera_project\", creator, nonce]."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "title",
+            "docs": [
+              "<= 96 UTF-8 bytes."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "terms_sha256",
+            "docs": [
+              "Project master contribution-agreement digest."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "extension_policy",
+            "docs": [
+              "1 = OPEN, 2 = REVIEWED."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "controller",
+            "docs": [
+              "Required when extension_policy == REVIEWED."
+            ],
+            "type": {
+              "option": "pubkey"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "DeploymentConfig",
+      "docs": [
+        "One-time immutable deployment configuration. The program cannot read the",
+        "cluster genesis hash on-chain (no sysvar exposes it), so each deployment",
+        "commits its reviewed network-domain value here exactly once",
+        "(docs/14 \"Network binding\" — \"constant or configuration\")."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "state_version",
+            "docs": [
+              "Layout/state version; always 1 for v1."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "network_genesis",
+            "docs": [
+              "Target cluster genesis hash — the intent `network_genesis` domain."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "program_id",
+            "docs": [
+              "Program id committed at init; always == the executing program."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "authority",
+            "docs": [
+              "The authority that ran initialize_deployment. Recorded for",
+              "transparency; grants no mutation or admin power in v1."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Canonical PDA bump for [\"tessera_config\"]."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DeploymentInitialized",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "config",
+            "type": "pubkey"
+          },
+          {
+            "name": "network_genesis",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "IntentV1Fields",
+      "docs": [
+        "The complete semantic IntentV1 fields carried as instruction arguments.",
+        "`format_version`, `statement_code` and the domain separator are fixed v1",
+        "constants and are not repeated as arguments."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "network_genesis",
+            "docs": [
+              "Target network domain (deployment genesis hash)."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "program_id",
+            "docs": [
+              "Must equal the executing program id."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "project_address",
+            "docs": [
+              "Must equal the project account address."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "economic_parent",
+            "docs": [
+              "Economic parent node; None iff publish_root."
+            ],
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "references",
+            "docs": [
+              "Non-economic descriptive ancestry refs, 0..=8."
+            ],
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "nonce",
+            "docs": [
+              "16-byte CSPRNG uniqueness/idempotency nonce (PDA seed)."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "contributor",
+            "docs": [
+              "Must equal the native transaction signer (and beneficiary in v1)."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "docs": [
+              "1..=64 UTF-8 bytes."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "docs": [
+              "0..=96 UTF-8 bytes."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "artifact_sha256",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "metadata_sha256",
+            "type": {
+              "option": {
+                "array": [
+                  "u8",
+                  32
+                ]
+              }
+            }
+          },
+          {
+            "name": "terms_sha256",
+            "docs": [
+              "Must equal the project's master terms digest."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "claim_bps",
+            "docs": [
+              "0..=10000."
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "declared_at",
+            "docs": [
+              "Untrusted client-declared Unix time."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "custody_mode",
+            "docs": [
+              "1 user, 2 embedded, 3 server."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "NodePublished",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "node",
+            "type": "pubkey"
+          },
+          {
+            "name": "project",
+            "type": "pubkey"
+          },
+          {
+            "name": "parent",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "contributor",
+            "type": "pubkey"
+          },
+          {
+            "name": "intent_digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "depth",
+            "type": "u16"
+          },
+          {
+            "name": "claim_bps",
+            "type": "u16"
+          },
+          {
+            "name": "effective_units",
+            "type": "u64"
+          },
+          {
+            "name": "residual_out_units",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "NodeReplayed",
+      "docs": [
+        "Emitted when a republished intent maps onto an already-existing node",
+        "(identical digest): the transaction succeeds without changing state."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "node",
+            "type": "pubkey"
+          },
+          {
+            "name": "intent_digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProjectAccount",
+      "docs": [
+        "Immutable project scope. Extension policy and terms are fixed at creation;",
+        "`root_node` is set exactly once by publish_root."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "state_version",
+            "docs": [
+              "Layout/state version; always 1."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "economic_rule",
+            "docs": [
+              "Economic rule id; 1 = \"residual-v1\"."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "extension_policy",
+            "docs": [
+              "Extension policy; 1 = OPEN, 2 = REVIEWED."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Canonical PDA bump."
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "network_genesis",
+            "docs": [
+              "Committed deployment network domain (copied from DeploymentConfig)."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "program_id",
+            "docs": [
+              "Always == the executing program id."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "creator",
+            "docs": [
+              "Project creator; the only key allowed to publish the root."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "controller",
+            "docs": [
+              "REVIEWED co-signer. Inert under OPEN."
+            ],
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "root_node",
+            "docs": [
+              "The unique root node; set once by publish_root, never changed."
+            ],
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "project_nonce",
+            "docs": [
+              "16-byte PDA nonce supplied at creation (also a PDA seed)."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "title",
+            "docs": [
+              "Bounded project label (<= 96 UTF-8 bytes)."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "terms_sha256",
+            "docs": [
+              "Project master contribution-agreement digest; every child intent must",
+              "carry this exact value in terms_sha256."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "total_units",
+            "docs": [
+              "Total capacity U = 1_000_000_000_000."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "created_slot",
+            "docs": [
+              "Network-observed creation slot / unix time (not client-asserted)."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "created_unix_time",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProjectCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "project",
+            "type": "pubkey"
+          },
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "extension_policy",
+            "type": "u8"
+          },
+          {
+            "name": "terms_sha256",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

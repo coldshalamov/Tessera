@@ -1,0 +1,24 @@
+# Rust workspace for the Tessera Solana program (T03) and its Rust-side
+# test crate. This workspace is intentionally separate from the pnpm
+# workspace (packages/*, tests/* with package.json are Node packages;
+# tests/program here is a pure Cargo crate with no package.json).
+[workspace]
+members = [
+    "programs/*",
+    "tests/program",
+]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+rust-version = "1.89.0"
+
+[profile.release]
+overflow-checks = true
+lto = "fat"
+codegen-units = 1
+
+[profile.release.build-override]
+opt-level = 3
+incremental = false
+codegen-units = 1

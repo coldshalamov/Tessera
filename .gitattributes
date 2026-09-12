@@ -1,0 +1,16 @@
+# Byte-determinism matters: fixtures, golden wire vectors and generated
+# artifacts are compared by exact bytes/hash. Pin LF everywhere so Windows
+# checkouts do not rewrite them to CRLF.
+* text=auto eol=lf
+
+# Binary formats — never convert.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.mp3 binary
+*.m4a binary
+*.wav binary
+*.zip binary
+*.so binary
+*.ico binary
