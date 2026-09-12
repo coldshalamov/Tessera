@@ -28,6 +28,8 @@ Public upload, signing, generation and payments have server-enforced caps/flags.
 
 Use current official docs for changing APIs/prices. Prefer provider CLI/API when safe; use semantic browser automation for dashboard-only settings and inspect the actual result. Keep authenticated browser state out of source. Ask for the smallest unavoidable founder action once, record it, and continue independent work.
 
+Windows note: development happens under Git Bash. `2>nul` creates a real file literally named `nul` that Git cannot add; use `2>/dev/null`. Solana/Anchor CLIs are absent; program build/test needs WSL2 or a cloud dev environment — record the gate and keep non-chain work unblocked.
+
 For UI, create coherent designs, implement semantic controls and run browser visual/functional tests. A successful typecheck is not visual QA; a pretty page is not a working player. For money/chain, run deterministic/adversarial tests and preserve verified network/mode distinctions. A self-review is not an external audit.
 
 ## Completion report
