@@ -1,0 +1,8 @@
+# Python tooling dependencies for tools/*.py. Install with:
+#   python -m pip install -r tools/requirements.txt
+# validate_seed.py and check_shared.py are stdlib-only.
+# inspect_signature_fixture.py and regen_intent_fixture.py need `cryptography`
+# for Ed25519 (stdlib-only checks still run without it).
+# Schema validation helpers need `jsonschema`.
+cryptography>=42
+jsonschema>=4.21
