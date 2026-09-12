@@ -1,0 +1,18 @@
+{
+  "format_version": 1,
+  "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+  "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+  "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
+  "economic_parent": null,
+  "nonce": "000102030405060708090a0b0c0d0e0f",
+  "contributor": "F2FucZs3hTqsw6ZmyKozNEXM4otdYnsrL57M5FL8shCE",
+  "name": "Alex",
+  "title": "The Lantern Room test seed",
+  "artifact_sha256": "fd02088635b4bf27a9779a6aac03cd48258cb128d54f41948f052931f4127c1d",
+  "metadata_sha256": "12cc1c1f597a4173d43b0f4b553cf588785f15d0ad0e5df3d327cd9064dc0a04",
+  "terms_sha256": "05a2186a31e57ae3d5139f4771df03df05dd07034d64584d3e9620ecd4f71733",
+  "claim_bps": 1500,
+  "statement_code": "CONTRIBUTE_AND_ACCEPT_TERMS",
+  "declared_at": "1789166400",
+  "custody_mode": "server_custodied"
+}

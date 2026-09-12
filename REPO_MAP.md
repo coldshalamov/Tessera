@@ -1,0 +1,136 @@
+# Repository map — Tessera
+
+This is a map of the **actual specification seed**, followed by the future source layout agents should build. Existing Markdown links below all point inside this independent repo. `shared/` is intentionally copied into both repos so either agent has the full integration/launch context.
+
+## Specification and helper-document map
+
+| File | Purpose |
+|---|---|
+| [AGENTS.md](AGENTS.md) | Execution, authority and completion rules |
+| [BACKLOG.md](BACKLOG.md) | Dependency-aware task queue |
+| [DECISIONS.md](DECISIONS.md) | Confirmed/default/approval-gate register |
+| [LICENSE_DECISION.md](LICENSE_DECISION.md) | Software license/visibility decision not silently made |
+| [README.md](README.md) | Project purpose and entrypoint |
+| [START_HERE.md](START_HERE.md) | Initialization and reading order |
+| [docs/00_PRODUCT.md](docs/00_PRODUCT.md) | Tessera product specification |
+| [docs/01_ECONOMIC_MODEL.md](docs/01_ECONOMIC_MODEL.md) | Economic model: exact, version-specific residual claims |
+| [docs/02_STATE_AND_CONSENT.md](docs/02_STATE_AND_CONSENT.md) | State, consent, branches and authority |
+| [docs/03_SERIALIZATION_AND_SCHEMA.md](docs/03_SERIALIZATION_AND_SCHEMA.md) | Core record, serialization and signatures |
+| [docs/04_SOLANA_PROGRAM.md](docs/04_SOLANA_PROGRAM.md) | Solana program design and implementation plan |
+| [docs/05_IDENTITY_AND_KEYS.md](docs/05_IDENTITY_AND_KEYS.md) | Embedded signing identity and key safety |
+| [docs/06_PERSISTENCE_AND_EXPORT.md](docs/06_PERSISTENCE_AND_EXPORT.md) | Persistence, evidence bundles and independent recovery |
+| [docs/07_SECURITY_AND_ABUSE.md](docs/07_SECURITY_AND_ABUSE.md) | Threat model and abuse controls |
+| [docs/08_SDK_AND_EXPLORER.md](docs/08_SDK_AND_EXPLORER.md) | SDK, CLI, indexer and independent explorer |
+| [docs/09_TEST_AND_ACCEPTANCE.md](docs/09_TEST_AND_ACCEPTANCE.md) | Test strategy and release acceptance |
+| [docs/10_DEPLOYMENT_AND_OPERATIONS.md](docs/10_DEPLOYMENT_AND_OPERATIONS.md) | Deployment and operations |
+| [docs/11_LEGAL_EVIDENCE.md](docs/11_LEGAL_EVIDENCE.md) | Legal meaning, evidence and permission boundaries |
+| [docs/12_PRIOR_ART_AND_POSITIONING.md](docs/12_PRIOR_ART_AND_POSITIONING.md) | Prior art, research tasks and positioning |
+| [docs/13_FUNDING_AND_ROADMAP.md](docs/13_FUNDING_AND_ROADMAP.md) | Funding demonstration and staged roadmap |
+| [docs/14_BINARY_LAYOUT_V1.md](docs/14_BINARY_LAYOUT_V1.md) | Proposed binary layout v1 and semantic constraints |
+| [fixtures/README.md](fixtures/README.md) | Reference fixtures |
+| [packets/T01.md](packets/T01.md) | T01 — Deterministic economics and portable types |
+| [packets/T02.md](packets/T02.md) | T02 — Identity, intent signing and exportable consent |
+| [packets/T03.md](packets/T03.md) | T03 — Solana program, constraints and measured footprint |
+| [packets/T04.md](packets/T04.md) | T04 — SDK, sponsor relayer and finality reconciliation |
+| [packets/T05.md](packets/T05.md) | T05 — Independent evidence export, verifier and recovery |
+| [packets/T06.md](packets/T06.md) | T06 — Generic explorer and non-audio demonstration |
+| [packets/T07.md](packets/T07.md) | T07 — Program/key/sponsor security hardening |
+| [packets/T08.md](packets/T08.md) | T08 — Prior art, licensing and legal-evidence documentation |
+| [packets/T09.md](packets/T09.md) | T09 — Deployment, cost quotation and bounded mainnet readiness |
+| [packets/T10.md](packets/T10.md) | T10 — Cross-repo acceptance and incubator demonstration |
+| [reports/SEED_VALIDATION.md](reports/SEED_VALIDATION.md) | Actual reference validation, with unperformed tasks separated |
+| [shared/ACCEPTANCE_SCENARIO.md](shared/ACCEPTANCE_SCENARIO.md) | Complete two-branch/two-release acceptance test |
+| [shared/FOUNDING_DECISIONS.md](shared/FOUNDING_DECISIONS.md) | Conversation-derived source of intent |
+| [shared/INTEGRATION_CONTRACT.md](shared/INTEGRATION_CONTRACT.md) | Versioned cross-repo SDK/data agreement |
+| [shared/LAUNCH_BUDGET.md](shared/LAUNCH_BUDGET.md) | Free-tier limits, priced components and mainnet/payment scenarios |
+| [shared/RESEARCH_SOURCES.md](shared/RESEARCH_SOURCES.md) | 51 public primary sources and research limitations |
+| [shared/SETUP_RUNBOOK.md](shared/SETUP_RUNBOOK.md) | Provider setup and agent/human boundaries |
+| [status/SETUP_STATUS.md](status/SETUP_STATUS.md) | Actual external-resource status, initially unprovisioned |
+| [status/WORK_LOG.md](status/WORK_LOG.md) | Per-session implementation evidence |
+| [tools/README.md](tools/README.md) | Reference tools |
+
+## Existing non-map file inventory
+
+```text
+.env.example
+.gitignore
+AGENTS.md
+BACKLOG.md
+DECISIONS.md
+LICENSE_DECISION.md
+README.md
+START_HERE.md
+docs/00_PRODUCT.md
+docs/01_ECONOMIC_MODEL.md
+docs/02_STATE_AND_CONSENT.md
+docs/03_SERIALIZATION_AND_SCHEMA.md
+docs/04_SOLANA_PROGRAM.md
+docs/05_IDENTITY_AND_KEYS.md
+docs/06_PERSISTENCE_AND_EXPORT.md
+docs/07_SECURITY_AND_ABUSE.md
+docs/08_SDK_AND_EXPLORER.md
+docs/09_TEST_AND_ACCEPTANCE.md
+docs/10_DEPLOYMENT_AND_OPERATIONS.md
+docs/11_LEGAL_EVIDENCE.md
+docs/12_PRIOR_ART_AND_POSITIONING.md
+docs/13_FUNDING_AND_ROADMAP.md
+docs/14_BINARY_LAYOUT_V1.md
+fixtures/README.md
+fixtures/artifact.txt
+fixtures/economics.json
+fixtures/intent-v1-signature.json
+fixtures/intent-v1.json
+fixtures/metadata.json
+fixtures/terms.txt
+packets/T01.md
+packets/T02.md
+packets/T03.md
+packets/T04.md
+packets/T05.md
+packets/T06.md
+packets/T07.md
+packets/T08.md
+packets/T09.md
+packets/T10.md
+reports/SEED_VALIDATION.md
+schemas/contribution-intent.schema.json
+schemas/evidence-bundle.schema.json
+schemas/node.schema.json
+schemas/project.schema.json
+shared/ACCEPTANCE_SCENARIO.md
+shared/FOUNDING_DECISIONS.md
+shared/INTEGRATION_CONTRACT.md
+shared/LAUNCH_BUDGET.md
+shared/RESEARCH_SOURCES.md
+shared/SETUP_RUNBOOK.md
+shared/economic-vectors.json
+status/SETUP_STATUS.md
+status/WORK_LOG.md
+tools/README.md
+tools/inspect_signature_fixture.py
+tools/reference_economics.py
+tools/validate_seed.py
+```
+
+`REPO_MAP.md` and `DELIVERY_MANIFEST.json` are generated last and are additional root files. The manifest contains hashes of all files except itself. Specification files, reference tools and fixtures are not a completed production app.
+
+## Future implementation tree
+
+```text
+programs/tessera/       Rust/Anchor economic state transitions
+packages/math/         Pure integer economics
+packages/types/        Generated types and binary codecs
+packages/identity/     Injected signing/export adapters
+packages/sdk/          Network/submit/read/verify API
+packages/evidence/     Portable evidence and recovery
+services/relayer/       Bounded sponsor submission
+apps/cli/              Independent verification/export tools
+apps/explorer/         Generic read-only explorer
+ops/                   Deployment, quotes and recovery
+```
+
+These source directories are targets in the work packets, not code claimed to exist now. Local development can use a sibling repo artifact, but production integration must pin an SDK package/tarball and contract version. Never move Morpheus-specific production roles/player tables into Tessera's core merely because the repos are adjacent.
+
+## Agent handoff
+
+Begin at `START_HERE.md` and the first ready `BACKLOG.md` packet. Read linked inputs, implement target paths, run acceptance tests and save evidence. Preserve this map by regenerating/updating it when specs change; update implementation path references separately from historical seed inventory.

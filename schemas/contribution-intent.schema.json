@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tessera:draft:contribution-intent:1",
+  "title": "Tessera ContributionIntent draft v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format_version",
+    "network_genesis",
+    "program_id",
+    "project_address",
+    "economic_parent",
+    "nonce",
+    "contributor",
+    "name",
+    "title",
+    "artifact_sha256",
+    "metadata_sha256",
+    "terms_sha256",
+    "claim_bps",
+    "statement_code",
+    "declared_at",
+    "custody_mode"
+  ],
+  "properties": {
+    "format_version": {
+      "const": 1
+    },
+    "network_genesis": {
+      "type": "string",
+      "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+    },
+    "program_id": {
+      "type": "string",
+      "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+    },
+    "project_address": {
+      "type": "string",
+      "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+    },
+    "economic_parent": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "nonce": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$"
+    },
+    "contributor": {
+      "type": "string",
+      "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "Also enforce maximum 64 UTF-8 bytes; self-chosen, not verified."
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 96,
+      "description": "Also enforce maximum 96 UTF-8 bytes."
+    },
+    "artifact_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "metadata_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "terms_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "claim_bps": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000
+    },
+    "statement_code": {
+      "const": "CONTRIBUTE_AND_ACCEPT_TERMS"
+    },
+    "declared_at": {
+      "type": "string",
+      "pattern": "^-?(0|[1-9][0-9]{0,18})$"
+    },
+    "custody_mode": {
+      "enum": [
+        "user_controlled",
+        "embedded_provider",
+        "server_custodied"
+      ]
+    }
+  }
+}

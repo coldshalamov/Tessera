@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tessera:draft:project:1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format_version",
+    "genesis_hash",
+    "program_id",
+    "project_address",
+    "creator",
+    "controller",
+    "root_node",
+    "project_nonce",
+    "title",
+    "economic_rule",
+    "total_units",
+    "extension_policy",
+    "terms_sha256"
+  ],
+  "properties": {
+    "format_version": {
+      "const": 1
+    },
+    "genesis_hash": {
+      "type": "string",
+      "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+    },
+    "program_id": {
+      "type": "string",
+      "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+    },
+    "project_address": {
+      "type": "string",
+      "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+    },
+    "creator": {
+      "type": "string",
+      "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+    },
+    "controller": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "root_node": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "project_nonce": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$"
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 96
+    },
+    "economic_rule": {
+      "const": "residual-v1"
+    },
+    "total_units": {
+      "const": "1000000000000"
+    },
+    "extension_policy": {
+      "enum": [
+        "OPEN",
+        "REVIEWED"
+      ]
+    },
+    "terms_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tessera:draft:evidence-bundle:1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format_version",
+    "selected_leaf",
+    "exporter",
+    "files",
+    "limitations"
+  ],
+  "properties": {
+    "format_version": {
+      "const": 1
+    },
+    "selected_leaf": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "genesis_hash",
+        "program_id",
+        "project_address",
+        "node_address"
+      ],
+      "properties": {
+        "genesis_hash": {
+          "type": "string",
+          "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+        },
+        "program_id": {
+          "type": "string",
+          "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+        },
+        "project_address": {
+          "type": "string",
+          "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+        },
+        "node_address": {
+          "type": "string",
+          "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+        }
+      }
+    },
+    "exporter": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256",
+          "bytes",
+          "kind"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "description": "Safe relative path; reject traversal/symlinks/absolute paths semantically."
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "bytes": {
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]{0,19})$",
+            "description": "Unsigned decimal integer; semantic validator also enforces u64 and rights-space bounds."
+          },
+          "kind": {
+            "enum": [
+              "record",
+              "intent",
+              "signature",
+              "metadata",
+              "terms",
+              "artifact",
+              "report"
+            ]
+          }
+        }
+      },
+      "maxItems": 10000
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 1000
+      }
+    }
+  }
+}

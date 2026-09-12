@@ -1,0 +1,35 @@
+# Generated application output and dependencies
+node_modules/
+.pnpm-store/
+dist/
+build/
+.next/
+.wrangler/
+.vercel/
+coverage/
+target/
+test-results/
+playwright-report/
+__pycache__/
+*.pyc
+# Credentials and authenticated browser state
+.env
+.env.*
+!.env.example
+*keypair*.json
+*private-key*
+*recovery-secret*
+auth-state*.json
+browser-state*.json
+# Local data; store approved artifact manifests, not production media
+.local/
+.tmp/
+*.mp3
+*.m4a
+*.wav
+*.flac
+*.mp4
+*.mov
+*.zip
+.DS_Store
+Thumbs.db

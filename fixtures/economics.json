@@ -1,0 +1,300 @@
+{
+  "fixture_version": 1,
+  "notice": "Mathematical test data only. Labels A/B/C are not on-chain addresses. Beneficiary hex values encode raw bytes for deterministic tie tests.",
+  "total_units": "1000000000000",
+  "nodes": [
+    {
+      "id": "A",
+      "parent": null,
+      "claim_bps": 1500,
+      "expected": {
+        "residual_in_units": "1000000000000",
+        "claim_bps": 1500,
+        "effective_units": "150000000000",
+        "residual_out_units": "850000000000",
+        "issued_total_units": "150000000000",
+        "own_payout_numerator_units": "150000000000",
+        "own_payout_denominator_units": "150000000000"
+      }
+    },
+    {
+      "id": "ALICE",
+      "parent": "A",
+      "claim_bps": 5000,
+      "expected": {
+        "residual_in_units": "850000000000",
+        "claim_bps": 5000,
+        "effective_units": "425000000000",
+        "residual_out_units": "425000000000",
+        "issued_total_units": "575000000000",
+        "own_payout_numerator_units": "425000000000",
+        "own_payout_denominator_units": "575000000000"
+      }
+    },
+    {
+      "id": "B",
+      "parent": "A",
+      "claim_bps": 2000,
+      "expected": {
+        "residual_in_units": "850000000000",
+        "claim_bps": 2000,
+        "effective_units": "170000000000",
+        "residual_out_units": "680000000000",
+        "issued_total_units": "320000000000",
+        "own_payout_numerator_units": "170000000000",
+        "own_payout_denominator_units": "320000000000"
+      }
+    },
+    {
+      "id": "C",
+      "parent": "B",
+      "claim_bps": 1000,
+      "expected": {
+        "residual_in_units": "680000000000",
+        "claim_bps": 1000,
+        "effective_units": "68000000000",
+        "residual_out_units": "612000000000",
+        "issued_total_units": "388000000000",
+        "own_payout_numerator_units": "68000000000",
+        "own_payout_denominator_units": "388000000000"
+      }
+    },
+    {
+      "id": "D",
+      "parent": "C",
+      "claim_bps": 2500,
+      "expected": {
+        "residual_in_units": "612000000000",
+        "claim_bps": 2500,
+        "effective_units": "153000000000",
+        "residual_out_units": "459000000000",
+        "issued_total_units": "541000000000",
+        "own_payout_numerator_units": "153000000000",
+        "own_payout_denominator_units": "541000000000"
+      }
+    },
+    {
+      "id": "ZERO",
+      "parent": null,
+      "claim_bps": 0,
+      "expected": {
+        "residual_in_units": "1000000000000",
+        "claim_bps": 0,
+        "effective_units": "0",
+        "residual_out_units": "1000000000000",
+        "issued_total_units": "0",
+        "own_payout_numerator_units": "0",
+        "own_payout_denominator_units": "0"
+      }
+    },
+    {
+      "id": "CLOSED",
+      "parent": "A",
+      "claim_bps": 10000,
+      "expected": {
+        "residual_in_units": "850000000000",
+        "claim_bps": 10000,
+        "effective_units": "850000000000",
+        "residual_out_units": "0",
+        "issued_total_units": "1000000000000",
+        "own_payout_numerator_units": "850000000000",
+        "own_payout_denominator_units": "1000000000000"
+      }
+    },
+    {
+      "id": "CREDIT",
+      "parent": "CLOSED",
+      "claim_bps": 0,
+      "expected": {
+        "residual_in_units": "0",
+        "claim_bps": 0,
+        "effective_units": "0",
+        "residual_out_units": "0",
+        "issued_total_units": "1000000000000",
+        "own_payout_numerator_units": "0",
+        "own_payout_denominator_units": "1000000000000"
+      }
+    }
+  ],
+  "settlements": [
+    {
+      "id": "C_1000",
+      "amount_minor": 1000,
+      "weights": [
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000001",
+          "effective_units": "150000000000"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000002",
+          "effective_units": "170000000000"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000003",
+          "effective_units": "68000000000"
+        }
+      ],
+      "expected": {
+        "0000000000000000000000000000000000000000000000000000000000000001": 387,
+        "0000000000000000000000000000000000000000000000000000000000000002": 438,
+        "0000000000000000000000000000000000000000000000000000000000000003": 175
+      }
+    },
+    {
+      "id": "D_1000",
+      "amount_minor": 1000,
+      "weights": [
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000001",
+          "effective_units": "150000000000"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000002",
+          "effective_units": "170000000000"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000003",
+          "effective_units": "68000000000"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000004",
+          "effective_units": "153000000000"
+        }
+      ],
+      "expected": {
+        "0000000000000000000000000000000000000000000000000000000000000001": 277,
+        "0000000000000000000000000000000000000000000000000000000000000002": 314,
+        "0000000000000000000000000000000000000000000000000000000000000003": 126,
+        "0000000000000000000000000000000000000000000000000000000000000004": 283
+      }
+    },
+    {
+      "id": "C_1",
+      "amount_minor": 1,
+      "weights": [
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000001",
+          "effective_units": "150000000000"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000002",
+          "effective_units": "170000000000"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000003",
+          "effective_units": "68000000000"
+        }
+      ],
+      "expected": {
+        "0000000000000000000000000000000000000000000000000000000000000001": 0,
+        "0000000000000000000000000000000000000000000000000000000000000002": 1,
+        "0000000000000000000000000000000000000000000000000000000000000003": 0
+      }
+    },
+    {
+      "id": "D_0",
+      "amount_minor": 0,
+      "weights": [
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000001",
+          "effective_units": "150000000000"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000002",
+          "effective_units": "170000000000"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000003",
+          "effective_units": "68000000000"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000004",
+          "effective_units": "153000000000"
+        }
+      ],
+      "expected": {
+        "0000000000000000000000000000000000000000000000000000000000000001": 0,
+        "0000000000000000000000000000000000000000000000000000000000000002": 0,
+        "0000000000000000000000000000000000000000000000000000000000000003": 0,
+        "0000000000000000000000000000000000000000000000000000000000000004": 0
+      }
+    },
+    {
+      "id": "TIE_1",
+      "amount_minor": 1,
+      "weights": [
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000001",
+          "effective_units": "1"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000002",
+          "effective_units": "1"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000003",
+          "effective_units": "1"
+        }
+      ],
+      "expected": {
+        "0000000000000000000000000000000000000000000000000000000000000001": 1,
+        "0000000000000000000000000000000000000000000000000000000000000002": 0,
+        "0000000000000000000000000000000000000000000000000000000000000003": 0
+      }
+    },
+    {
+      "id": "AGGREGATE_BEFORE_DUST",
+      "amount_minor": 2,
+      "weights": [
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000001",
+          "effective_units": "1"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000001",
+          "effective_units": "1"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000002",
+          "effective_units": "2"
+        },
+        {
+          "beneficiary_hex": "0000000000000000000000000000000000000000000000000000000000000003",
+          "effective_units": "2"
+        }
+      ],
+      "expected": {
+        "0000000000000000000000000000000000000000000000000000000000000001": 1,
+        "0000000000000000000000000000000000000000000000000000000000000002": 1,
+        "0000000000000000000000000000000000000000000000000000000000000003": 0
+      }
+    }
+  ],
+  "invalid_append": [
+    {
+      "residual": 1000000000000,
+      "claim_bps": -1,
+      "error": "CLAIM_OUT_OF_RANGE"
+    },
+    {
+      "residual": 1000000000000,
+      "claim_bps": 10001,
+      "error": "CLAIM_OUT_OF_RANGE"
+    },
+    {
+      "residual": 1,
+      "claim_bps": 1,
+      "error": "CLAIM_ROUNDS_TO_ZERO"
+    },
+    {
+      "residual": 0,
+      "claim_bps": 1,
+      "error": "BRANCH_CAPACITY_EXHAUSTED"
+    },
+    {
+      "residual": 1000000000001,
+      "claim_bps": 500,
+      "error": "RESIDUAL_OUT_OF_RANGE"
+    }
+  ]
+}
