@@ -11,7 +11,7 @@ All tasks start PLANNED. These packets are execution briefs, not evidence that a
 | [T05](packets/T05.md) | Independent evidence export, verifier and recovery | PLANNED | T02 signatures and T04 node reads; can build bundle parser against fixtures first. |
 | [T06](packets/T06.md) | Generic explorer and non-audio demonstration | PLANNED | T01 fixtures; T04/T05 live reads/verification progressively integrated. |
 | [T07](packets/T07.md) | Program/key/sponsor security hardening | PLANNED | T03–T05 integrated enough to attack. |
-| [T08](packets/T08.md) | Prior art, licensing and legal-evidence documentation | PLANNED | Can run in parallel; uses current implemented scope before finalizing claims. |
+| [T08](packets/T08.md) | Prior art, licensing and legal-evidence documentation | DONE | Evidence: `reports/prior-art-matrix.md`, `reports/naming-collision.md`, `reports/license-inventory.md`, `reports/claim-wording.md`, `reports/founder-legal-queue.md`; WORK_LOG Session 4; `packet/t08` commit. Live primary sources verified 2026-09-12. Naming/license decisions remain founder gates (D16) — nothing renamed or licensed. |
 | [T09](packets/T09.md) | Deployment, cost quotation and bounded mainnet readiness | PLANNED | T03 footprint, T04 SDK, T05 recovery, T07 review; founder approval for live actions. |
 | [T10](packets/T10.md) | Cross-repo acceptance and incubator demonstration | PLANNED | T01–T06 functional; coordinate with M11/M12; T07–T09 determine launch level. |
 

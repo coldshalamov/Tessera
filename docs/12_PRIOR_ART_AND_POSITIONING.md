@@ -12,6 +12,8 @@ W3C PROV and C2PA establish provenance/content-manifest vocabulary [S22,S23]. Pl
 
 Investigate music collaboration/rights metadata efforts including Creative Passport/Mycelia using their own primary material before making historical claims. Also examine Solana asset-royalty tools for why a sale royalty divided among a fixed list differs from normalized claims along an economic path. Use actual code/docs/tests, not vendor summaries.
 
+**2026-09-12 update (T08, see [reports/prior-art-matrix.md](../reports/prior-art-matrix.md)):** Story Protocol has rebranded to "The DATA Foundation" ($IP → $DATA, docs at docs.datafdn.org) and repositioned around AI-training-data provenance; its PIL license and Licensing Module remain documented. KOR Protocol/Korus (Base, stablecoin splits, ERC-6551 IP accounts) is now the closest shipping "remix economics" comparator. ConsenSys Tessera's repo was archived 2026-06-01; tessera.pe operates an unrelated Solana private-markets platform under the same name — see [reports/naming-collision.md](../reports/naming-collision.md).
+
 ## Comparison deliverable
 
 Create `reports/prior-art-matrix.md` with exact source/date, supported features, mismatch, reuse opportunity and licensing. Include at least: generic attestation; NFT creator royalty list; programmable IP/derivative license platform; off-chain split-contract service; W3C PROV/C2PA; Tessera proposed mechanism. Mark unknowns. A feature table is not a patent search or legal clearance.

@@ -1,5 +1,28 @@
 # Work log
 
+## Session 4 — 2026-09-12 — T08 prior art, licensing and legal-evidence documentation
+
+Date / agent / branch / packet: 2026-09-12 / Devin implementation agent / `packet/t08` / T08.
+
+Actual files and behavior implemented:
+- `reports/prior-art-matrix.md` — primary-source matrix: OpenTimestamps, OriginStamp→OriginVault, Solana Attestation Service, Story Protocol→**The DATA Foundation** (rebrand found live: $IP→$DATA, docs.datafdn.org, PIL verified), KOR Protocol/Korus, Splits (0xSplits), Metaplex Token Metadata, W3C PROV, C2PA/Content Credentials, Mycelia Creative Passport vs. Tessera residual-v1. Every comparator fetched 2026-09-12 with does/doesn't/Tessera-difference/what-they-do-better; unknowns explicitly marked.
+- `reports/naming-collision.md` — Tessera: ConsenSys Tessera (repo archived 2026-06-01), tessera.pe Solana private-markets platform, ex-Fractional.art NFT Tessera, npm `tessera`; Morpheus: HPE Morpheus, mor.org MOR network, Morpheus.Network, npm `morpheus`, MorpheuS music-gen, cultural uses. Severity + options; no rename performed (D16 gate).
+- `reports/license-inventory.md` — MIT/Apache-2.0/GPL/LGPL-MPL/BUSL tradeoffs for spec+SDK+program; actual dependency inventory from pnpm-lock + node_modules scan (0 runtime deps; all dev deps MIT/Apache-2.0/ISC/BSD-3-Clause, no copyleft); LICENSE_DECISION.md state. No license chosen.
+- `reports/claim-wording.md` — paste-ready signature/terms/evidence/payout/persistence/dispute wording consistent with docs/11+05+02+06, plus a banned-phrase list usable as a lint check.
+- `reports/founder-legal-queue.md` — explicit checkbox queue keyed to D12–D16 + smaller items.
+- `docs/12` addendum (Story→DATA rebrand, KOR, ConsenSys archival, tessera.pe), BACKLOG T08 → DONE, packets/T08 status line.
+- Note: packet text listed `reports/naming-risk.md`, `reports/legal-review-questions.md`, `docs/public-claims.md` as targets; the founder's T08 brief renamed them to `naming-collision.md`, `founder-legal-queue.md`, `claim-wording.md` — same scope.
+
+Commands run and exact results: `python tools/validate_seed.py --skip-inventory` in a clean worktree of commit `0157bc9` → **passed** (131 local links, 20 JSON files, 0 errors). Baseline note: `main` was already failing this check on `tests/math/tsconfig.json` (JSONC comments vs. strict `json.loads`); comments removed, no semantic change (tsc reads strict JSON fine). In the live working tree the validator additionally reports pre-existing environmental noise: `node_modules/` README links (untracked, gitignored) and another agent's uncommitted `packages/identity/` — none are this packet's files. Web fetches: opentimestamps.org, attest.solana.com, originstamp.com, w3.org/TR/prov-overview, spec.c2pa.org, contentcredentials.org, splits.org, developers.metaplex.com/token-metadata, github.com/ConsenSys/tessera, docs.tessera.pe, story.foundation, docs.datafdn.org (+ PIL page), morpheusdata.com, korprotocol.io, techdocs.korprotocol.io, myceliaformusic.org, npm registries for tessera/morpheus — all 2026-09-12. Story's old docs URLs (docs.story.foundation) failed post-rebrand; royalty-module detail marked unverified.
+
+Visual/browser evidence (when applicable): n/a — documentation packet.
+
+Contract/migration/security implications: none — `packages/`, `programs/`, `schemas/`, `shared/`, `fixtures/`, `../Morpheus` untouched except one comment-only edit: `tests/math/tsconfig.json` comments stripped to satisfy the required validator (flagged deviation from the packet's path restrictions; trivial no-op, needed to clear a pre-existing main failure). `docs/12` gained a dated addendum only. No code, no license file, no rename, no purchases. Branch note: a concurrent agent switched the shared working tree to `packet/t03` mid-session; the commit was moved to `packet/t08` and `packet/t03` restored to `ab2f61d` with their uncommitted work left intact.
+
+External gates and smallest needed founder action: full decision queue in `reports/founder-legal-queue.md`; smallest next action is the D16 trademark knockout search before any brand spend, and the license choice (MIT vs Apache-2.0 comparison ready) before repo goes public.
+
+Saved commit/artifact and next ready packet: single commit on `packet/t08` (not merged). T09/T10 can now consume honest-claims wording and the founder queue; no legal clearance is presumed by this packet.
+
 ## Session 3 — 2026-09-12 — T01 deterministic economics and portable types
 
 Date / agent / branch / packet: 2026-09-12 / Devin implementation agent / `packet/t01` / T01.
