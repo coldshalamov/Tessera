@@ -14,13 +14,13 @@ A creator publishes a seed, names a claim against its remaining economic capacit
 
 Residual is **unallocated capacity, not an escrow balance**. Claims create integer effective weights; payouts at any version normalize that version's issued weights to 100%. Root-only versions can pay 100% to a root whose effective weight is much smaller. The schema must explicitly expose residual-in, requested claim, effective units, residual-out, issued total and the new node's as-is payout ratio. Ancestor payout ratios are relative to the selected version, not overwritten on historical nodes.
 
-Tessera itself enforces the economic tree and validates these calculations on-chain. It is not just a generic hash log whose meaning is trapped in Morpheus servers. One economic parent is deliberately supported in v1. Multiple descriptive references are allowed in metadata; economic merges require a future explicit model, not an ambiguous `parents[]` field.
+Tessera itself enforces the economic tree and validates these calculations on-chain. It is not just a generic hash log whose meaning is trapped in Morpheus servers. One economic parent is deliberately supported on-chain in v1. A signed, bounded `references` list (at most eight node addresses) in the core record captures additional descriptive ancestry; economic merges still require a future explicit versioned design, not an ambiguous `parents[]` field.
 
 ## Identity and UX
 
 A single public `name` field is self-chosen: a name, alias or studio label. No compulsory legal-name taxonomy. Public-key signatures, statement meaning, artifact hashes, terms and chain position add evidentiary context. No statement claims that a name was identity-verified.
 
-Normal website login; no required wallet installation, token purchase, gas funding, external crypto website or seed phrase at onboarding. An embedded signing identity is created automatically; keys/export tools are accessible inside Settings. The platform sponsors chain costs. Retaining an export is optional for everyday use but necessary for genuinely independent key recovery unless a separate recovery arrangement exists.
+Normal website login; no required wallet installation, token purchase, gas funding, external crypto website or seed phrase at onboarding. An embedded signing identity is created automatically; keys/export tools are accessible inside Settings. Default signing is a platform-generated server-custodied keypair provisioned silently at login with in-settings export (founder-confirmed); managed embedded providers are an optional scaling upgrade, and custody mode is always disclosed. The platform sponsors chain costs. Retaining an export is optional for everyday use but necessary for genuinely independent key recovery unless a separate recovery arrangement exists.
 
 ## Budget and execution
 

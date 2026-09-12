@@ -4,8 +4,11 @@
   "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
   "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
   "economic_parent": null,
+  "references": [
+    "5BXQSBCPDShWC5DoEKUyoFoKgaVC978Um3WiHmid718S"
+  ],
   "nonce": "000102030405060708090a0b0c0d0e0f",
-  "contributor": "F2FucZs3hTqsw6ZmyKozNEXM4otdYnsrL57M5FL8shCE",
+  "contributor": "4MPEkX67Yf1CApYj9PSzN6RCENYS2aFcrvHjZmpFW7Au",
   "name": "Alex",
   "title": "The Lantern Room test seed",
   "artifact_sha256": "fd02088635b4bf27a9779a6aac03cd48258cb128d54f41948f052931f4127c1d",

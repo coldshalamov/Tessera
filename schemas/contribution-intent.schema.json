@@ -10,6 +10,7 @@
     "program_id",
     "project_address",
     "economic_parent",
+    "references",
     "nonce",
     "contributor",
     "name",
@@ -48,6 +49,16 @@
           "type": "null"
         }
       ]
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+      },
+      "maxItems": 8,
+      "default": [],
+      "description": "Signed descriptive ancestry/dependency node addresses within the same network/program/project; non-economic, does not affect arithmetic."
     },
     "nonce": {
       "type": "string",

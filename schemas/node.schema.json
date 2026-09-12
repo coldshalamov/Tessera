@@ -9,6 +9,7 @@
     "economic_rule",
     "node_ref",
     "economic_parent",
+    "references",
     "contributor",
     "name",
     "title",
@@ -100,6 +101,16 @@
           "type": "null"
         }
       ]
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+      },
+      "maxItems": 8,
+      "default": [],
+      "description": "Signed descriptive ancestry/dependency node addresses within the same network/program/project; non-economic, does not affect arithmetic."
     },
     "contributor": {
       "type": "string",

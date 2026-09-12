@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tessera:draft:statement:1",
+  "title": "Tessera Statement draft v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format_version",
+    "network_genesis",
+    "program_id",
+    "project_address",
+    "statement_type",
+    "subject_ref",
+    "aux_key",
+    "payload_sha256",
+    "declared_at",
+    "custody_mode"
+  ],
+  "properties": {
+    "format_version": {
+      "const": 1
+    },
+    "network_genesis": {
+      "type": "string",
+      "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+    },
+    "program_id": {
+      "type": "string",
+      "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+    },
+    "project_address": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Absent for identity-scoped statements such as KEY_CONTINUITY."
+    },
+    "statement_type": {
+      "enum": [
+        "APP_DEFINED",
+        "KEY_CONTINUITY",
+        "RELEASE_ANCHOR",
+        "RETRACTION_OR_DISPUTE"
+      ]
+    },
+    "subject_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Node address being annotated/finalized; RELEASE_ANCHOR uses the release's economic leaf."
+    },
+    "aux_key": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "KEY_CONTINUITY carries the new public key here; the signer is the old key."
+    },
+    "payload_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Digest of the referenced payload bytes, e.g. release manifest or canonical identity-link JSON."
+    },
+    "declared_at": {
+      "type": "string",
+      "pattern": "^-?(0|[1-9][0-9]{0,18})$"
+    },
+    "custody_mode": {
+      "enum": [
+        "user_controlled",
+        "embedded_provider",
+        "server_custodied"
+      ]
+    }
+  }
+}

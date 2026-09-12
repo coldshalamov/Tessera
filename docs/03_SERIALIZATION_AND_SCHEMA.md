@@ -10,7 +10,9 @@ Artifact is the exact byte sequence hashed; normalization/transcoding creates a 
 
 ## Contribution intent
 
-Required semantic fields: format/rule version, network/program, project, economic parent or null for root, 16-byte random nonce, contributor public key, chosen name, title, artifact SHA-256, metadata SHA-256 or explicit absent marker, terms SHA-256, claim_bps, statement code, client-declared creation time and identity-custody disclosure. A metadata URI is a retrieval hint and MUST NOT substitute for a digest.
+Required semantic fields: format/rule version, network/program, project, economic parent or null for root, a bounded `references` list of descriptive ancestry node addresses, 16-byte random nonce, contributor public key, chosen name, title, artifact SHA-256, metadata SHA-256 or explicit absent marker, terms SHA-256, claim_bps, statement code, client-declared creation time and identity-custody disclosure. A metadata URI is a retrieval hint and MUST NOT substitute for a digest.
+
+`references` is signed but non-economic: up to eight node addresses scoped by the already-committed network/program/project, recording descriptive ancestry or dependency. It creates no additional economic parent, changes no payout arithmetic and reserves no capacity. Referenced-node existence is enforced at the SDK/application layer; the program stores the list as declared. An economic multi-parent merge remains a future explicit versioned design.
 
 A signer MUST bind the statement meaning and terms digest. `CONTRIBUTE_AND_ACCEPT_TERMS` is not the same as `I_AUTHORED_EVERYTHING`. The standard statement means “I submit this artifact under the referenced terms and accept the stated economic claim.” Authorship, licenses, provenance references and role can be richer app-specific assertions.
 
@@ -56,4 +58,4 @@ This is a partial illustration, not a complete signed record. See generated sche
 
 Target a measured node account at or below roughly 640 bytes, but this is an engineering target, not a verified layout. Bound all strings and keep full metadata/terms off-chain with exports. Preserve the conservative 1,232-byte transaction envelope until the target cluster's larger-transaction activation is confirmed [S13]. Multiple signatures and metadata/name lengths must be included in worst-case serialization tests. Failure at a size boundary must be visible before requesting signatures.
 
-Program acceptance computes and stores derived fields. Core economic state is immutable. Retrieval hints can be added through separately signed supplemental records, not by altering the original statement. Key link/retraction/dispute events use distinct typed domains so a signature cannot be replayed as a contribution or transfer.
+Program acceptance computes and stores derived fields. Core economic state is immutable. Retrieval hints can be added through separately signed supplemental records, not by altering the original statement. Key-continuity, retraction, release-anchor and dispute events are `StatementV1` records under the distinct `TESSERA:STATEMENT:1` domain, so a signature cannot be replayed as a contribution or transfer.

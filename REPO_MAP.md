@@ -97,6 +97,7 @@ schemas/contribution-intent.schema.json
 schemas/evidence-bundle.schema.json
 schemas/node.schema.json
 schemas/project.schema.json
+schemas/statement.schema.json
 shared/ACCEPTANCE_SCENARIO.md
 shared/FOUNDING_DECISIONS.md
 shared/INTEGRATION_CONTRACT.md
@@ -109,6 +110,7 @@ status/WORK_LOG.md
 tools/README.md
 tools/inspect_signature_fixture.py
 tools/reference_economics.py
+tools/regen_intent_fixture.py
 tools/validate_seed.py
 ```
 

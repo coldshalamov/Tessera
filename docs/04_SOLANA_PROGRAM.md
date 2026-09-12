@@ -16,7 +16,7 @@ Account creation is funded by an explicitly authorized sponsor or signer. Deposi
 
 `append_contribution`: require parent owned by this program and belonging to the same project, valid initialized account format (the app checks finality before presenting a parent; the program checks account state, not an RPC commitment label), active parent reference, child signer, policy/controller consent where required, unique nonce/PDA and checked claim. Derive new fields from the parent; ignore/reject client supplied contradictory caches. Create exactly one child. Parent economic state is read-only, so two children need not fight over a global residual balance: they are alternatives, not withdrawals from shared cash.
 
-`publish_statement` can be deferred until after append/export, or implemented as a distinct bounded append-only evidence record for retraction/key continuity. It MUST NOT reallocate a node. No arbitrary invocation forwarding or payout instruction exists in v1.
+`publish_statement` can be deferred until after append/export; when implemented it writes a bounded append-only `StatementV1` record ([binary layout](14_BINARY_LAYOUT_V1.md)) of type `APP_DEFINED`, `KEY_CONTINUITY`, `RELEASE_ANCHOR` or `RETRACTION_OR_DISPUTE`. It MUST NOT reallocate or mutate a node. No arbitrary invocation forwarding or payout instruction exists in v1.
 
 ## Authorization invariants
 

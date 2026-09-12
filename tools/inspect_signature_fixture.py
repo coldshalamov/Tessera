@@ -39,6 +39,9 @@ def inspect(require_signature: bool=False) -> dict:
          'program_id':b58(take(32)),
          'project_address':b58(take(32))}
     parent=optional();got['economic_parent']=None if parent is None else b58(parent)
+    ref_count=take(1)[0]
+    if ref_count>8:raise ValueError('references exceeds bound')
+    got['references']=[b58(take(32)) for _ in range(ref_count)]
     got['nonce']=take(16).hex();got['contributor']=b58(take(32))
     got['name']=text(64);got['title']=text(96)
     got['artifact_sha256']=take(32).hex()

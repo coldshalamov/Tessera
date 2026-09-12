@@ -18,9 +18,11 @@ Record the custody/signing mode as contextual evidence. Attribution to a real pe
 
 ## Initial implementation choice and gates
 
-Local/devnet reference mode uses independently randomly generated test keys and no real-value custody. Public pilot selects a managed embedded-wallet adapter after export, recovery, Solana-signing and cost tests. Privy is a candidate, not a compulsory vendor; its published 500-MAU price cliff must be budgeted. Crossmint is an alternative whose smart-account identity/export behavior may differ [S16–S19]. Keep `IdentityPort` replaceable and use an ordinary Ed25519 signer as the core protocol identity.
+Local/devnet reference mode uses independently randomly generated test keys and no real-value custody. The default mode for demo **and** public pilot is `server_custodied`: a platform-generated per-user Ed25519 key provisioned silently at login, encrypted at rest per the minimum engineering below, and exportable from Settings. This is an honestly disclosed custody choice — `custody_mode` and exported evidence always show it, and the server-impersonation warning in the trust-model section stands unchanged. It is not a claim of exclusive personal authorship or non-repudiation.
 
-Do not delay the whole product pending a vendor. Build against a test adapter, keep mainnet-signing off, and finish the player/collaboration/proofs. Do not quietly promote a convenient test custody backend into production with valuable contracts.
+A managed `embedded_provider` adapter is an optional upgrade path, not the launch requirement; adopting it in production needs a cost/security/recovery review first. Privy is a candidate, not a compulsory vendor; its published 500-MAU price cliff must be budgeted. Crossmint is an alternative whose smart-account identity/export behavior may differ [S16–S19]. Keep `IdentityPort` replaceable and use an ordinary Ed25519 signer as the core protocol identity.
+
+Do not delay the whole product pending a vendor. Build against the server-custodied adapter, keep mainnet-signing off until approved, and finish the player/collaboration/proofs. Changing custody modes or promoting a convenient test custody backend into production with valuable contracts requires the documented disclosure/review gate — never a silent settings change.
 
 ## Minimum server-custody engineering for tests
 
@@ -38,7 +40,7 @@ Detached signing and native transaction signing may be two SDK calls behind one 
 
 Key export requires recent authentication, an explicit warning and a safe in-app provider/export flow. Prefer client-side delivery/download without logging. A copied key can have multiple holders; export does not prove exclusive control or cause the server/provider to forget existing authority. The founder must not receive user private keys through support requests.
 
-V1 identifies each contribution by its signing key. A later key-continuity statement is signed by both old and new keys and references their public addresses. It helps link identities but does not itself transfer copyright or redirect every past payment. If the old key is lost, a unilateral new-key claim does not prove continuity. Application account recovery may restore access through a provider's recovery policy, whose trust assumptions must be disclosed.
+V1 identifies each contribution by its signing key. The key-continuity record format is specified in v1: a `KEY_CONTINUITY` `StatementV1` ([binary layout](14_BINARY_LAYOUT_V1.md)) is signed by the old key and names the new public key in `aux_key`; its committed payload is a canonical identity-link JSON that should embed the new key's countersignature so both sides attest. Chained records form an A→B→C lineage verifiable from exports after the application disappears. The `publish_statement` instruction may still land in a later packet, but the record format already exists. Continuity helps link identities but does not itself transfer copyright or redirect every past payment. If the old key is lost, a unilateral new-key claim does not prove continuity. Application account recovery may restore access through a provider's recovery policy, whose trust assumptions must be disclosed.
 
 A compromised old key can sign a fraudulent rotation. Do not promise simple A→B rotation solves compromise. A future recovery/controller or delay/challenge design needs a separate threat model. For v1, preserve records, annotate disputes, require strong payment-account verification and avoid pretending there is trustless lost-key recovery.
 

@@ -44,6 +44,8 @@ Readable error codes: `AUTH_REQUIRED`, `CONSENT_EXPIRED`, `PARENT_NOT_FOUND`, `P
 
 A release manifest binds `release_id`, `node_ref`, exact audio hash, artifact/storage version, complete ancestry IDs, all beneficiaries' effective units, issued denominator, terms hash, `revenue_policy_version`, currency scope, provenance verification report and rights-review state. Its byte hash is retained with every related ledger entry. Revenue must not resolve against the production's current head later.
 
+Each published release's manifest SHA-256 is anchored on-chain in a `RELEASE_ANCHOR` statement record whose `subject_ref` is the release's economic leaf node, so the binding between the sold artifact and its economic version survives the application. Devnet anchors are test evidence, not permanent records.
+
 The revenue base is funds actually attributable to that release after explicitly agreed deductions; it is not all money the creator ever earns. Morpheus's fee is a versioned distribution agreement outside the residual math. Tessera's output distributes 100% of whatever **distributable amount** is passed to it; it does not certify that the amount is truthful.
 
 ## Independent development

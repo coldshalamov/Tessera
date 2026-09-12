@@ -25,7 +25,7 @@ If implementing both policies would delay the core, implement OPEN first in loca
 5. `finalized`: immutable node state exists on target chain; projection becomes canonical.
 6. `restricted` or `disputed`: app discovery/distribution annotation, never a rewrite of historical facts.
 
-Expired unsigned/signed offers can be re-proposed. A changed claim or artifact produces a fresh intent nonce. A failed transaction can be retried using the same semantic intent and nonce. No on-chain mutation is necessary for ordinary pre-publication rejection. Public dispute/retraction statements are separate signed records referencing the original; they cannot erase it or automatically adjudicate ownership.
+Expired unsigned/signed offers can be re-proposed. A changed claim or artifact produces a fresh intent nonce. A failed transaction can be retried using the same semantic intent and nonce. No on-chain mutation is necessary for ordinary pre-publication rejection. Public dispute/retraction statements are separate signed `StatementV1` records ([binary layout](14_BINARY_LAYOUT_V1.md)) referencing the original; they cannot erase it or automatically adjudicate ownership.
 
 ## Economic versus editorial acceptance
 

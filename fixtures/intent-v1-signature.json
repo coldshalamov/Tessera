@@ -1,12 +1,12 @@
 {
   "fixture_only": true,
   "notice": "Fictional network/program/project; no chain account or finalized transaction exists. Test signing key is unsafe for production.",
-  "wire_base64": "VEVTU0VSQTpDT05UUklCVVRJT046MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnE4BIpBWvbhf2ORh0gi1ncFn4iQ/diFb+YPdiTwPmhOoAAAECAwQFBgcICQoLDA0OD9BWDaY0mH0nUUe7TwehrJnjKd4y+ekoH13NBV5rB2vLBAAAAEFsZXgaAAAAVGhlIExhbnRlcm4gUm9vbSB0ZXN0IHNlZWT9AgiGNbS/J6l3mmqsA81IJYyxKNVPQZSPBSkx9BJ8HQESzBwfWXpBc9Q7D0tVPPWIeF8V0K0OXfPTJ82QZNwKBAWiGGox5Xrj1ROfR3HfA98F3QcDTWRYTT6WIOzU9xcz3AUBQIOkagAAAAAD",
-  "wire_bytes": 315,
-  "intent_sha256": "4d0e0037016c0f4d3b27aaf80fa4fcb0dc192f9fc029c2a49a7dcb8a13050a25",
-  "public_key_base58": "F2FucZs3hTqsw6ZmyKozNEXM4otdYnsrL57M5FL8shCE",
-  "public_key_hex": "d0560da634987d275147bb4f07a1ac99e329de32f9e9281f5dcd055e6b076bcb",
-  "signature_base64": "uCOYhj9eEhVzb84dQWP8+3eeCFbFpWpFrLfmyjSyPPtY44imquWBv4vuMC+39AuUUoFauXhm5dtuLFID5IfZBg==",
+  "wire_base64": "VEVTU0VSQTpDT05UUklCVVRJT046MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnE4BIpBWvbhf2ORh0gi1ncFn4iQ/diFb+YPdiTwPmhOoAAT4g7wopuMh7/4qRBarKr2UuBBJY/PJtsG4PZmsMFVl/AAECAwQFBgcICQoLDA0ODzHL0gxY3SPw4ctyqJnqzhwXIXD49F56pbs91wdZQi/eBAAAAEFsZXgaAAAAVGhlIExhbnRlcm4gUm9vbSB0ZXN0IHNlZWT9AgiGNbS/J6l3mmqsA81IJYyxKNVPQZSPBSkx9BJ8HQESzBwfWXpBc9Q7D0tVPPWIeF8V0K0OXfPTJ82QZNwKBAWiGGox5Xrj1ROfR3HfA98F3QcDTWRYTT6WIOzU9xcz3AUBQIOkagAAAAAD",
+  "wire_bytes": 348,
+  "intent_sha256": "17ec80050a9b433b4131a60e794dc828222e235186f2af3bbdb4cbb36f5cc93d",
+  "public_key_base58": "4MPEkX67Yf1CApYj9PSzN6RCENYS2aFcrvHjZmpFW7Au",
+  "public_key_hex": "31cbd20c58dd23f0e1cb72a899eace1c172170f8f45e7aa5bb3dd70759422fde",
+  "signature_base64": "xZ71UoEkorXpvPtUUUlSt0vUjHr1jHPGigyJVJQX9urYlQXIno+sf51DmMksG1Bb6lcXlu8tX2lhP/VgGHsaDA==",
   "signed_message": "32-byte SHA-256 of IntentV1 bytes",
   "verified_locally": true
 }

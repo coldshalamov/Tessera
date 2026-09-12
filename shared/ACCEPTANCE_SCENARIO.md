@@ -12,6 +12,6 @@ Record a simulated $10.00 **distributable** receipt for the third-node version a
 
 Tamper with the metadata name or claim, switch the program/network, substitute a same-role sibling track, replay the publish click and deliver duplicate/out-of-order payment webhooks. None may forge a valid agreement, change an existing release, duplicate a claim or double-pay.
 
-Export a branch, public metadata, detached signatures and available artifact files. Disable the Morpheus database and host. The Tessera verifier must reconstruct the tree and exact payouts from the bundle, verify bytes/signatures offline, and distinguish that from live chain-finality verification through an independent RPC. Unknown/missing terms yield an incomplete verification report rather than a green badge.
+Export a branch, public metadata, detached signatures, each release's manifest anchor record and available artifact files. Disable the Morpheus database and host. The Tessera verifier must reconstruct the tree and exact payouts from the bundle, verify bytes/signatures and each manifest's `RELEASE_ANCHOR` statement record offline, and distinguish that from live chain-finality verification through an independent RPC. Unknown/missing terms yield an incomplete verification report rather than a green badge.
 
 If the test uses devnet, show **test network; resettable; not permanent evidence**. No demo should display “paid” when money was only calculated or “ownership verified” when only bytes/signatures were verified.

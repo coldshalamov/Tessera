@@ -20,5 +20,9 @@ Status is either **founder-confirmed**, **proposed default**, or **approval gate
 | D14 | approval gate | Mainnet budget, upgrade authority and release | actual measurements and independent review |
 | D15 | approval gate | Live fees/subscription allocation/payout policies | financial eligibility, working capital and law |
 | D16 | approval gate | Brand/domain/package/software license | names chosen, not cleared; no automatic public license |
+| D17 | founder-confirmed | 2026-09-12: signed bounded `references[]` (<=8) in IntentV1 records descriptive ancestry; non-economic | docs/14_BINARY_LAYOUT_V1.md, docs/03, intent/node schemas, regenerated fixtures |
+| D18 | founder-confirmed | 2026-09-12: StatementV1 record family specified (APP_DEFINED, KEY_CONTINUITY, RELEASE_ANCHOR, RETRACTION_OR_DISPUTE) | docs/14_BINARY_LAYOUT_V1.md, schemas/statement.schema.json, docs/02, docs/04, docs/05 |
+| D19 | founder-confirmed | 2026-09-12: release manifest SHA-256 anchored on-chain via RELEASE_ANCHOR statement on the economic leaf | shared/INTEGRATION_CONTRACT.md, shared/ACCEPTANCE_SCENARIO.md, Morpheus docs/07 |
+| D20 | founder-confirmed | 2026-09-12: default signing is platform-generated server-custodied keys with in-settings export; managed embedded providers optional | docs/05_IDENTITY_AND_KEYS.md, shared/FOUNDING_DECISIONS.md, Morpheus docs/06 |
 
 Record changes with date, author, affected spec/schema/tests, alternatives, evidence and migration consequences. Historic deployed economic rules never change merely because this register is edited.

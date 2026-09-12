@@ -10,7 +10,7 @@ No external resources were provisioned in the specification session. Fill IDs on
 | Google OAuth | demo | Not configured | — | Account/consent configuration |
 | Private R2 bucket | demo | Not created | — | Account/billing activation if required |
 | SMTP sender | demo | Not configured | — | Domain/account verification |
-| Embedded signer | test/pilot | Not selected | — | Provider/custody approval |
+| Signing identity | test/pilot | Default: platform-provisioned server-custodied Ed25519 with in-settings export; managed embedded provider is an optional upgrade | — | Provider/custody review before any switch |
 | Tessera program | local/devnet/mainnet | Not deployed | — | Mainnet budget/authority approval |
 | Sponsor key/budget | mainnet | Disabled | — | Funding and cap |
 | Stripe/Connect | live | Disabled | — | Business/KYC/fees/terms |
