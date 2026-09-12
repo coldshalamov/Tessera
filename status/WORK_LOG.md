@@ -1,5 +1,25 @@
 # Work log
 
+## Session 7 — 2026-09-12 — T05 independent evidence export, verifier and recovery
+
+Date / agent / branch / packet: 2026-09-13 / Devin implementation agent / `packet/t05` / T05.
+
+Actual files and behavior implemented:
+- `packages/evidence/` (Workers-safe, zero `node:*` imports; WebCrypto + fflate 0.8.3): safe bundle writer/reader (`bundle.ts`), strict ZIP reader/writer with path traversal/zip-slip/duplicate/symlink/encrypted/zip64/zip-bomb rejection (`zip.ts`, `paths.ts`), manifest build + lenient parse (`manifest.ts`), structured pass/fail/warn/incomplete/skipped reports (`report.ts`), ancestry reconstruction + residual-v1 recomputation + frozen payout-table rebuild (`recover.ts`), full offline verifier (`verify.ts` — 21 named checks), minimal `getAccountInfo`/`getMinimumBalanceForRentExemption` RPC probes with labeled trust assumptions (`rpc.ts`), docs/14 field-sum storage quote (`quote.ts`), local-port session serialization (`session.ts`), export assembly (`export.ts`), deterministic demo session (`demo.ts`).
+- `apps/cli/` (`tessera-evidence`): `inspect`, `verify`, `export --from-port`, `quote`, `recover-known-project`, `demo`; exit codes 0/1/2/3/4/5/6 distinguish ok/usage/invalid/incomplete/unsupported/unreadable/network.
+- `tests/evidence/` (50 Vitest cases): all packet tamper classes (payload bytes, manifest hash/path, signature, economic field, wrong digest, missing ancestor → incomplete, missing terms → incomplete), unsupported-vs-malformed-v1 distinction, forward-compat unknown-kind preservation, traversal/zip-bomb/boundary suite, RPC mock suite, CLI e2e, and the restore exercise — a fresh temp-dir process importing only built `dist` reconstructs the 4-node chain and the exact `x/541000000000` payout table, asserted equal to the live port's `getPayouts`.
+- `reports/evidence-verifier.md`, `reports/recovery-rehearsal.md`; BACKLOG T05 → DONE; REPO_MAP implementation rows.
+
+Commands run and exact results: `pnpm -r build` exit 0 (4 tsc packages); `pnpm -r test` exit 0 — tests/math **169/169**, tests/evidence **50/50** (5 files); `pnpm typecheck` exit 0 (6 projects); `pnpm lint` exit 0 (0 warnings/0 errors, 44 files). CLI smoke: `demo → export` self-check `valid-offline (19 pass/0 fail/2 warn/0 incomplete)`; `verify` exit 0 `VALID-OFFLINE`; `verify` on tampered zip exit 2, unsupported exit 4, unreadable exit 5, `--rpc` unreachable exit 6; `quote` prints labeled illustrative rent; `recover-known-project` prints the exact payout table.
+
+Visual/browser evidence (when applicable): n/a — library/CLI packet; CLI text output quoted above and in reports.
+
+Contract/migration/security implications: none to shared contracts — `docs/`, `schemas/`, `shared/`, `fixtures/` untouched (verified via `git status`). Packet path deviation: CLI lives at `apps/cli` per the packet's stated target (`apps/cli/**`) rather than `tools/`; `tools/` remains Python reference tools only. fflate added as the package's sole runtime dependency (pinned 0.8.3). No floating-point economics; local mode is labeled in bundle limitations, report status and CLI output — no chain finality claimed. Exports carry no private keys (tested).
+
+External gates and smallest needed founder action: none for T05 itself. Not implemented (later packets): full online verification (program binary/upgrade state, decoded account data — needs T03 layout), `preview`/`recover-index`/`submit` CLI commands, real network submission.
+
+Saved commit/artifact and next ready packet: single commit on `packet/t05` (not merged). **T06 ready** (generic explorer can consume `EvidenceVerificationReport` + bundle reader); T07 can now attack the bundle surface. `reports/recovery-rehearsal.md` is the shutdown-exercise evidence.
+
 ## Session 6 — 2026-09-12 — T03 Solana/Anchor provenance program
 
 Date / agent / branch / packet: 2026-09-12 / Devin implementation agent / `packet/t03` (from `main` at T02 commit) / T03.

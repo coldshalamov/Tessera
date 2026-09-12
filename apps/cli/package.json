@@ -1,0 +1,30 @@
+{
+  "name": "tessera-evidence",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "tessera-evidence CLI: inspect/verify/export/recover evidence bundles. Node-only entry — node:fs stays OUT of @tessera/evidence's export path.",
+  "bin": {
+    "tessera-evidence": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/cli.d.ts",
+      "import": "./dist/cli.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "tessera-evidence": "node dist/cli.js"
+  },
+  "dependencies": {
+    "@tessera/evidence": "workspace:*",
+    "@tessera/math": "workspace:*",
+    "@tessera/types": "workspace:*"
+  }
+}

@@ -39,6 +39,8 @@ This is a map of the **actual specification seed**, followed by the future sourc
 | [packets/T09.md](packets/T09.md) | T09 — Deployment, cost quotation and bounded mainnet readiness |
 | [packets/T10.md](packets/T10.md) | T10 — Cross-repo acceptance and incubator demonstration |
 | [reports/math-conformance.md](reports/math-conformance.md) | T01 economics/type conformance evidence (commands + pass counts) |
+| [reports/evidence-verifier.md](reports/evidence-verifier.md) | T05 verifier checks, semantics and explicit non-claims |
+| [reports/recovery-rehearsal.md](reports/recovery-rehearsal.md) | T05 bundle-only shutdown/restore exercise evidence |
 | [reports/SEED_VALIDATION.md](reports/SEED_VALIDATION.md) | Actual reference validation, with unperformed tasks separated |
 | [shared/ACCEPTANCE_SCENARIO.md](shared/ACCEPTANCE_SCENARIO.md) | Complete two-branch/two-release acceptance test |
 | [shared/FOUNDING_DECISIONS.md](shared/FOUNDING_DECISIONS.md) | Conversation-derived source of intent |
@@ -121,16 +123,19 @@ tools/validate_seed.py
 tsconfig.base.json
 ```
 
-Implementation paths added by T01/T02/T03 (see "Implementation tree" below for the
+Implementation paths added by T01/T02/T03/T05 (see "Implementation tree" below for the
 full future layout — the marked rows are the ones that exist today):
 
 ```text
 packages/types/     Portable record types, semantic validators, wire codecs+decoders (T01/T02)
 packages/math/      Exact bigint economics + LocalTesseraPort simulator (T01)
 packages/identity/  IdentityPort, LocalTestSigner, provider boundary, continuity (T02)
+packages/evidence/  Bundle writer/reader, verifier, recovery, local export (T05)
 programs/tessera/   Anchor program: deployment config, projects, root+child nodes (T03)
+apps/cli/           tessera-evidence CLI: inspect/verify/export/quote/recover (T05)
 tests/math/         Vitest conformance/property/rejection/local-port suite (T01)
 tests/signatures/   Golden/mutation/replay/boundary/consent/continuity suite (T02)
+tests/evidence/     Bundle tamper/traversal/restore/CLI/RPC suite (T05)
 tests/program/      LiteSVM + solana-test-validator program suite (T03)
 generated/          Committed IDL + golden account-layout vectors (T03)
 ```
@@ -145,19 +150,22 @@ packages/math/          Pure integer economics + local TesseraPort    (T01 DONE)
 packages/types/         Record types, validators, binary codecs/decoders (T01/T02 DONE)
 packages/identity/      IdentityPort signing/consent/export adapters  (T02 DONE)
 packages/sdk/           Network/submit/read/verify API                (target)
-packages/evidence/      Portable evidence and recovery                (target)
+packages/evidence/      Portable evidence and recovery                (T05 DONE)
 services/relayer/       Bounded sponsor submission                    (target)
-apps/cli/               Independent verification/export tools         (target)
+apps/cli/               Independent verification/export tools         (T05 DONE)
 apps/explorer/          Generic read-only explorer                    (target)
 ops/                    Deployment, quotes and recovery               (T03 started: localnet-t03.sh)
 tests/math/             Economics/types conformance suite             (T01 DONE)
 tests/signatures/       Signing/consent/continuity adversarial suite  (T02 DONE)
 tests/program/          Rust LiteSVM + live-localnet program tests    (T03 DONE)
+tests/evidence/         Evidence tamper/traversal/restore suite       (T05 DONE)
 generated/idl/          Committed Anchor IDL for the program          (T03 DONE)
 generated/vectors/      Golden account-layout vectors                 (T03 DONE)
 reports/math-conformance.md  T01 evidence                             (T01 DONE)
 reports/identity-spike.md    T02 provider research + signer evidence  (T02 DONE)
 reports/program-footprint.md T03 measured footprint + test evidence   (T03 DONE)
+reports/evidence-verifier.md   T05 verifier spec + evidence           (T05 DONE)
+reports/recovery-rehearsal.md  T05 shutdown/restore exercise          (T05 DONE)
 ```
 
 Rows marked `(target)` are future code destinations in the work packets, not
