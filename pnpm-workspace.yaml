@@ -1,6 +1,7 @@
 packages:
   - "packages/*"
   - "tests/*"
+  - "apps/*"
 
 # vitest -> esbuild requires its postinstall (platform binary link).
 allowBuilds:

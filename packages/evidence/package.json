@@ -1,0 +1,26 @@
+{
+  "name": "@tessera/evidence",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Portable evidence-bundle writer/reader, offline verifier and recovery for Tessera (docs/06). Workers-safe: no Node-only APIs on the main export path; zip via fflate; hashing/signatures via WebCrypto.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@tessera/math": "workspace:*",
+    "@tessera/types": "workspace:*",
+    "fflate": "0.8.3"
+  }
+}

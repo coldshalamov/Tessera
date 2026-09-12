@@ -1,0 +1,20 @@
+{
+  "name": "@tessera-tests/evidence",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "pretest": "pnpm -r --filter @tessera/evidence... --filter tessera-evidence build",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@tessera/evidence": "workspace:*",
+    "@tessera/math": "workspace:*",
+    "@tessera/types": "workspace:*",
+    "@types/node": "24.13.3",
+    "fflate": "0.8.3",
+    "typescript": "5.9.3",
+    "vitest": "3.2.7"
+  }
+}

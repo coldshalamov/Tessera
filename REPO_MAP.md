@@ -39,6 +39,8 @@ This is a map of the **actual specification seed**, followed by the future sourc
 | [packets/T09.md](packets/T09.md) | T09 — Deployment, cost quotation and bounded mainnet readiness |
 | [packets/T10.md](packets/T10.md) | T10 — Cross-repo acceptance and incubator demonstration |
 | [reports/math-conformance.md](reports/math-conformance.md) | T01 economics/type conformance evidence (commands + pass counts) |
+| [reports/evidence-verifier.md](reports/evidence-verifier.md) | T05 verifier checks, semantics and explicit non-claims |
+| [reports/recovery-rehearsal.md](reports/recovery-rehearsal.md) | T05 bundle-only shutdown/restore exercise evidence |
 | [reports/SEED_VALIDATION.md](reports/SEED_VALIDATION.md) | Actual reference validation, with unperformed tasks separated |
 | [shared/ACCEPTANCE_SCENARIO.md](shared/ACCEPTANCE_SCENARIO.md) | Complete two-branch/two-release acceptance test |
 | [shared/FOUNDING_DECISIONS.md](shared/FOUNDING_DECISIONS.md) | Conversation-derived source of intent |
@@ -121,13 +123,16 @@ tools/validate_seed.py
 tsconfig.base.json
 ```
 
-Implementation paths added by T01 (see "Implementation tree" below for the full
-future layout — the T01 rows are the only ones that exist today):
+Implementation paths added by T01 and T05 (see "Implementation tree" below for
+the full future layout — these rows are the ones that exist today):
 
 ```text
 packages/types/     Portable record types, semantic validators, wire codecs (T01)
 packages/math/      Exact bigint economics + LocalTesseraPort simulator (T01)
+packages/evidence/  Bundle writer/reader, verifier, recovery, local export (T05)
+apps/cli/           tessera-evidence CLI: inspect/verify/export/quote/recover (T05)
 tests/math/         Vitest conformance/property/rejection/local-port suite (T01)
+tests/evidence/     Bundle tamper/traversal/restore/CLI/RPC suite (T05)
 ```
 
 `REPO_MAP.md` and `DELIVERY_MANIFEST.json` are generated last and are additional root files. The manifest contains hashes of all files except itself. Specification files, reference tools and fixtures are not a completed production app.
@@ -140,13 +145,16 @@ packages/math/          Pure integer economics + local TesseraPort    (T01 DONE)
 packages/types/         Record types, validators, binary codecs       (T01 DONE)
 packages/identity/      Injected signing/export adapters              (target)
 packages/sdk/           Network/submit/read/verify API                (target)
-packages/evidence/      Portable evidence and recovery                (target)
+packages/evidence/      Portable evidence and recovery                (T05 DONE)
 services/relayer/       Bounded sponsor submission                    (target)
-apps/cli/               Independent verification/export tools         (target)
+apps/cli/               Independent verification/export tools         (T05 DONE)
 apps/explorer/          Generic read-only explorer                    (target)
 ops/                    Deployment, quotes and recovery               (target)
 tests/math/             Economics/types conformance suite             (T01 DONE)
+tests/evidence/         Evidence tamper/traversal/restore suite       (T05 DONE)
 reports/math-conformance.md  T01 evidence                             (T01 DONE)
+reports/evidence-verifier.md   T05 verifier spec + evidence           (T05 DONE)
+reports/recovery-rehearsal.md  T05 shutdown/restore exercise          (T05 DONE)
 ```
 
 Rows marked `(target)` are future code destinations in the work packets, not
