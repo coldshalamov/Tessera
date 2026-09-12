@@ -26,6 +26,6 @@ Keep test and live identifiers separate. A tool returning a local simulation doe
 | Node / npm / pnpm | Node v24.15.0, npm 11.5.2, pnpm 12.4.1 — installed, working |
 | Rust | rustc/cargo 1.94.1 (Windows) — installed |
 | Git identity | configured (coldshalamov) |
-| WSL2 Ubuntu-24.04 | installed and verified working — use for Solana/Anchor builds (not supported natively on Windows); solana/agave/anchor CLIs not yet installed inside it |
+| WSL2 Ubuntu-24.04 | working — Solana toolchain installed inside: Rust 1.98.1, Agave/Solana 3.1.10, Anchor 1.2.0 (run via `wsl -d Ubuntu-24.04 -- bash -lc ...`); see `ops/wsl-solana-install.sh` |
 | Docker Desktop | running — enables `supabase start` local stack and local validators |
-| solana / anchor / supabase CLIs | not installed; install inside WSL2 (solana/anchor) or as dev dep (supabase) when the packet needs them |
+| supabase CLI | not installed; install as dev dep (`supabase` npm package) when needed |
