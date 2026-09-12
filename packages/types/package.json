@@ -1,0 +1,21 @@
+{
+  "name": "@tessera/types",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Portable Tessera record types, semantic validators and v1 wire codecs. Pure TypeScript; no network/Solana/web3 dependencies.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    // WebCrypto globals (crypto.subtle, CryptoKey, CryptoKeyPair, btoa) are
+    // provided by the Node 24 test runtime; DOM lib exposes their types.
+    "lib": ["ES2023", "DOM"],
+    "paths": {
+      "@tessera/types": ["../../packages/types/src/index.ts"],
+      "@tessera/math": ["../../packages/math/src/index.ts"]
+    }
+  },
+  "include": ["src", "vitest.config.ts"]
+}

@@ -38,6 +38,7 @@ This is a map of the **actual specification seed**, followed by the future sourc
 | [packets/T08.md](packets/T08.md) | T08 — Prior art, licensing and legal-evidence documentation |
 | [packets/T09.md](packets/T09.md) | T09 — Deployment, cost quotation and bounded mainnet readiness |
 | [packets/T10.md](packets/T10.md) | T10 — Cross-repo acceptance and incubator demonstration |
+| [reports/math-conformance.md](reports/math-conformance.md) | T01 economics/type conformance evidence (commands + pass counts) |
 | [reports/SEED_VALIDATION.md](reports/SEED_VALIDATION.md) | Actual reference validation, with unperformed tasks separated |
 | [shared/ACCEPTANCE_SCENARIO.md](shared/ACCEPTANCE_SCENARIO.md) | Complete two-branch/two-release acceptance test |
 | [shared/FOUNDING_DECISIONS.md](shared/FOUNDING_DECISIONS.md) | Conversation-derived source of intent |
@@ -54,6 +55,7 @@ This is a map of the **actual specification seed**, followed by the future sourc
 ```text
 .env.example
 .gitignore
+.oxlintrc.json
 AGENTS.md
 BACKLOG.md
 DECISIONS.md
@@ -92,6 +94,10 @@ packets/T07.md
 packets/T08.md
 packets/T09.md
 packets/T10.md
+package.json
+pnpm-lock.yaml
+pnpm-workspace.yaml
+reports/math-conformance.md
 reports/SEED_VALIDATION.md
 schemas/contribution-intent.schema.json
 schemas/evidence-bundle.schema.json
@@ -112,26 +118,40 @@ tools/inspect_signature_fixture.py
 tools/reference_economics.py
 tools/regen_intent_fixture.py
 tools/validate_seed.py
+tsconfig.base.json
+```
+
+Implementation paths added by T01 (see "Implementation tree" below for the full
+future layout — the T01 rows are the only ones that exist today):
+
+```text
+packages/types/     Portable record types, semantic validators, wire codecs (T01)
+packages/math/      Exact bigint economics + LocalTesseraPort simulator (T01)
+tests/math/         Vitest conformance/property/rejection/local-port suite (T01)
 ```
 
 `REPO_MAP.md` and `DELIVERY_MANIFEST.json` are generated last and are additional root files. The manifest contains hashes of all files except itself. Specification files, reference tools and fixtures are not a completed production app.
 
-## Future implementation tree
+## Implementation tree
 
 ```text
-programs/tessera/       Rust/Anchor economic state transitions
-packages/math/         Pure integer economics
-packages/types/        Generated types and binary codecs
-packages/identity/     Injected signing/export adapters
-packages/sdk/          Network/submit/read/verify API
-packages/evidence/     Portable evidence and recovery
-services/relayer/       Bounded sponsor submission
-apps/cli/              Independent verification/export tools
-apps/explorer/         Generic read-only explorer
-ops/                   Deployment, quotes and recovery
+programs/tessera/       Rust/Anchor economic state transitions        (target)
+packages/math/          Pure integer economics + local TesseraPort    (T01 DONE)
+packages/types/         Record types, validators, binary codecs       (T01 DONE)
+packages/identity/      Injected signing/export adapters              (target)
+packages/sdk/           Network/submit/read/verify API                (target)
+packages/evidence/      Portable evidence and recovery                (target)
+services/relayer/       Bounded sponsor submission                    (target)
+apps/cli/               Independent verification/export tools         (target)
+apps/explorer/          Generic read-only explorer                    (target)
+ops/                    Deployment, quotes and recovery               (target)
+tests/math/             Economics/types conformance suite             (T01 DONE)
+reports/math-conformance.md  T01 evidence                             (T01 DONE)
 ```
 
-These source directories are targets in the work packets, not code claimed to exist now. Local development can use a sibling repo artifact, but production integration must pin an SDK package/tarball and contract version. Never move Morpheus-specific production roles/player tables into Tessera's core merely because the repos are adjacent.
+Rows marked `(target)` are future code destinations in the work packets, not
+code claimed to exist now. Rows marked `(T01 DONE)` exist on `packet/t01` with
+the evidence in `reports/math-conformance.md`. Local development can use a sibling repo artifact, but production integration must pin an SDK package/tarball and contract version. Never move Morpheus-specific production roles/player tables into Tessera's core merely because the repos are adjacent.
 
 ## Agent handoff
 

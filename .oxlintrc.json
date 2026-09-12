@@ -1,0 +1,28 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "env": {
+    "es2023": true,
+    "node": true
+  },
+  "rules": {
+    "no-unused-vars": "error",
+    "no-var": "error",
+    "eqeqeq": "error",
+    "no-throw-literal": "error",
+    "typescript/no-explicit-any": "warn"
+  },
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "**/*.d.ts",
+    "docs",
+    "shared",
+    "fixtures",
+    "schemas",
+    "tools",
+    "packets",
+    "reports",
+    "status"
+  ]
+}

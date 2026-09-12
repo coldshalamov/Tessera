@@ -29,3 +29,4 @@ Keep test and live identifiers separate. A tool returning a local simulation doe
 | WSL2 Ubuntu-24.04 | working — Solana toolchain installed inside: Rust 1.98.1, Agave/Solana 3.1.10, Anchor 1.2.0 (run via `wsl -d Ubuntu-24.04 -- bash -lc ...`); see `ops/wsl-solana-install.sh` |
 | Docker Desktop | running — enables `supabase start` local stack and local validators |
 | supabase CLI | not installed; install as dev dep (`supabase` npm package) when needed |
+| Tessera pnpm workspace | installed on `packet/t01` — `@tessera/types` + `@tessera/math` build/test/typecheck/lint clean (T01) |

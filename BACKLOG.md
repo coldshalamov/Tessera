@@ -4,8 +4,8 @@ All tasks start PLANNED. These packets are execution briefs, not evidence that a
 
 | Packet | Outcome | State | Dependencies |
 |---|---|---|---|
-| [T01](packets/T01.md) | Deterministic economics and portable types | PLANNED | None; first implementation packet. |
-| [T02](packets/T02.md) | Identity, intent signing and exportable consent | PLANNED | T01 types; can overlap program work after the wire contract is agreed. |
+| [T01](packets/T01.md) | Deterministic economics and portable types | DONE | Evidence: `reports/math-conformance.md`, WORK_LOG Session 3, `packet/t01` commit. TypeScript reference implementation only — no deployed program or live money router. |
+| [T02](packets/T02.md) | Identity, intent signing and exportable consent | READY | T01 types/wire codec exist: IntentV1 `references`, golden fixture round-trip, `TesseraPort` local adapter. Can overlap program work now that the wire contract is fixed. |
 | [T03](packets/T03.md) | Solana program, constraints and measured footprint | PLANNED | T01/T02 wire and economics fixed for the development version. |
 | [T04](packets/T04.md) | SDK, sponsor relayer and finality reconciliation | PLANNED | T01–T03 interfaces and local program available. |
 | [T05](packets/T05.md) | Independent evidence export, verifier and recovery | PLANNED | T02 signatures and T04 node reads; can build bundle parser against fixtures first. |
