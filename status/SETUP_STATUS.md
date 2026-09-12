@@ -18,3 +18,14 @@ No external resources were provisioned in the specification session. Fill IDs on
 | Content/legal contact | public | Not configured | — | Actual permissions/contact/terms |
 
 Keep test and live identifiers separate. A tool returning a local simulation does not change a live resource's state.
+
+## Local toolchain (verified 2026-09-12)
+
+| Tool | State |
+|---|---|
+| Node / npm / pnpm | Node v24.15.0, npm 11.5.2, pnpm 12.4.1 — installed, working |
+| Rust | rustc/cargo 1.94.1 (Windows) — installed |
+| Git identity | configured (coldshalamov) |
+| WSL2 Ubuntu-24.04 | installed and verified working — use for Solana/Anchor builds (not supported natively on Windows); solana/agave/anchor CLIs not yet installed inside it |
+| Docker Desktop | running — enables `supabase start` local stack and local validators |
+| solana / anchor / supabase CLIs | not installed; install inside WSL2 (solana/anchor) or as dev dep (supabase) when the packet needs them |
