@@ -5,4 +5,5 @@ export * from './base58.js';
 export * from './hex.js';
 export * from './records.js';
 export * from './wire.js';
+export * from './decode.js';
 export * from './port.js';

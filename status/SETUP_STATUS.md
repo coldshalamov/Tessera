@@ -10,7 +10,7 @@ No external resources were provisioned in the specification session. Fill IDs on
 | Google OAuth | demo | Not configured | — | Account/consent configuration |
 | Private R2 bucket | demo | Not created | — | Account/billing activation if required |
 | SMTP sender | demo | Not configured | — | Domain/account verification |
-| Signing identity | test/pilot | Default: platform-provisioned server-custodied Ed25519 with in-settings export; managed embedded provider is an optional upgrade | — | Provider/custody review before any switch |
+| Signing identity | test/pilot | Default: platform-provisioned server-custodied Ed25519 with in-settings export; managed embedded provider is an optional upgrade | `reports/identity-spike.md` (Privy/Crossmint export/recovery/pricing facts, T02) | Provider/custody review before any switch — founder picks provider, creates account, supplies credentials, approves pricing |
 | Tessera program | local/devnet/mainnet | Not deployed | — | Mainnet budget/authority approval |
 | Sponsor key/budget | mainnet | Disabled | — | Funding and cap |
 | Stripe/Connect | live | Disabled | — | Business/KYC/fees/terms |
@@ -30,3 +30,4 @@ Keep test and live identifiers separate. A tool returning a local simulation doe
 | Docker Desktop | running — enables `supabase start` local stack and local validators |
 | supabase CLI | not installed; install as dev dep (`supabase` npm package) when needed |
 | Tessera pnpm workspace | installed on `packet/t01` — `@tessera/types` + `@tessera/math` build/test/typecheck/lint clean (T01) |
+| Tessera signing workspace | `@tessera/identity` + `tests/signatures` added on `packet/t02` — build/test/typecheck/lint clean (T02); signing dep `@noble/ed25519@3.2.0` pinned; no provider account provisioned |

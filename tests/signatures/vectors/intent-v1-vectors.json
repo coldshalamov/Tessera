@@ -1,0 +1,284 @@
+{
+  "fixture_only": true,
+  "notice": "Fictional network/program/project; no chain account or finalized transaction exists. Generated with fresh fixture_only test keys; private seeds were never written.",
+  "family": "IntentV1",
+  "domain": "TESSERA:CONTRIBUTION:1",
+  "generated_by": "tests/signatures/gen-vectors.mjs",
+  "cases": [
+    {
+      "id": "base-root",
+      "description": "Root intent: metadata present, one reference, server_custodied.",
+      "record": {
+        "format_version": 1,
+        "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+        "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+        "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
+        "economic_parent": null,
+        "references": [
+          "8WcmtGvEt1tmxceaCz2KZF2bXUrLMVDGQThBeLUDg1b1"
+        ],
+        "nonce": "000102030405060708090a0b0c0d0e0f",
+        "contributor": "CxaoeK49uNzU1rmMYQpMH9YGmmHtVYysrViPF5waTcia",
+        "name": "Alex",
+        "title": "The Lantern Room test seed",
+        "artifact_sha256": "fd02088635b4bf27a9779a6aac03cd48258cb128d54f41948f052931f4127c1d",
+        "metadata_sha256": "12cc1c1f597a4173d43b0f4b553cf588785f15d0ad0e5df3d327cd9064dc0a04",
+        "terms_sha256": "05a2186a31e57ae3d5139f4771df03df05dd07034d64584d3e9620ecd4f71733",
+        "claim_bps": 1500,
+        "statement_code": "CONTRIBUTE_AND_ACCEPT_TERMS",
+        "declared_at": "1789166400",
+        "custody_mode": "server_custodied"
+      },
+      "wire_base64": "VEVTU0VSQTpDT05UUklCVVRJT046MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnE4BIpBWvbhf2ORh0gi1ncFn4iQ/diFb+YPdiTwPmhOoAAW+YGgFcVOpBNTBXWNfdgQAVwXige/RHIJMlrDniaG2sAAECAwQFBgcICQoLDA0OD7GtuSSL/sHGyRs9ySFB3Dqd/x6D6PTFf0ySX+QHNaA3BAAAAEFsZXgaAAAAVGhlIExhbnRlcm4gUm9vbSB0ZXN0IHNlZWT9AgiGNbS/J6l3mmqsA81IJYyxKNVPQZSPBSkx9BJ8HQESzBwfWXpBc9Q7D0tVPPWIeF8V0K0OXfPTJ82QZNwKBAWiGGox5Xrj1ROfR3HfA98F3QcDTWRYTT6WIOzU9xcz3AUBQIOkagAAAAAD",
+      "wire_bytes": 348,
+      "digest_sha256": "2527a97e69b05163ad0f1bfc7907db1ecfa313fddbd1f2cbdaf0a625534af2b6",
+      "public_key_base58": "CxaoeK49uNzU1rmMYQpMH9YGmmHtVYysrViPF5waTcia",
+      "signature_base64": "9JlUt4Iy2q3n73VuP0U46HJ2IaKBWOe0GCA18Xk5HF/h7u8Lj6wkbsp+1uDubIWMaYOSBsSn7Ryhr8tIhidBAA=="
+    },
+    {
+      "id": "absent-metadata",
+      "description": "metadata_sha256 absent (option tag 0).",
+      "record": {
+        "format_version": 1,
+        "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+        "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+        "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
+        "economic_parent": null,
+        "references": [
+          "8WcmtGvEt1tmxceaCz2KZF2bXUrLMVDGQThBeLUDg1b1"
+        ],
+        "nonce": "000102030405060708090a0b0c0d0e0f",
+        "contributor": "6BpvAoQg8p4V5GWtVWaLFUuXCp7L5QyZVqXJtThe6Wnf",
+        "name": "Alex",
+        "title": "The Lantern Room test seed",
+        "artifact_sha256": "fd02088635b4bf27a9779a6aac03cd48258cb128d54f41948f052931f4127c1d",
+        "metadata_sha256": null,
+        "terms_sha256": "05a2186a31e57ae3d5139f4771df03df05dd07034d64584d3e9620ecd4f71733",
+        "claim_bps": 1500,
+        "statement_code": "CONTRIBUTE_AND_ACCEPT_TERMS",
+        "declared_at": "1789166400",
+        "custody_mode": "server_custodied"
+      },
+      "wire_base64": "VEVTU0VSQTpDT05UUklCVVRJT046MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnE4BIpBWvbhf2ORh0gi1ncFn4iQ/diFb+YPdiTwPmhOoAAW+YGgFcVOpBNTBXWNfdgQAVwXige/RHIJMlrDniaG2sAAECAwQFBgcICQoLDA0OD00QbBzXsxNSerywH83tY7GTqTMCALKLMOGnI+EN44WEBAAAAEFsZXgaAAAAVGhlIExhbnRlcm4gUm9vbSB0ZXN0IHNlZWT9AgiGNbS/J6l3mmqsA81IJYyxKNVPQZSPBSkx9BJ8HQAFohhqMeV649UTn0dx3wPfBd0HA01kWE0+liDs1PcXM9wFAUCDpGoAAAAAAw==",
+      "wire_bytes": 316,
+      "digest_sha256": "209f4586b1b9b7b31f6a4c47b25eb394d0089bb1e39bd6de2fedb8e64e104e35",
+      "public_key_base58": "6BpvAoQg8p4V5GWtVWaLFUuXCp7L5QyZVqXJtThe6Wnf",
+      "signature_base64": "mDEeRF749LgqH7JARYW1PUjwhXg9Ok03RhTpcDfeR3BIxtdnHvNBbtTSQ5FECKozNtAOo/NBpMrbLuz+IrkZAg=="
+    },
+    {
+      "id": "empty-title",
+      "description": "title is the empty string (0 bytes, allowed 0..96).",
+      "record": {
+        "format_version": 1,
+        "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+        "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+        "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
+        "economic_parent": null,
+        "references": [
+          "8WcmtGvEt1tmxceaCz2KZF2bXUrLMVDGQThBeLUDg1b1"
+        ],
+        "nonce": "000102030405060708090a0b0c0d0e0f",
+        "contributor": "CBo3JkziohTC5v5jcXRhRBeFbfTZuy4e8QppYW4Vh4hh",
+        "name": "Alex",
+        "title": "",
+        "artifact_sha256": "fd02088635b4bf27a9779a6aac03cd48258cb128d54f41948f052931f4127c1d",
+        "metadata_sha256": "12cc1c1f597a4173d43b0f4b553cf588785f15d0ad0e5df3d327cd9064dc0a04",
+        "terms_sha256": "05a2186a31e57ae3d5139f4771df03df05dd07034d64584d3e9620ecd4f71733",
+        "claim_bps": 1500,
+        "statement_code": "CONTRIBUTE_AND_ACCEPT_TERMS",
+        "declared_at": "1789166400",
+        "custody_mode": "server_custodied"
+      },
+      "wire_base64": "VEVTU0VSQTpDT05UUklCVVRJT046MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnE4BIpBWvbhf2ORh0gi1ncFn4iQ/diFb+YPdiTwPmhOoAAW+YGgFcVOpBNTBXWNfdgQAVwXige/RHIJMlrDniaG2sAAECAwQFBgcICQoLDA0OD6Y0a+5Ri9NMlPwDdM5JVs+DzgsElSERsNZ/39F+pMlEBAAAAEFsZXgAAAAA/QIIhjW0vyepd5pqrAPNSCWMsSjVT0GUjwUpMfQSfB0BEswcH1l6QXPUOw9LVTz1iHhfFdCtDl3z0yfNkGTcCgQFohhqMeV649UTn0dx3wPfBd0HA01kWE0+liDs1PcXM9wFAUCDpGoAAAAAAw==",
+      "wire_bytes": 322,
+      "digest_sha256": "9813543f323a350e7b13441a605bb64895171fc92c8b9c7754c65122c76e4c1b",
+      "public_key_base58": "CBo3JkziohTC5v5jcXRhRBeFbfTZuy4e8QppYW4Vh4hh",
+      "signature_base64": "uAgEG2T5cSq/5hrf3k9EiWgDjWAg+XwglJjhpodk7Aef1PMRDnAB+Fa89SVVvbeKbLNJ2dGO4FJK3sd6OL1zCw=="
+    },
+    {
+      "id": "max-name-multibyte-bound",
+      "description": "name is exactly 64 UTF-8 bytes ending in a 2-byte 'é' (62 ASCII + é).",
+      "record": {
+        "format_version": 1,
+        "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+        "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+        "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
+        "economic_parent": null,
+        "references": [
+          "8WcmtGvEt1tmxceaCz2KZF2bXUrLMVDGQThBeLUDg1b1"
+        ],
+        "nonce": "000102030405060708090a0b0c0d0e0f",
+        "contributor": "zTa8kk6votXNafwgvJxFctt5tEUYM3Muh7ju88uGswU",
+        "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxé",
+        "title": "The Lantern Room test seed",
+        "artifact_sha256": "fd02088635b4bf27a9779a6aac03cd48258cb128d54f41948f052931f4127c1d",
+        "metadata_sha256": "12cc1c1f597a4173d43b0f4b553cf588785f15d0ad0e5df3d327cd9064dc0a04",
+        "terms_sha256": "05a2186a31e57ae3d5139f4771df03df05dd07034d64584d3e9620ecd4f71733",
+        "claim_bps": 1500,
+        "statement_code": "CONTRIBUTE_AND_ACCEPT_TERMS",
+        "declared_at": "1789166400",
+        "custody_mode": "server_custodied"
+      },
+      "wire_base64": "VEVTU0VSQTpDT05UUklCVVRJT046MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnE4BIpBWvbhf2ORh0gi1ncFn4iQ/diFb+YPdiTwPmhOoAAW+YGgFcVOpBNTBXWNfdgQAVwXige/RHIJMlrDniaG2sAAECAwQFBgcICQoLDA0ODw64Jn1AeWvpysBNuQ77iS7LVONARN6wD5h2q/5dqZgXQAAAAHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4w6kaAAAAVGhlIExhbnRlcm4gUm9vbSB0ZXN0IHNlZWT9AgiGNbS/J6l3mmqsA81IJYyxKNVPQZSPBSkx9BJ8HQESzBwfWXpBc9Q7D0tVPPWIeF8V0K0OXfPTJ82QZNwKBAWiGGox5Xrj1ROfR3HfA98F3QcDTWRYTT6WIOzU9xcz3AUBQIOkagAAAAAD",
+      "wire_bytes": 408,
+      "digest_sha256": "bc5de14fc890c7f1522fdcd8ed83c941d73a63dae91a44aa7ebcf392f11baa94",
+      "public_key_base58": "zTa8kk6votXNafwgvJxFctt5tEUYM3Muh7ju88uGswU",
+      "signature_base64": "X1qQulS3afQATXNXgG1ZBWaggndPSRSvaUI64fIJIf8RjZpZFySiwpZ7jXuiQbdusdW/+HiHS4qt91ORWabcCA=="
+    },
+    {
+      "id": "max-title-multibyte-bound",
+      "description": "title is exactly 96 UTF-8 bytes (32 × '€', 3 bytes each).",
+      "record": {
+        "format_version": 1,
+        "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+        "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+        "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
+        "economic_parent": null,
+        "references": [
+          "8WcmtGvEt1tmxceaCz2KZF2bXUrLMVDGQThBeLUDg1b1"
+        ],
+        "nonce": "000102030405060708090a0b0c0d0e0f",
+        "contributor": "3YLKzpeP923eJGQiyqpuXrbu1ECFtab3xiM5ji9Ld2rr",
+        "name": "Alex",
+        "title": "€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€",
+        "artifact_sha256": "fd02088635b4bf27a9779a6aac03cd48258cb128d54f41948f052931f4127c1d",
+        "metadata_sha256": "12cc1c1f597a4173d43b0f4b553cf588785f15d0ad0e5df3d327cd9064dc0a04",
+        "terms_sha256": "05a2186a31e57ae3d5139f4771df03df05dd07034d64584d3e9620ecd4f71733",
+        "claim_bps": 1500,
+        "statement_code": "CONTRIBUTE_AND_ACCEPT_TERMS",
+        "declared_at": "1789166400",
+        "custody_mode": "server_custodied"
+      },
+      "wire_base64": "VEVTU0VSQTpDT05UUklCVVRJT046MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnE4BIpBWvbhf2ORh0gi1ncFn4iQ/diFb+YPdiTwPmhOoAAW+YGgFcVOpBNTBXWNfdgQAVwXige/RHIJMlrDniaG2sAAECAwQFBgcICQoLDA0ODyW+O46mXthlkUHwQLlwOvLDjAC4smZwKkIelqdTQ+x/BAAAAEFsZXhgAAAA4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs4oKs/QIIhjW0vyepd5pqrAPNSCWMsSjVT0GUjwUpMfQSfB0BEswcH1l6QXPUOw9LVTz1iHhfFdCtDl3z0yfNkGTcCgQFohhqMeV649UTn0dx3wPfBd0HA01kWE0+liDs1PcXM9wFAUCDpGoAAAAAAw==",
+      "wire_bytes": 418,
+      "digest_sha256": "87b9c848977a785393d97098d0b70eba2784e7be14c2067211e3c815871963aa",
+      "public_key_base58": "3YLKzpeP923eJGQiyqpuXrbu1ECFtab3xiM5ji9Ld2rr",
+      "signature_base64": "/oY2b2M/AfdiNyb9fZjGSzZFEecm4Yg0fXw8/RCV9if30MfoQSwU21YiHiM/WzpwhB714YsIttt38LllOBTNBA=="
+    },
+    {
+      "id": "references-empty",
+      "description": "references count 0.",
+      "record": {
+        "format_version": 1,
+        "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+        "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+        "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
+        "economic_parent": null,
+        "references": [],
+        "nonce": "000102030405060708090a0b0c0d0e0f",
+        "contributor": "J4a8KpcSpXPMmWq31jnTeBMN65LfpGRucx4PdeWE5xEe",
+        "name": "Alex",
+        "title": "The Lantern Room test seed",
+        "artifact_sha256": "fd02088635b4bf27a9779a6aac03cd48258cb128d54f41948f052931f4127c1d",
+        "metadata_sha256": "12cc1c1f597a4173d43b0f4b553cf588785f15d0ad0e5df3d327cd9064dc0a04",
+        "terms_sha256": "05a2186a31e57ae3d5139f4771df03df05dd07034d64584d3e9620ecd4f71733",
+        "claim_bps": 1500,
+        "statement_code": "CONTRIBUTE_AND_ACCEPT_TERMS",
+        "declared_at": "1789166400",
+        "custody_mode": "server_custodied"
+      },
+      "wire_base64": "VEVTU0VSQTpDT05UUklCVVRJT046MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnE4BIpBWvbhf2ORh0gi1ncFn4iQ/diFb+YPdiTwPmhOoAAAABAgMEBQYHCAkKCwwNDg/9gOBNn8673TrDKE4ov7iayZyewmLrPVu+zaS1YbuUowQAAABBbGV4GgAAAFRoZSBMYW50ZXJuIFJvb20gdGVzdCBzZWVk/QIIhjW0vyepd5pqrAPNSCWMsSjVT0GUjwUpMfQSfB0BEswcH1l6QXPUOw9LVTz1iHhfFdCtDl3z0yfNkGTcCgQFohhqMeV649UTn0dx3wPfBd0HA01kWE0+liDs1PcXM9wFAUCDpGoAAAAAAw==",
+      "wire_bytes": 316,
+      "digest_sha256": "e3522fd99de68e01f85ec7d7fac760735c1536e5669f4f32fa6e263996c13833",
+      "public_key_base58": "J4a8KpcSpXPMmWq31jnTeBMN65LfpGRucx4PdeWE5xEe",
+      "signature_base64": "2qXVTjb240M/4C89uWzlaJsDfgkbV/u59BCskvx5TjyjK/DGIbVLRndRFgw5OP6JgTKZiadHu4PsJTTcA4zMBw=="
+    },
+    {
+      "id": "references-eight",
+      "description": "references count 8 (the maximum).",
+      "record": {
+        "format_version": 1,
+        "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+        "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+        "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
+        "economic_parent": null,
+        "references": [
+          "FSkv1zWcxtgGSSrZxGddAVSVeTiLZhjsuxds4cfFyhfZ",
+          "71EfR3MvStU4EecTeXzDS8iUMgroDoVaSS5uEza11FZT",
+          "HJCWMyZ6pVQDZMXZjR3uD2DM9t4H1TYrjqmRhnBqbBKD",
+          "6Ybvr1eXb69Txw4P93QtKErtmtEUa4w1f7z35Vz6LGiR",
+          "AoEjPCsiWUb7JYKjxhnA4fSrxmUKJrN8tPtRLtiF1kAZ",
+          "DPn8sVxiBABWuAK7F59vWMb6YNhswPzsaL5sa6BoZ1WR",
+          "2RfftX83YMPEYvozxfnkgfsheuTzBMnHjKWLKPMxWsyv",
+          "DYTLgs3ZV2rv18diVo1gvdV8zk3tzVJSqZRYVL4wBY66"
+        ],
+        "nonce": "000102030405060708090a0b0c0d0e0f",
+        "contributor": "By9umrcYbYe9DYs38L6dNvropmwkeZvXd7DP87JNqDZk",
+        "name": "Alex",
+        "title": "The Lantern Room test seed",
+        "artifact_sha256": "fd02088635b4bf27a9779a6aac03cd48258cb128d54f41948f052931f4127c1d",
+        "metadata_sha256": "12cc1c1f597a4173d43b0f4b553cf588785f15d0ad0e5df3d327cd9064dc0a04",
+        "terms_sha256": "05a2186a31e57ae3d5139f4771df03df05dd07034d64584d3e9620ecd4f71733",
+        "claim_bps": 1500,
+        "statement_code": "CONTRIBUTE_AND_ACCEPT_TERMS",
+        "declared_at": "1789166400",
+        "custody_mode": "server_custodied"
+      },
+      "wire_base64": "VEVTU0VSQTpDT05UUklCVVRJT046MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnE4BIpBWvbhf2ORh0gi1ncFn4iQ/diFb+YPdiTwPmhOoACNacyn/YMdpsMVaGIIxBQfvP74znKOpKMkic+Yx/+sv8WTWR0LyQ5b4Pgct16h/yhCfy0LcnqZFxlwuv1s+KbbLyIt/tfBkzVLgfg44kAT+OKKi6hM/3w7Nmyx5zhXH5WFJi7u9Dh6OsSA7es1Y9gjgXBwsfwWD+gf6FVptw5r5mkZFsyYqoNoXZE8yfs+nGP7pq8PF67nKiKvExXm46UPa4Ig5XEg7Es0V3KBVL0kfyuL4JslLUl+D5DeNco0IkihUtWeh5/O/T1GSZiSMRDoogRJEB9AgUCREehIpVfJblulsHwUVWttXeRZE3ZKYIpObPTzLGj4fa8ctj2HamnBMAAQIDBAUGBwgJCgsMDQ4Povd4ESRundj8ZOhCHVKo4u72BPOSIusSPkJM6yFOY4sEAAAAQWxleBoAAABUaGUgTGFudGVybiBSb29tIHRlc3Qgc2VlZP0CCIY1tL8nqXeaaqwDzUgljLEo1U9BlI8FKTH0EnwdARLMHB9ZekFz1DsPS1U89Yh4XxXQrQ5d89MnzZBk3AoEBaIYajHleuPVE59Hcd8D3wXdBwNNZFhNPpYg7NT3FzPcBQFAg6RqAAAAAAM=",
+      "wire_bytes": 572,
+      "digest_sha256": "cd3742e05632be3c848b4797568d369463e7114e5e8a6a22423eeb67ccab70fc",
+      "public_key_base58": "By9umrcYbYe9DYs38L6dNvropmwkeZvXd7DP87JNqDZk",
+      "signature_base64": "IJ4Y0vLl0Xcs0buiujeLSQPGR1pckmxpyRDmN65AMYj5kygH8OpYFLApT+k7Up38+wc1EvR3aO2HXzorBmQdAg=="
+    },
+    {
+      "id": "child-intent-user-custody",
+      "description": "economic_parent present (tag 1), custody_mode user_controlled.",
+      "record": {
+        "format_version": 1,
+        "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+        "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+        "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
+        "economic_parent": "9LxhLcYxQRVJdfwwSREna9W4JJHrWy2yMFokAfBXoGYG",
+        "references": [
+          "8WcmtGvEt1tmxceaCz2KZF2bXUrLMVDGQThBeLUDg1b1"
+        ],
+        "nonce": "000102030405060708090a0b0c0d0e0f",
+        "contributor": "7ysdmzp7b7eLmzfcBCBVfrT1zvHTmDTpntPEUYEW4R8H",
+        "name": "Alex",
+        "title": "The Lantern Room test seed",
+        "artifact_sha256": "fd02088635b4bf27a9779a6aac03cd48258cb128d54f41948f052931f4127c1d",
+        "metadata_sha256": "12cc1c1f597a4173d43b0f4b553cf588785f15d0ad0e5df3d327cd9064dc0a04",
+        "terms_sha256": "05a2186a31e57ae3d5139f4771df03df05dd07034d64584d3e9620ecd4f71733",
+        "claim_bps": 1500,
+        "statement_code": "CONTRIBUTE_AND_ACCEPT_TERMS",
+        "declared_at": "1789166400",
+        "custody_mode": "user_controlled"
+      },
+      "wire_base64": "VEVTU0VSQTpDT05UUklCVVRJT046MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnE4BIpBWvbhf2ORh0gi1ncFn4iQ/diFb+YPdiTwPmhOoBe/qBgKfGmnXgaz9j0WWzE8cJPWUAJ5ihf4qjHgXfeoEBb5gaAVxU6kE1MFdY192BABXBeKB79EcgkyWsOeJobawAAQIDBAUGBwgJCgsMDQ4PZ7fmJABtqHWpTEtmaSzpDXcZ3dV/0/Dchkgo1I11qa4EAAAAQWxleBoAAABUaGUgTGFudGVybiBSb29tIHRlc3Qgc2VlZP0CCIY1tL8nqXeaaqwDzUgljLEo1U9BlI8FKTH0EnwdARLMHB9ZekFz1DsPS1U89Yh4XxXQrQ5d89MnzZBk3AoEBaIYajHleuPVE59Hcd8D3wXdBwNNZFhNPpYg7NT3FzPcBQFAg6RqAAAAAAE=",
+      "wire_bytes": 380,
+      "digest_sha256": "49c0908a8b799054902e7378d36706b08b19cdd0c7d221cdc71c68f5175994c2",
+      "public_key_base58": "7ysdmzp7b7eLmzfcBCBVfrT1zvHTmDTpntPEUYEW4R8H",
+      "signature_base64": "YBqj+jrDfTScoN+X6PCDW6iiKej6WAQGm9wH/JaXD0wHbXtFiXwJ7bQmsIkXPO2+Tl26nvzkUVNFCzork90dCA=="
+    },
+    {
+      "id": "claim-zero-bps",
+      "description": "claim_bps at lower bound 0.",
+      "record": {
+        "format_version": 1,
+        "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+        "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+        "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
+        "economic_parent": null,
+        "references": [
+          "8WcmtGvEt1tmxceaCz2KZF2bXUrLMVDGQThBeLUDg1b1"
+        ],
+        "nonce": "000102030405060708090a0b0c0d0e0f",
+        "contributor": "GeqT63REPmRisVNPNWBGdTx6i6Y8DwrTZHgSMJXzReWs",
+        "name": "Alex",
+        "title": "The Lantern Room test seed",
+        "artifact_sha256": "fd02088635b4bf27a9779a6aac03cd48258cb128d54f41948f052931f4127c1d",
+        "metadata_sha256": "12cc1c1f597a4173d43b0f4b553cf588785f15d0ad0e5df3d327cd9064dc0a04",
+        "terms_sha256": "05a2186a31e57ae3d5139f4771df03df05dd07034d64584d3e9620ecd4f71733",
+        "claim_bps": 0,
+        "statement_code": "CONTRIBUTE_AND_ACCEPT_TERMS",
+        "declared_at": "1789166400",
+        "custody_mode": "server_custodied"
+      },
+      "wire_base64": "VEVTU0VSQTpDT05UUklCVVRJT046MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnE4BIpBWvbhf2ORh0gi1ncFn4iQ/diFb+YPdiTwPmhOoAAW+YGgFcVOpBNTBXWNfdgQAVwXige/RHIJMlrDniaG2sAAECAwQFBgcICQoLDA0OD+iQk3+ajWOdu8ygzQ90RkIsy8KYl1TTr7hzaymabV1IBAAAAEFsZXgaAAAAVGhlIExhbnRlcm4gUm9vbSB0ZXN0IHNlZWT9AgiGNbS/J6l3mmqsA81IJYyxKNVPQZSPBSkx9BJ8HQESzBwfWXpBc9Q7D0tVPPWIeF8V0K0OXfPTJ82QZNwKBAWiGGox5Xrj1ROfR3HfA98F3QcDTWRYTT6WIOzU9xczAAABQIOkagAAAAAD",
+      "wire_bytes": 348,
+      "digest_sha256": "15ee8f2d45617d7f7a5cfec96d3569a7bc174858c1e5c02c729e82edb720d0f4",
+      "public_key_base58": "GeqT63REPmRisVNPNWBGdTx6i6Y8DwrTZHgSMJXzReWs",
+      "signature_base64": "c+NtiBp/8lJ95imEKc5tPHQ7YX7XFyO9wQUHpvtslmz6E4+yJSl3Ufo9K4LpHyI7B2RKErsj5hPpNGPdVyltBg=="
+    }
+  ]
+}

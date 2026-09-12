@@ -5,9 +5,9 @@ All tasks start PLANNED. These packets are execution briefs, not evidence that a
 | Packet | Outcome | State | Dependencies |
 |---|---|---|---|
 | [T01](packets/T01.md) | Deterministic economics and portable types | DONE | Evidence: `reports/math-conformance.md`, WORK_LOG Session 3, `packet/t01` commit. TypeScript reference implementation only — no deployed program or live money router. |
-| [T02](packets/T02.md) | Identity, intent signing and exportable consent | READY | T01 types/wire codec exist: IntentV1 `references`, golden fixture round-trip, `TesseraPort` local adapter. Can overlap program work now that the wire contract is fixed. |
-| [T03](packets/T03.md) | Solana program, constraints and measured footprint | PLANNED | T01/T02 wire and economics fixed for the development version. |
-| [T04](packets/T04.md) | SDK, sponsor relayer and finality reconciliation | PLANNED | T01–T03 interfaces and local program available. |
+| [T02](packets/T02.md) | Identity, intent signing and exportable consent | DONE | Evidence: `reports/identity-spike.md`, `tests/signatures` (110 tests), `tests/signatures/vectors/` golden vectors, WORK_LOG Session 4, `packet/t02` commit. `packages/identity` + wire decoders; provider integration remains an approval gate (untested, unconfigured). |
+| [T03](packets/T03.md) | Solana program, constraints and measured footprint | READY | T01/T02 wire, economics, decoders and golden vectors fixed for the development version; intent/statement digests and detached-signature conventions are the program's verification target. |
+| [T04](packets/T04.md) | SDK, sponsor relayer and finality reconciliation | PLANNED | T01–T03 interfaces and local program available; IdentityPort consent/sign/export flow is the SDK's signing boundary (T02 DONE). |
 | [T05](packets/T05.md) | Independent evidence export, verifier and recovery | PLANNED | T02 signatures and T04 node reads; can build bundle parser against fixtures first. |
 | [T06](packets/T06.md) | Generic explorer and non-audio demonstration | PLANNED | T01 fixtures; T04/T05 live reads/verification progressively integrated. |
 | [T07](packets/T07.md) | Program/key/sponsor security hardening | PLANNED | T03–T05 integrated enough to attack. |

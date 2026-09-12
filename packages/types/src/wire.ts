@@ -27,8 +27,9 @@ import { I64_MAX, I64_MIN, parseI64Decimal } from './units.js';
  * present. No padding, no trailing bytes. This is the pinned v1 layout;
  * after deployment these bytes never change in place.
  *
- * IntentV1 is verified byte-for-byte against fixtures/intent-v1-signature.json.
- * StatementV1 follows the same spec table; no golden vector exists yet (T02).
+ * IntentV1 is verified byte-for-byte against fixtures/intent-v1-signature.json;
+ * StatementV1 against tests/signatures/vectors/statement-v1-vectors.json (T02).
+ * The strict decoders live in decode.ts (same file format, inverse direction).
  */
 
 class ByteWriter {
@@ -281,11 +282,42 @@ export async function sha256Hex(bytes: Uint8Array): Promise<Result<string, Valid
   return ok(s);
 }
 
-/** intent_digest = SHA256(IntentV1 bytes) per docs/14. */
+/** SHA-256 over raw bytes, returned as bytes (the detached-signature message). */
+export async function sha256Bytes(bytes: Uint8Array): Promise<Result<Uint8Array, ValidationIssue>> {
+  const subtle = globalThis.crypto?.subtle;
+  if (!subtle) {
+    return err(issue('CRYPTO_UNAVAILABLE', 'crypto.subtle', 'WebCrypto SHA-256 is unavailable in this runtime'));
+  }
+  const digest = await subtle.digest('SHA-256', bytes as Uint8Array<ArrayBuffer>);
+  return ok(new Uint8Array(digest));
+}
+
+/** intent_digest = SHA256(IntentV1 bytes) per docs/14, as hex. */
 export async function intentDigestHex(intent: IntentV1): Promise<Result<string, ValidationIssue>> {
   const encoded = encodeIntentV1(intent);
   if (!encoded.ok) return encoded;
   return sha256Hex(encoded.value);
+}
+
+/** intent_digest as the 32 raw bytes that are actually Ed25519-signed. */
+export async function intentDigestBytes(intent: IntentV1): Promise<Result<Uint8Array, ValidationIssue>> {
+  const encoded = encodeIntentV1(intent);
+  if (!encoded.ok) return encoded;
+  return sha256Bytes(encoded.value);
+}
+
+/** statement_digest = SHA256(StatementV1 bytes) per docs/14, as hex. */
+export async function statementDigestHex(statement: StatementV1): Promise<Result<string, ValidationIssue>> {
+  const encoded = encodeStatementV1(statement);
+  if (!encoded.ok) return encoded;
+  return sha256Hex(encoded.value);
+}
+
+/** statement_digest as the 32 raw bytes that are actually Ed25519-signed. */
+export async function statementDigestBytes(statement: StatementV1): Promise<Result<Uint8Array, ValidationIssue>> {
+  const encoded = encodeStatementV1(statement);
+  if (!encoded.ok) return encoded;
+  return sha256Bytes(encoded.value);
 }
 
 /** Ed25519 detached-signature verification over a 32-byte digest (docs/03). */

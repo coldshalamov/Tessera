@@ -176,6 +176,15 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
+  packages/identity:
+    dependencies:
+      '@noble/ed25519':
+        specifier: 3.2.0
+        version: 3.2.0
+      '@tessera/types':
+        specifier: workspace:*
+        version: link:../types
+
   packages/math:
     dependencies:
       '@tessera/types':
@@ -189,6 +198,27 @@ importers:
       '@tessera/math':
         specifier: workspace:*
         version: link:../../packages/math
+      '@tessera/types':
+        specifier: workspace:*
+        version: link:../../packages/types
+      '@types/node':
+        specifier: 24.13.3
+        version: 24.13.3
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: 3.2.7
+        version: 3.2.7(@types/node@24.13.3)
+
+  tests/signatures:
+    devDependencies:
+      '@noble/ed25519':
+        specifier: 3.2.0
+        version: 3.2.0
+      '@tessera/identity':
+        specifier: workspace:*
+        version: link:../../packages/identity
       '@tessera/types':
         specifier: workspace:*
         version: link:../../packages/types
@@ -369,6 +399,9 @@ packages:
     cpu: [x64]
     os: [linux]
     libc: [glibc]
+
+  '@noble/ed25519@3.2.0':
+    resolution: {integrity: sha512-criDgRlnUA09hchYrTy/JUWPIEap5rZxQe6wDWzRx51oWWpDRcUpuNzlgPxDJaOK6AsW9c0wKcj3rKRv6t+bPQ==}
 
   '@oxlint/binding-android-arm-eabi@1.81.0':
     resolution: {integrity: sha512-IcCRsXiedJoJopY6mpZUBEeVFsUrutmrG7dZ87zMuKJlhg70Ora9bBl1WcCxZQtyI10YpnVdEso5oCg7YcfSHw==}
@@ -990,6 +1023,8 @@ snapshots:
 
   '@napi-rs/lzma-linux-x64-gnu@1.5.1':
     optional: true
+
+  '@noble/ed25519@3.2.0': {}
 
   '@oxlint/binding-android-arm-eabi@1.81.0':
     optional: true

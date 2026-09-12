@@ -1,0 +1,94 @@
+{
+  "fixture_only": true,
+  "notice": "Fictional network/program/project; no chain account or finalized transaction exists. Generated with fresh fixture_only test keys; private seeds were never written.",
+  "family": "StatementV1",
+  "domain": "TESSERA:STATEMENT:1",
+  "generated_by": "tests/signatures/gen-vectors.mjs",
+  "cases": [
+    {
+      "id": "app-defined",
+      "description": "APP_DEFINED annotation bound to a subject node; payload is a namespaced JSON digest.",
+      "record": {
+        "format_version": 1,
+        "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+        "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+        "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
+        "statement_type": "APP_DEFINED",
+        "subject_ref": "AQPs6WSR8y3X5tThQGpdnvXTsbSTHk6dZrGA4Xkkeimc",
+        "aux_key": null,
+        "payload_sha256": "4a8ab1828d10ca7c01adeca1eaed47e34f745c023a25c3a96a5df584610c2f9c",
+        "declared_at": "1789166400",
+        "custody_mode": "server_custodied"
+      },
+      "wire_base64": "VEVTU0VSQTpTVEFURU1FTlQ6MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnAROASKQVr24X9jkYdIItZ3BZ+IkP3YhW/mD3Yk8D5oTqAQGLt2SdBDfxfbZuwX8wK+iLtXmfPFMl6EDK9Un9E6cuNwBKirGCjRDKfAGt7KHq7UfjT3RcAjolw6lqXfWEYQwvnECDpGoAAAAAAw==",
+      "wire_bytes": 193,
+      "digest_sha256": "dd490a863b16362209289434e68353b19e3e6fb40ff54306bdb86be3949fe630",
+      "public_key_base58": "8NzTLBJ8Xk87Jykzc1UW5eUBaeJ4SpFN7wLf5cZ4TrxW",
+      "signature_base64": "BUbxP7p8vtqiy7hO1XY3XKL0bSOslqwwVe2yjPpVzGii4BNe0s0Jxanb4izAlw0xdHRsy1jtr2oGRIvQuFDhDg=="
+    },
+    {
+      "id": "key-continuity",
+      "description": "KEY_CONTINUITY: old key signs; aux_key is the new key; payload_sha256 commits the canonical identity-link JSON embedding the new key's countersignature. payload_json is included so verifiers can check the link.",
+      "record": {
+        "format_version": 1,
+        "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+        "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+        "project_address": null,
+        "statement_type": "KEY_CONTINUITY",
+        "subject_ref": null,
+        "aux_key": "3hd4CHBbWBhbzhyopADXdL15Hy8EupQ867jkVN9er2N9",
+        "payload_sha256": "d2d8158eea70a5b3619ad1711db02542f9126a1661dc60429e14adff288b1985",
+        "declared_at": "1789166400",
+        "custody_mode": "server_custodied"
+      },
+      "payload_json": "{\"declared_at\":\"1789166400\",\"format\":\"tessera.identity-link/1\",\"new_key\":\"3hd4CHBbWBhbzhyopADXdL15Hy8EupQ867jkVN9er2N9\",\"new_key_signature_base64\":\"Iy8s2przTW6ELgZQnhLKss92KnD5dGdHsVGe6m2cMPxYNuRwZmkXm5JQZR61I/xlF0FajfPn8ku8MDAHEYfTCA==\",\"old_key\":\"DpFBggYABT1LahSQHt1pz8bMpsdb1d3MUnRW3bfvgR5i\"}",
+      "wire_base64": "VEVTU0VSQTpTVEFURU1FTlQ6MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnAAIAASgfX7K/lqfmIamrNrP/61CZKWNQ01f/zn5q7tVQAKwm0tgVjupwpbNhmtFxHbAlQvkSahZh3GBCnhSt/yiLGYVAg6RqAAAAAAM=",
+      "wire_bytes": 161,
+      "digest_sha256": "8be3cf89e17d1df45f391663a94cb94eb1a5fefef99721608551be3e1725e3eb",
+      "public_key_base58": "DpFBggYABT1LahSQHt1pz8bMpsdb1d3MUnRW3bfvgR5i",
+      "signature_base64": "yxflO4N9I+SrC3E9Yu8FWkktRQphx5GAXH0vVRCtGZ731fciSWlsAGrQzSiPlZrhtHp/u+HeqgmaXhXOaSZ+Cg=="
+    },
+    {
+      "id": "release-anchor",
+      "description": "RELEASE_ANCHOR: subject_ref is the release economic leaf; payload_sha256 is the release manifest digest.",
+      "record": {
+        "format_version": 1,
+        "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+        "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+        "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
+        "statement_type": "RELEASE_ANCHOR",
+        "subject_ref": "8bpB6PyznkUX3pD48dKyS6Kv1614a42GCu13mxKDYqxz",
+        "aux_key": null,
+        "payload_sha256": "deff0169efd572421c3cf40ffccce2284e4b210d4622511585ac372cce4b0a98",
+        "declared_at": "1789166400",
+        "custody_mode": "server_custodied"
+      },
+      "wire_base64": "VEVTU0VSQTpTVEFURU1FTlQ6MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnAROASKQVr24X9jkYdIItZ3BZ+IkP3YhW/mD3Yk8D5oTqAwFw7OVUy4si9CICIUReS11/OrKlVrw9xzmHiSJCZ+lQBwDe/wFp79VyQhw89A/8zOIoTkshDUYiURWFrDcszksKmECDpGoAAAAAAw==",
+      "wire_bytes": 193,
+      "digest_sha256": "2a06f4c291a6fea0d12d2f348e5070ba04744383e87943e7e6d41677bd658e99",
+      "public_key_base58": "3s3KUpCm4Bawu6a5ByNEAQNHZ4LGCrqV26p1fDcQkqcM",
+      "signature_base64": "SpsigavnXmZuxfUF6S8PtkVIa5Ody2VDghKS1Irg4imtamZCrMqdlfDfw9kSP4BasQ7sv5i3Eeniu7A8/86bDQ=="
+    },
+    {
+      "id": "retraction-or-dispute",
+      "description": "RETRACTION_OR_DISPUTE annotates subject_ref without erasing it.",
+      "record": {
+        "format_version": 1,
+        "network_genesis": "FzyYqPYZJDeb2qipvU2FVnaGYmGNfuwWnpWmgpW42imP",
+        "program_id": "8XSPTHtZLZkYEdhBMWMAyxwHFmzrGDTmBiuMw9HYftcn",
+        "project_address": "2K8CfN8zTE59rgTjqZxeTWxTPXFUgKGoC2uVBzYa2XSq",
+        "statement_type": "RETRACTION_OR_DISPUTE",
+        "subject_ref": "AQPs6WSR8y3X5tThQGpdnvXTsbSTHk6dZrGA4Xkkeimc",
+        "aux_key": null,
+        "payload_sha256": "3c5d56b4638243e94b80a7a449c2e0bbea31f5d059624e1787e395949f3cc03e",
+        "declared_at": "1789166400",
+        "custody_mode": "server_custodied"
+      },
+      "wire_base64": "VEVTU0VSQTpTVEFURU1FTlQ6MQHe3anAh17vcyAyh7akyqKA3AlRAmrgOMnuNnfDQtVqim/N8CVyDFVcnXvZc7+CRX4VE52Up0jsps8rC9CXu/AnAROASKQVr24X9jkYdIItZ3BZ+IkP3YhW/mD3Yk8D5oTqBAGLt2SdBDfxfbZuwX8wK+iLtXmfPFMl6EDK9Un9E6cuNwA8XVa0Y4JD6UuAp6RJwuC76jH10FliTheH45WUnzzAPkCDpGoAAAAAAw==",
+      "wire_bytes": 193,
+      "digest_sha256": "fbf8432893751441bd42572a8ed7d8800f01fb5c7871f5defe83309cc39f00dd",
+      "public_key_base58": "FJvMmppwgAUEBg4B5XgtZRJj3vMPca81W5z6YeJ5E1gQ",
+      "signature_base64": "d1+RzlpYH1TMui5LYD7udOVm+v2zSYRN9LGQ80Ba5kHFTtGer3VetlWBx+ywOZfTXXsPb0vpD5njqXHXdfwkBw=="
+    }
+  ]
+}

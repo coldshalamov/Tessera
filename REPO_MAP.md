@@ -121,13 +121,15 @@ tools/validate_seed.py
 tsconfig.base.json
 ```
 
-Implementation paths added by T01 (see "Implementation tree" below for the full
-future layout — the T01 rows are the only ones that exist today):
+Implementation paths added by T01/T02 (see "Implementation tree" below for the
+full future layout — the T01/T02 rows are the only ones that exist today):
 
 ```text
-packages/types/     Portable record types, semantic validators, wire codecs (T01)
+packages/types/     Portable record types, semantic validators, wire codecs+decoders (T01/T02)
 packages/math/      Exact bigint economics + LocalTesseraPort simulator (T01)
+packages/identity/  IdentityPort, LocalTestSigner, provider boundary, continuity (T02)
 tests/math/         Vitest conformance/property/rejection/local-port suite (T01)
+tests/signatures/   Golden/mutation/replay/boundary/consent/continuity suite (T02)
 ```
 
 `REPO_MAP.md` and `DELIVERY_MANIFEST.json` are generated last and are additional root files. The manifest contains hashes of all files except itself. Specification files, reference tools and fixtures are not a completed production app.
@@ -137,8 +139,8 @@ tests/math/         Vitest conformance/property/rejection/local-port suite (T01)
 ```text
 programs/tessera/       Rust/Anchor economic state transitions        (target)
 packages/math/          Pure integer economics + local TesseraPort    (T01 DONE)
-packages/types/         Record types, validators, binary codecs       (T01 DONE)
-packages/identity/      Injected signing/export adapters              (target)
+packages/types/         Record types, validators, binary codecs/decoders (T01/T02 DONE)
+packages/identity/      IdentityPort signing/consent/export adapters  (T02 DONE)
 packages/sdk/           Network/submit/read/verify API                (target)
 packages/evidence/      Portable evidence and recovery                (target)
 services/relayer/       Bounded sponsor submission                    (target)
@@ -146,7 +148,9 @@ apps/cli/               Independent verification/export tools         (target)
 apps/explorer/          Generic read-only explorer                    (target)
 ops/                    Deployment, quotes and recovery               (target)
 tests/math/             Economics/types conformance suite             (T01 DONE)
+tests/signatures/       Signing/consent/continuity adversarial suite  (T02 DONE)
 reports/math-conformance.md  T01 evidence                             (T01 DONE)
+reports/identity-spike.md    T02 provider research + signer evidence  (T02 DONE)
 ```
 
 Rows marked `(target)` are future code destinations in the work packets, not

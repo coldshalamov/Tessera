@@ -1,0 +1,25 @@
+{
+  "name": "@tessera/identity",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Injected IdentityPort signers, consent-freeze/cancel/reauth/export hooks, detached Ed25519 sign+verify and KEY_CONTINUITY helpers. Workers-compatible (pure JS deps + WebCrypto only).",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@noble/ed25519": "3.2.0",
+    "@tessera/types": "workspace:*"
+  }
+}
