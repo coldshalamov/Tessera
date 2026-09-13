@@ -1,0 +1,27 @@
+{
+  "name": "@tessera/sdk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "TesseraPort implementation over real Solana JSON-RPC (local/devnet modes). Thin hand-rolled instruction/transaction layer (no @solana/web3.js, no @coral-xyz/anchor client) — Workers-safe, fetch + WebCrypto + @noble/ed25519 only.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@noble/ed25519": "3.2.0",
+    "@tessera/math": "workspace:*",
+    "@tessera/types": "workspace:*"
+  }
+}

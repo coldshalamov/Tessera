@@ -60,7 +60,19 @@ export type PortErrorCode =
   | 'NOT_FOUND'
   | 'BUNDLE_INVALID'
   | 'CRYPTO_UNAVAILABLE'
-  | 'VALIDATION_FAILED';
+  | 'VALIDATION_FAILED'
+  // chain-adapter extensions (T04: real-RPC SDK); never produced by the
+  // in-memory local simulator
+  | 'RPC_UNREACHABLE'
+  | 'TRANSACTION_EXPIRED'
+  | 'NETWORK_MISMATCH'
+  | 'PROGRAM_NOT_DEPLOYED'
+  | 'INSTRUCTION_REJECTED'
+  | 'MAINNET_WRITES_DISABLED'
+  // relayer extensions (T04: bounded sponsor service); never produced by the
+  // in-memory local simulator
+  | 'SPONSOR_PAUSED'
+  | 'MISSING_TX_SIGNATURES';
 
 export interface PortError {
   readonly code: PortErrorCode;
