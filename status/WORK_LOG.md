@@ -1,5 +1,32 @@
 # Work log
 
+## Session 8 — 2026-09-13 — T06 generic explorer and non-audio demonstration
+
+Date / agent / branch / packet: 2026-09-13 / Devin implementation agent / `packet/t06` / T06 (continued — a prior agent was killed early leaving an uncommitted scaffold; inspected, kept, corrected, finished).
+
+Actual files and behavior implemented:
+- `apps/explorer/` (Vite 7.3.6 + React 19.3.0 + TS, read-only, no wallet/ticker/Morpheus concepts): source panel (bundle `.zip`/lone `bundle.json` drop+picker, node-address inspect scoped to loaded data, in-tab demo); chain context (genesis/program/project/mode/exporter/record count/leaf); ARIA `tree` with roving tabindex and full keyboard control — every node inspectable without a canvas; selected-version facts incl. claim bps, residual in→out, effective units, issued total, exact as-is ratio, custody, digests, references, clickable ancestors; as-is payout table (exact `num/den` authority + display-only %, outside-chain naming) re-denominating per selected version; settlement preview via `allocateMinorUnits` with conservation line; per-check verification panel with plain-language help and banned-phrase-free statuses; export buttons (bundle bytes + report JSON) with honest "download unavailable" fallback. All loads go through `packages/evidence` readers/verifier; all economics through `packages/math` — no reimplemented logic.
+- `apps/explorer/src/demo/stems.ts`: "Night Circuit" non-audio demo — 5 signed music-stem contributions (root 2000 bps; sibling drum/bass branches 3000/2500 bps; melody 1500; mix 1000 with cross-branch references), real local port + real bundle writer + RELEASE_ANCHOR release manifest; selected leaf denominates at 571.6e9 issued. Fixture-grade throwaway keys, local simulated mode labels.
+- `tests/explorer/` (24 Vitest cases, jsdom + real WebCrypto): demo load, exact ratios, re-denomination incl. hash tracking, root-collapse, settlement DOM-vs-library equality + conservation + malformed/boundary rejections, per-check WARN/identity/finality non-claims + banned-phrase DOM scan, keyboard navigation/selection, pasted-address hit/miss, zip + manifest-only + non-bundle + tampered loads, download-unavailable honesty, model-level loader/tree/economics/settlement coverage.
+- `apps/explorer/e2e/` (7 Playwright cases, `@playwright/test` 1.63.0 pinned, real Chromium 153 against `vite preview` of the built bundle): demo labels, nested-click regression, keyboard-only flow, file-picker round-trip, 320px no-horizontal-scroll, reduced-motion, committed screenshots `e2e/artifacts/*.png`. `test:e2e` is deliberately outside `pnpm -r test` (browserless CI stays green).
+- `reports/explorer-qa.md`; BACKLOG T06 → DONE; REPO_MAP implementation rows.
+
+Bugs found by the tests in the inherited scaffold (verified failing first, then fixed — evidence the suite tests behavior, not renders):
+- nested treeitem `<li>` click bubbled to ancestors' `onClick` — clicking a child selected the root; fixed with `stopPropagation` (e2e regression test).
+- `settlementPreview` passed decimal strings to `allocateMinorUnits`, whose strict `integer()` guard rejects strings — converted to bigint for amount + weights after digit validation.
+- `pattern="[0-9]*"` on the amount input let native validation block submits silently before the app's honest `INVALID_AMOUNT` message; `pattern` removed so the explicit error path is reachable/tested (verified: jsdom enforces pattern on submit).
+- roving-focus state could lag a programmatic `.focus()` by a render; `keyDown` now resolves the event's actual target treeitem first, `onFocus` syncs state (guarded against focusin bubbling from descendant treeitems).
+
+Commands run and exact results: `pnpm install` exit 0 (11 projects); `pnpm -r build` exit 0 (4 tsc packages + apps/cli tsc + `vite build` → dist JS 344.20 kB/gzip 108.32 kB); `pnpm -r test` exit 0 — tests/math **169/169**, tests/signatures **110/110**, tests/evidence **50/50**, tests/explorer **24/24**; `pnpm -r typecheck` exit 0 (10 projects); `pnpm lint` exit 0 (0 warnings/0 errors, 82 files). `pnpm exec playwright --version` → not found initially (no dep); installed pinned `@playwright/test@1.63.0` + `playwright install chromium` (chromium/headless-shell 1243; cache held only ≤1234). `pnpm --filter @tessera/explorer test:e2e` → **7 passed (12.6s)**. Preview port note: `vite preview` bound `::1` on this host — config uses `localhost:4817` (4173 was already serving an unrelated process).
+
+Visual/browser evidence: `apps/explorer/e2e/artifacts/explorer-desktop.png` (1280×900) + `explorer-320px.png` (320×800 full page) committed; real-browser assertions in `e2e/smoke.spec.ts` cover labels, tree, table, keyboard, file input, responsive and reduced-motion paths.
+
+Contract/migration/security implications: none — `docs/`, `schemas/`, `shared/`, `fixtures/`, `packages/` sources untouched (verified via `git status`); explorer consumes them read-only via src aliases (same convention as tests/*). Packet path deviation: none — `apps/explorer/**`, `tests/explorer/**`, `reports/explorer-qa.md` all as targeted. New pinned deps: react/react-dom 19.3.0, vite 7.3.6, @vitejs/plugin-react 5.2.0, vitest/jsdom/RTL chain (tests), @playwright/test 1.63.0 (e2e only). No secrets; demo keys are deterministic throwaway fixtures labeled as such.
+
+External gates and smallest needed founder action: none for T06. Not implemented (later packets): live RPC source/node lookup beyond the loaded bundle (needs T04 adapter), progressive loading beyond the reader's existing zip caps, graph canvas (optional enhancement — table/tree path already exposes every node).
+
+Saved commit/artifact and next ready packet: single commit on `packet/t06` (not merged). **T04 remains the unblock for live reads**; T07 can now attack the explorer's bundle surface; T10 receives the independent generic demo + explorer as specified.
+
 ## Session 7 — 2026-09-12 — T05 independent evidence export, verifier and recovery
 
 Date / agent / branch / packet: 2026-09-13 / Devin implementation agent / `packet/t05` / T05.

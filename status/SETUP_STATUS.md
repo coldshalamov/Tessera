@@ -31,3 +31,4 @@ Keep test and live identifiers separate. A tool returning a local simulation doe
 | supabase CLI | not installed; install as dev dep (`supabase` npm package) when needed |
 | Tessera pnpm workspace | installed on `packet/t01` — `@tessera/types` + `@tessera/math` build/test/typecheck/lint clean (T01) |
 | Tessera signing workspace | `@tessera/identity` + `tests/signatures` added on `packet/t02` — build/test/typecheck/lint clean (T02); signing dep `@noble/ed25519@3.2.0` pinned; no provider account provisioned |
+| Tessera explorer workspace | `apps/explorer` + `tests/explorer` added on `packet/t06` — build/test/typecheck/lint clean + Playwright e2e 7/7 (T06); pinned React 19.3.0 / Vite 7.3.6 / @playwright/test 1.63.0; chromium-1243 downloaded to the machine's ms-playwright cache |

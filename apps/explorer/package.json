@@ -1,0 +1,30 @@
+{
+  "name": "@tessera/explorer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Generic read-only Tessera protocol explorer (docs/08, packet T06). Local demo + offline evidence-bundle inspection only — no wallet, no chain-finality claims.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test:e2e": "playwright test",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@tessera/evidence": "workspace:*",
+    "@tessera/math": "workspace:*",
+    "@tessera/types": "workspace:*",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "24.13.3",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "5.2.0",
+    "typescript": "5.9.3",
+    "vite": "7.3.6"
+  }
+}
