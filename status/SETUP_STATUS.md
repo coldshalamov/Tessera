@@ -11,7 +11,8 @@ No external resources were provisioned in the specification session. Fill IDs on
 | Private R2 bucket | demo | Not created | — | Account/billing activation if required |
 | SMTP sender | demo | Not configured | — | Domain/account verification |
 | Signing identity | test/pilot | Default: platform-provisioned server-custodied Ed25519 with in-settings export; managed embedded provider is an optional upgrade | `reports/identity-spike.md` (Privy/Crossmint export/recovery/pricing facts, T02) | Provider/custody review before any switch — founder picks provider, creates account, supplies credentials, approves pricing |
-| Tessera program | local/devnet/mainnet | Not deployed | — | Mainnet budget/authority approval |
+| Tessera program | localnet | Deployed to local validator only (T03/T04 runs; fresh genesis each run) | program id `3fkMf7oJhVkiJF3Q7N6TzbRs16gsDFrJWXHNZcSFvytX` (dev keypair); T04 live run genesis `2yBx3b8KtEU1i9YYstVXPMAJh5K8SsYWcYRuuADwYCs9`, evidence `reports/sdk-conformance.md` | Devnet/mainnet budget/authority approval |
+| Sponsor key/budget | localnet | Test-only ephemeral sponsor keypair exercised by relayer on localnet; no persistent sponsor wallet exists | `reports/sdk-conformance.md` — sponsor paid 6,183,520 lamports/contribution on localnet | Real funding and cap before any devnet/mainnet use |
 | Sponsor key/budget | mainnet | Disabled | — | Funding and cap |
 | Stripe/Connect | live | Disabled | — | Business/KYC/fees/terms |
 | Brand/domain | public | Not cleared/purchased | — | Naming review and checkout |
@@ -32,3 +33,5 @@ Keep test and live identifiers separate. A tool returning a local simulation doe
 | Tessera pnpm workspace | installed on `packet/t01` — `@tessera/types` + `@tessera/math` build/test/typecheck/lint clean (T01) |
 | Tessera signing workspace | `@tessera/identity` + `tests/signatures` added on `packet/t02` — build/test/typecheck/lint clean (T02); signing dep `@noble/ed25519@3.2.0` pinned; no provider account provisioned |
 | Tessera explorer workspace | `apps/explorer` + `tests/explorer` added on `packet/t06` — build/test/typecheck/lint clean + Playwright e2e 7/7 (T06); pinned React 19.3.0 / Vite 7.3.6 / @playwright/test 1.63.0; chromium-1243 downloaded to the machine's ms-playwright cache |
+| Tessera SDK workspace | `@tessera/sdk` + `tests/sdk` added on `packet/t04` — build/test/typecheck/lint clean (T04); Workers-safe (fetch + WebCrypto + `@noble/ed25519` only, no `@solana/web3.js`/Anchor client); packed `tessera-sdk-0.1.0.tgz` sha256 `d5b3a21f0f9cee56ed22e82b688cb1230a5d455ec93b3db50cc9aeec4d0896a1` (gitignored artifact) |
+| Tessera relayer service | `services/relayer` added on `packet/t04` — local/devnet only (mainnet mode refused); sponsor key via env/file only; mandatory caps; no running instance provisioned |

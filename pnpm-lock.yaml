@@ -255,7 +255,28 @@ importers:
         specifier: workspace:*
         version: link:../types
 
+  packages/sdk:
+    dependencies:
+      '@noble/ed25519':
+        specifier: 3.2.0
+        version: 3.2.0
+      '@tessera/math':
+        specifier: workspace:*
+        version: link:../math
+      '@tessera/types':
+        specifier: workspace:*
+        version: link:../types
+
   packages/types: {}
+
+  services/relayer:
+    dependencies:
+      '@tessera/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
+      '@tessera/types':
+        specifier: workspace:*
+        version: link:../../packages/types
 
   tests/evidence:
     devDependencies:
@@ -343,6 +364,33 @@ importers:
       vitest:
         specifier: 3.2.7
         version: 3.2.7(@types/node@24.13.3)(jsdom@30.0.1)
+
+  tests/sdk:
+    devDependencies:
+      '@noble/ed25519':
+        specifier: 3.2.0
+        version: 3.2.0
+      '@tessera/math':
+        specifier: workspace:*
+        version: link:../../packages/math
+      '@tessera/relayer':
+        specifier: workspace:*
+        version: link:../../services/relayer
+      '@tessera/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
+      '@tessera/types':
+        specifier: workspace:*
+        version: link:../../packages/types
+      '@types/node':
+        specifier: 24.13.3
+        version: 24.13.3
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: 3.2.7
+        version: 3.2.7(@types/node@24.13.3)
 
   tests/signatures:
     devDependencies:
