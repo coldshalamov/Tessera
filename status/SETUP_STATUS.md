@@ -4,7 +4,7 @@ No external resources were provisioned in the specification session. Fill IDs on
 
 | Resource | Environment | State | Identifier / evidence | Human gate |
 |---|---|---|---|---|
-| GitHub repository | source | Founder plans to create | Not supplied | Owner/visibility/remote |
+| GitHub repository | source | Existing repository; feature branches and draft PR workflow | `https://github.com/coldshalamov/Tessera` verified via connector and `git fetch origin`, 2026-10-20 | Founder review before merging significant changes |
 | Cloudflare project | demo | Not created | — | Authorized account/terms |
 | Supabase project | demo | Not created | — | Authorized account |
 | Google OAuth | demo | Not configured | — | Account/consent configuration |
@@ -19,6 +19,16 @@ No external resources were provisioned in the specification session. Fill IDs on
 | Content/legal contact | public | Not configured | — | Actual permissions/contact/terms |
 
 Keep test and live identifiers separate. A tool returning a local simulation does not change a live resource's state.
+
+## Explorer extension — verified 2026-10-20
+
+`codex/explorer-economic-preview` adds an interactive map, exact hypothetical
+descendant comparison, and input/version-bound settlement results. Local/offline
+mode only; no RPC, custody, chain, provider or payment resource was provisioned.
+All 35 focused tests passed; all 9 distinct Chromium cases passed across the suite
+and a focused rerun. Production build, workspace typecheck and lint passed.
+Browser cache needed `pnpm --filter @tessera/explorer exec playwright install chromium --only-shell`
+(headless shell 1243). See WORK_LOG Session 10 for failed attempts and final evidence.
 
 ## Local toolchain (verified 2026-09-12)
 

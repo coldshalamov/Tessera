@@ -20,7 +20,14 @@ export function PayoutPanel(props: {
 }): React.JSX.Element {
   const { payout, chain } = props.view;
   const [amount, setAmount] = useState('100000');
-  const [settlement, setSettlement] = useState<SettlementResult | null>(null);
+  const [preview, setPreview] = useState<{
+    node: NodeRecordV1;
+    amount: string;
+    result: SettlementResult;
+  } | null>(null);
+  // A result belongs to the exact input and immutable version used to calculate it.
+  const settlement = preview?.node === props.view.node && preview.amount === amount.trim()
+    ? preview.result : null;
 
   const nodeByAddr = new Map<string, NodeRecordV1>(chain.map((n) => [n.node_ref.node_address, n]));
   const namesFor = (beneficiary: string): string[] => {
@@ -36,10 +43,10 @@ export function PayoutPanel(props: {
     e.preventDefault();
     const trimmed = amount.trim();
     if (!/^[0-9]+$/.test(trimmed)) {
-      setSettlement({ ok: false, code: 'INVALID_AMOUNT', message: 'enter a non-negative integer minor-unit amount (digits only)' });
+      setPreview({ node: props.view.node, amount: trimmed, result: { ok: false, code: 'INVALID_AMOUNT', message: 'enter a non-negative integer minor-unit amount (digits only)' } });
       return;
     }
-    setSettlement(settlementPreview(chain, trimmed));
+    setPreview({ node: props.view.node, amount: trimmed, result: settlementPreview(chain, trimmed) });
   };
 
   return (
@@ -169,7 +176,7 @@ export function PayoutPanel(props: {
                     <td />
                     <td className="num mono">
                       Σ {formatUnits(settlement.total)}{' '}
-                      {settlement.total === amount.trim() ? '= input (conserved)' : `≠ input ${amount.trim()} (INCONSISTENT)`}
+                      {BigInt(settlement.total) === BigInt(amount.trim()) ? '= input (conserved)' : `≠ input ${amount.trim()} (INCONSISTENT)`}
                     </td>
                   </tr>
                 </tfoot>

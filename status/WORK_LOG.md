@@ -1,5 +1,72 @@
 # Work log
 
+## Session 10 — 2026-10-20 — interactive economics and immutable descendant preview
+
+Branch / scope: `codex/explorer-economic-preview`; bounded T06 product extension.
+Read AGENTS.md, founding decisions, integration contract, explorer specification,
+T06 packet and actual implementation. `PROJECT_MATURATION.md` was absent locally;
+read the directive in open draft PR #1 via the GitHub connector. Its remote-main
+snapshot predates the three existing local T04/T06 commits. The new maturation
+record preserves that direction and corrects implemented/planned distinctions.
+
+Implemented:
+
+- Branching economic map built from loaded records; pointer/keyboard version
+  selection updates URL, selected chain and exact payout denominators. Existing
+  complete ARIA tree is retained. Visual map is limited to 80 nodes.
+- Live hypothetical descendant claim controls call `@tessera/math`'s integer
+  append arithmetic. Show residual in, effective units, residual out, issued total,
+  current/new exact ratios and display-only percentages. Invalid/incomplete bundles
+  cannot enable this preview. No synthetic account/signature or mutable historical
+  record is constructed. Network eligibility is explicitly unverified.
+- Fixed stale settlement display when amount/version changes and false
+  conservation warnings for leading-zero integer inputs.
+- Added exact arithmetic/boundary/component regressions and browser interactions
+  proving graph selection, keyboard slider changes, input rejection, responsive
+  behavior, stale-result clearing and unchanged exported ZIP bytes.
+- Added current maturation guidance and corrected the earlier non-audio claim:
+  music-stems fixtures are audio-domain even though they contain no real audio.
+
+Commands and actual outcomes (Git Bash, invoked explicitly from PowerShell):
+
+- `pnpm -r build` → passed; explorer CSS 8.30 kB, JS 351.10 kB (110.07 kB gzip).
+- `pnpm --filter @tessera-tests/explorer test` → 3 files / **35 passed**.
+- `pnpm -r typecheck && pnpm lint` → passed, no lint errors.
+- `TESSERA_QA_DIR=<artifact directory> pnpm --filter @tessera/explorer test:e2e`
+  first failed at browser launch: cached headless-shell 1243 absent; no app tested.
+- `pnpm --filter @tessera/explorer exec playwright install chromium --only-shell`
+  → downloaded headless-shell 1243 successfully; no source dependency change.
+- Same browser-suite command → **8 passed / 1 failed**; the new test's unscoped
+  `getByRole('status')` matched both preview error and verification status. Scoped
+  the locator to the descendant panel (test-only fix).
+- `TESSERA_QA_DIR=<artifact directory> pnpm --filter @tessera/explorer test:e2e --grep "graph selection|320px"`
+  → **2 passed**; all 9 distinct browser cases have now passed. The new interaction
+  observed no browser warnings/page errors and compared original/final downloads
+  byte-for-byte. Node's FORCE_COLOR/NO_COLOR runner warnings are not page errors.
+- `git diff --check` → passed before saving.
+
+Visual QA: regular Playwright used because Browser plugin is not available.
+Production Vite preview at `http://localhost:4817`, desktop 1280×720/1280×900 and
+320×800 mobile viewport. Identity/nonblank/overlay/console/interaction checks pass.
+Manually inspected map, exact comparison and mobile-panel screenshots; mobile
+tables/map scroll inside their own labeled regions, no horizontal page overflow.
+Screenshots saved outside source in
+`C:/Users/93rob/.codex/visualizations/2026/10/21/01a15c88-0396-7921-9119-8988e3b4d981/`:
+`economic-map.png`, `descendant-preview.png`, `descendant-320px.png`,
+`explorer-desktop.png`, `explorer-320px.png`.
+
+No shared contracts, schemas, fixtures, lockfiles, signing/custody or chain program
+changed in this slice. No deployment, merge, real funds or binding consent.
+Feature branch includes the three pre-existing unpublished local T04/T06 commits;
+its draft PR against origin/main therefore also exposes that foundation. Historical
+SDK/program live checks were not rerun or certified by this UI slice.
+
+Acceptance: this product slice is complete. T07/T09/T10 remain open; the explorer
+still has no live RPC source or signing interface. Next ready product slice is
+bounded SDK-backed explorer reads, followed by a writing/software demonstration.
+Morpheus's parallel M03 authentication repair is saved independently in its draft
+PR #2; durable DB-backed libraries and audio transport remain unfinished there.
+
 ## Session 9 — 2026-09-13 — T04 SDK, bounded sponsor relayer and finality reconciliation
 
 Date / agent / branch / packet: 2026-09-13 / Devin implementation agent / `packet/t04` (isolated worktree `Tessera-t04`, branched from `814c413` = main + T05 merge) / T04.

@@ -17,6 +17,8 @@ import { NodeTree } from './components/NodeTree.js';
 import { NodeDetail } from './components/NodeDetail.js';
 import { PayoutPanel } from './components/PayoutPanel.js';
 import { VerifyPanel } from './components/VerifyPanel.js';
+import { EconomicGraph } from './components/EconomicGraph.js';
+import { DescendantPanel } from './components/DescendantPanel.js';
 
 /**
  * Tessera Explorer — a compact, read-only protocol explorer (docs/08, T06).
@@ -205,6 +207,8 @@ export default function App(): React.JSX.Element {
 
             <ContextPanel loaded={loaded} />
 
+            {tree !== null && <EconomicGraph tree={tree} selected={selected} inPayoutChain={inPayoutChain} onSelect={select} />}
+
             <div className="columns">
               {tree !== null && (
                 <NodeTree
@@ -230,6 +234,8 @@ export default function App(): React.JSX.Element {
             </div>
 
             {view !== null && <PayoutPanel view={view} notInChain={notInChain} />}
+
+            {view !== null && <DescendantPanel view={view} verified={loaded.report.status === 'valid-offline'} />}
 
             <VerifyPanel report={loaded.report} />
           </>

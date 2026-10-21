@@ -197,6 +197,34 @@ input[type="text"] {
 .leaf-tag { background: #e6e1f7; color: #453183; border: 1px solid #b3a6dd; }
 
 /* --- tables ----------------------------------------------------------- */
+.graph-scroll { overflow: auto; max-height: 34rem; }
+.graph-surface { position: relative; }
+.graph-lines { position: absolute; inset: 0; pointer-events: none; }
+.graph-edge { fill: none; stroke: #aeb8c6; stroke-width: 2; }
+.graph-edge.active { stroke: var(--accent); stroke-width: 3; }
+.graph-node {
+  position: absolute; width: 218px; height: 70px; padding: 0.4rem 0.6rem;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  background: #f7f9fc; color: var(--ink); border-color: #aeb8c6; text-align: left;
+}
+.graph-node strong, .graph-node span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.graph-node span { font-size: 0.72rem; color: var(--muted); }
+.graph-node small { font-size: 0.65rem; color: var(--muted); }
+.graph-node.on-path { border-color: var(--accent); background: #edf4fe; }
+.graph-node[aria-pressed="true"] { border-width: 2px; background: #dfeafa; }
+.preview-heading { display: flex; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; }
+.preview-label { align-self: flex-start; border: 1px solid #b3a6dd; background: #ede8fa; color: #453183; padding: 0.2rem 0.45rem; border-radius: 4px; font-size: 0.72rem; }
+.claim-control { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin: 1rem 0; }
+.claim-control label { font-weight: 600; }
+.claim-control input[type="text"] { flex: 0 1 7rem; min-width: 5rem; }
+.claim-control input[type="range"] { flex: 1 1 14rem; accent-color: var(--accent); min-height: 2rem; }
+.claim-control .hint { flex-basis: 100%; }
+.preview-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: 0.6rem; margin: 0.75rem 0; }
+.preview-metrics > div { background: #f4f7fc; border-left: 2px solid var(--accent); padding: 0.6rem; }
+.preview-metrics dt { color: var(--muted); font-size: 0.8rem; }
+.preview-metrics dd { margin: 0.25rem 0 0; font-family: var(--mono); font-size: 0.88rem; overflow-wrap: anywhere; }
+.hypothetical-row { background: #f0edf9; }
+
 .table-scroll { overflow-x: auto; } /* a scrollable region, not page overflow */
 table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
 caption { text-align: left; color: var(--muted); font-size: 0.82rem; padding-bottom: 0.3rem; }

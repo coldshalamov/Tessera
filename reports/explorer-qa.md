@@ -1,5 +1,32 @@
 # Explorer QA — `apps/explorer` (T06)
 
+## 2026-10-20 extension
+
+Current extension on `codex/explorer-economic-preview`: interactive economic map,
+exact hypothetical-descendant claim comparison, and settlement results bound to
+the amount and immutable version used to calculate them. Valid offline evidence
+and complete ancestry are required for the new preview. No record is submitted.
+
+Validation: 35 focused tests passed; production build, workspace types and lint
+passed; all 9 distinct Chromium cases passed across the full run (8 pass, 1 test
+locator failure) and corrected focused rerun (2 pass). Full commands/failure
+history are in WORK_LOG Session 10. No relevant page errors or warnings occurred
+in the new interaction. The exported ZIP remained byte-for-byte identical after
+graph/claim interactions.
+
+Regular Playwright was used because Browser plugin is not available. Environment:
+`http://localhost:4817`, production Vite preview, desktop and 320px viewport. Manual
+screenshot inspection confirms the map and comparison render coherently; mobile
+wide tables/map scroll inside their own regions. Current screenshots are in
+`C:/Users/93rob/.codex/visualizations/2026/10/21/01a15c88-0396-7921-9119-8988e3b4d981/`.
+
+Corrections to the historical report below: a visual graph and arithmetic preview
+now exist; live RPC/signing do not. The stems example is audio-domain, despite
+having no real audio payloads. A separate non-audio example remains required for
+cross-repo acceptance. Browser emulation is not physical-device or production QA.
+
+## Historical T06 report
+
 Status date: 2026-09-13. Branch: `packet/t06`. Scope: `apps/explorer/**`,
 `tests/explorer/**`, `apps/explorer/e2e/**`. Consumed read-only:
 `packages/{types,math,evidence}` source. Shared surfaces

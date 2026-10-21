@@ -1,5 +1,5 @@
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { allocateMinorUnits, base58AddressToBytes } from '@tessera/math';
 import { MANIFEST_PATH, readZip, reconstructChain, utf8String, writeZip } from '@tessera/evidence';
 import App from '../../../apps/explorer/src/App.js';
@@ -29,7 +29,7 @@ async function renderLoadedDemo(): Promise<void> {
 
 /** Exact-ratio cell text of the row whose contribution title matches. */
 function ratioCell(title: RegExp): string {
-  const cell = screen.getByRole('rowheader', { name: title });
+  const cell = within(screen.getByRole('region', { name: 'Payout table' })).getByRole('rowheader', { name: title });
   const row = cell.closest('tr');
   const ratio = row?.querySelectorAll('td')[3]?.textContent ?? '';
   return ratio;
@@ -86,7 +86,7 @@ describe('payout table (acceptance: claim vs effective vs as-is)', () => {
     });
     expect(ratioCell(/Composition seed/)).toBe('200000000000/400000000000');
     expect(ratioCell(/Bass stem/)).toBe('200000000000/400000000000');
-    expect(screen.queryByRole('rowheader', { name: /Drum stem/ })).toBeNull();
+    expect(within(screen.getByRole('region', { name: 'Payout table' })).queryByRole('rowheader', { name: /Drum stem/ })).toBeNull();
     // URL tracks the selected version.
     await waitFor(() => {
       expect(window.location.hash).toMatch(/^#node=[1-9A-HJ-NP-Za-km-z]{32,44}$/);
@@ -100,7 +100,7 @@ describe('payout table (acceptance: claim vs effective vs as-is)', () => {
     await waitFor(() => {
       expect(screen.getByText(/200,000,000,000 units/)).toBeTruthy();
     });
-    const rows = screen.getAllByRole('rowheader');
+    const rows = within(screen.getByRole('region', { name: 'Payout table' })).getAllByRole('rowheader');
     const dataRows = rows.filter((r) => r.closest('tbody') !== null);
     expect(dataRows).toHaveLength(1);
     expect(ratioCell(/Composition seed/)).toBe('200000000000/200000000000');
@@ -108,6 +108,19 @@ describe('payout table (acceptance: claim vs effective vs as-is)', () => {
 });
 
 describe('settlement preview', () => {
+  it('hides an allocation when the amount or selected version changes', async () => {
+    await renderLoadedDemo();
+    fireEvent.click(screen.getByRole('button', { name: /preview split/i }));
+    expect(screen.getByRole('region', { name: 'Settlement preview' })).toBeTruthy();
+    fireEvent.change(screen.getByLabelText(/amount \(minor units, integer\)/i), { target: { value: '0007' } });
+    expect(screen.queryByRole('region', { name: 'Settlement preview' })).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: /preview split/i }));
+    expect(screen.getByText(/Σ 7 = input \(conserved\)/)).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: /Inspect Bass stem/ }));
+    expect(screen.queryByRole('region', { name: 'Settlement preview' })).toBeNull();
+    expect(ratioCell(/Composition seed/)).toBe('200000000000/400000000000');
+  });
+
   it('allocates a chosen amount and conserves every minor unit', async () => {
     await renderLoadedDemo();
     const input = screen.getByLabelText(/amount \(minor units, integer\)/i);
