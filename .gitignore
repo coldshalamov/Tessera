@@ -28,6 +28,8 @@ browser-state*.json
 .anchor/
 test-ledger/
 *.so
+# Package tarballs produced by `pnpm pack` are artifacts, not sources (T04)
+*.tgz
 
 *.mp3
 *.m4a

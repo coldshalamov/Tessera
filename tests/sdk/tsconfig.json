@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "lib": ["ES2023", "DOM"],
+    "paths": {
+      "@tessera/types": ["../../packages/types/src/index.ts"],
+      "@tessera/math": ["../../packages/math/src/index.ts"],
+      "@tessera/sdk": ["../../packages/sdk/src/index.ts"],
+      "@tessera/relayer": ["../../services/relayer/src/index.ts"]
+    }
+  },
+  "include": ["src", "vitest.config.ts"]
+}

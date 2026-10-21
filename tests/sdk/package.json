@@ -1,0 +1,20 @@
+{
+  "name": "@tessera-tests/sdk",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@noble/ed25519": "3.2.0",
+    "@tessera/math": "workspace:*",
+    "@tessera/relayer": "workspace:*",
+    "@tessera/sdk": "workspace:*",
+    "@tessera/types": "workspace:*",
+    "@types/node": "24.13.3",
+    "typescript": "5.9.3",
+    "vitest": "3.2.7"
+  }
+}

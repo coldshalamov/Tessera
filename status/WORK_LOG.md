@@ -1,5 +1,125 @@
 # Work log
 
+## Session 10 — 2026-10-20 — interactive economics and immutable descendant preview
+
+Branch / scope: `codex/explorer-economic-preview`; bounded T06 product extension.
+Read AGENTS.md, founding decisions, integration contract, explorer specification,
+T06 packet and actual implementation. `PROJECT_MATURATION.md` was absent locally;
+read the directive in open draft PR #1 via the GitHub connector. Its remote-main
+snapshot predates the three existing local T04/T06 commits. The new maturation
+record preserves that direction and corrects implemented/planned distinctions.
+
+Implemented:
+
+- Branching economic map built from loaded records; pointer/keyboard version
+  selection updates URL, selected chain and exact payout denominators. Existing
+  complete ARIA tree is retained. Visual map is limited to 80 nodes.
+- Live hypothetical descendant claim controls call `@tessera/math`'s integer
+  append arithmetic. Show residual in, effective units, residual out, issued total,
+  current/new exact ratios and display-only percentages. Invalid/incomplete bundles
+  cannot enable this preview. No synthetic account/signature or mutable historical
+  record is constructed. Network eligibility is explicitly unverified.
+- Fixed stale settlement display when amount/version changes and false
+  conservation warnings for leading-zero integer inputs.
+- Added exact arithmetic/boundary/component regressions and browser interactions
+  proving graph selection, keyboard slider changes, input rejection, responsive
+  behavior, stale-result clearing and unchanged exported ZIP bytes.
+- Added current maturation guidance and corrected the earlier non-audio claim:
+  music-stems fixtures are audio-domain even though they contain no real audio.
+
+Commands and actual outcomes (Git Bash, invoked explicitly from PowerShell):
+
+- `pnpm -r build` → passed; explorer CSS 8.30 kB, JS 351.10 kB (110.07 kB gzip).
+- `pnpm --filter @tessera-tests/explorer test` → 3 files / **35 passed**.
+- `pnpm -r typecheck && pnpm lint` → passed, no lint errors.
+- `TESSERA_QA_DIR=<artifact directory> pnpm --filter @tessera/explorer test:e2e`
+  first failed at browser launch: cached headless-shell 1243 absent; no app tested.
+- `pnpm --filter @tessera/explorer exec playwright install chromium --only-shell`
+  → downloaded headless-shell 1243 successfully; no source dependency change.
+- Same browser-suite command → **8 passed / 1 failed**; the new test's unscoped
+  `getByRole('status')` matched both preview error and verification status. Scoped
+  the locator to the descendant panel (test-only fix).
+- `TESSERA_QA_DIR=<artifact directory> pnpm --filter @tessera/explorer test:e2e --grep "graph selection|320px"`
+  → **2 passed**; all 9 distinct browser cases have now passed. The new interaction
+  observed no browser warnings/page errors and compared original/final downloads
+  byte-for-byte. Node's FORCE_COLOR/NO_COLOR runner warnings are not page errors.
+- `git diff --check` → passed before saving.
+
+Visual QA: regular Playwright used because Browser plugin is not available.
+Production Vite preview at `http://localhost:4817`, desktop 1280×720/1280×900 and
+320×800 mobile viewport. Identity/nonblank/overlay/console/interaction checks pass.
+Manually inspected map, exact comparison and mobile-panel screenshots; mobile
+tables/map scroll inside their own labeled regions, no horizontal page overflow.
+Screenshots saved outside source in
+`C:/Users/93rob/.codex/visualizations/2026/10/21/01a15c88-0396-7921-9119-8988e3b4d981/`:
+`economic-map.png`, `descendant-preview.png`, `descendant-320px.png`,
+`explorer-desktop.png`, `explorer-320px.png`.
+
+No shared contracts, schemas, fixtures, lockfiles, signing/custody or chain program
+changed in this slice. No deployment, merge, real funds or binding consent.
+Feature branch includes the three pre-existing unpublished local T04/T06 commits;
+its draft PR against origin/main therefore also exposes that foundation. Historical
+SDK/program live checks were not rerun or certified by this UI slice.
+
+Acceptance: this product slice is complete. T07/T09/T10 remain open; the explorer
+still has no live RPC source or signing interface. Next ready product slice is
+bounded SDK-backed explorer reads, followed by a writing/software demonstration.
+Morpheus's parallel M03 authentication repair is saved independently in its draft
+PR #2; durable DB-backed libraries and audio transport remain unfinished there.
+
+## Session 9 — 2026-09-13 — T04 SDK, bounded sponsor relayer and finality reconciliation
+
+Date / agent / branch / packet: 2026-09-13 / Devin implementation agent / `packet/t04` (isolated worktree `Tessera-t04`, branched from `814c413` = main + T05 merge) / T04.
+
+Actual files and behavior implemented:
+- `packages/sdk/` (Workers-safe; fetch JSON-RPC + WebCrypto + `@noble/ed25519` only — no `@solana/web3.js`, no Anchor client): `createSolanaTesseraPort` implementing the shared `TesseraPort` plus deployment/relayer extensions — `connect` (genesis pin, program-deployed/executable check, DeploymentConfig decode + version/genesis checks), `initializeDeployment`, `createProject` (PDA init-or-compare idempotency), `quoteContribution` (real rent quotes), `prepareContribution`/`submitSignedContribution`, `preflightContribution` (shared on-chain policy gate), `buildContributionMessage` (server-side compile for sponsor co-signing), `submitSignedWire`, `getSubmission` (confirmed→finalized upgrade), `getNode` (finalized read, digest re-verify, economics recompute), `getPayouts`/`exportBranch`/`verifyRelease`, `prepareStatement`/`submitStatement` (honest `UNSUPPORTED_VERSION` scaffold — publish_statement is not deployed). Hand-written Borsh/Anchor instruction encoders, exact fixed-layout account decoders, legacy Solana transaction compiler/parser/serializer, PDA derivation, error mapping, reconcile-aware submission (never blindly resubmits; PDA compare decides replay/conflict/expired). `mainnet` mode is read-only (`MAINNET_WRITES_DISABLED`).
+- `services/relayer/` (local/devnet only; mainnet refused at config): two-call intake — `prepare` compiles the canonical message itself after consent-signature verify + on-chain preflight, `submit` verifies every required client signature over the stored message, runs exact-match `reviewSponsoredMessage` (allowlisted program/discriminators/account-metas, sponsor-is-fee-payer, no stray signers/instructions/system transfers), enforces mandatory daily + per-account lamport caps, then co-signs as fee payer and submits via the SDK path. Arbitrary client wire bytes are never accepted. Atomic tmp+rename JSON outbox (corrupt file = hard failure, recorded intents never dropped), idempotency keys bound to intent digests, dead blockhashes rebuild + require fresh client signature, kill-switch env/file pause, append-only secret-free JSONL audit, bounded HTTP adapter + CLI. Sponsor key loaded once at boot from `TESSERA_SPONSOR_KEYPAIR_FILE`/`_JSON` only.
+- `packages/types/src/port.ts` (the only shared-contract touch): additive `PortErrorCode` members for chain-adapter + relayer failures (`RPC_UNREACHABLE`, `TRANSACTION_EXPIRED`, `NETWORK_MISMATCH`, `PROGRAM_NOT_DEPLOYED`, `INSTRUCTION_REJECTED`, `MAINNET_WRITES_DISABLED`, `SPONSOR_PAUSED`, `MISSING_TX_SIGNATURES`) — backward-compatible, no renames; existing codes (`INVALID_SIGNATURE`, `NONCE_REUSE_MISMATCH`, `SPONSOR_BUDGET_EXHAUSTED`, `UNSUPPORTED_VERSION`, …) reused unchanged.
+- `tests/sdk/` (66 Vitest cases): golden account-layout decode vs `generated/vectors/account-layout-v1.json`, IDL discriminator pinning vs `generated/idl/tessera.json`, tx compile/parse/signature-order suite, mock-RPC port suite (connect checks, mainnet refusal, statement scaffold, digest equality, simulate→send→poll, idempotent replay, consent/digest/Custom-error mapping, payouts, getNode re-verification), relayer review/outbox/config/service suite (8-case reject matrix, caps, kill switch, idempotent intake, audit content), and the env-gated live proof.
+- `reports/sdk-conformance.md` (all measured values + honest gaps); BACKLOG T04 → DONE; REPO_MAP implementation rows; `.gitignore` covers the packed tarball.
+
+Commands run and exact results:
+- `pnpm -r build` → exit 0 (all 7 packages emit `dist/`). `pnpm -r test` → exit 0: tests/signatures 110, tests/math 169, tests/evidence 50, tests/sdk **65 pass + 1 env-gated skip** (394 total). `pnpm -r typecheck` → exit 0 (12 projects, strict). `pnpm lint` → exit 0 (0 warnings/0 errors, oxlint 91 files).
+- WSL2: `CARGO_TARGET_DIR=/root/tessera-target anchor build --arch v2` → `tessera.so` 229,064 B, sha256 `a097fe4c…0085` — byte-identical to T03 (no program drift). `solana-test-validator --bpf-program …` on 127.0.0.1:8899, genesis `2yBx3b8KtEU1i9YYstVXPMAJh5K8SsYWcYRuuADwYCs9`.
+- `TESSERA_SDK_LIVE=1 pnpm --filter @tessera-tests/sdk test` → **pass (53.7 s)**: live initialize_deployment + create_project + publish_root + relayer-sponsored child/sibling appends; on-chain `intent_digest` equals the SDK/`types` wire digest; same-intent resubmit returns the same submission id with zero sends (PDA-compare replay); `getTransaction` shows sponsor as `accountKeys[0]` fee payer; wrong-genesis `connect` rejected (`NETWORK_MISMATCH`); submissions observed confirmed→finalized. Outbox recorded sponsor outlay **6,183,520 lamports/contribution** — exactly T03's measured rent+fee.
+- `pnpm --filter @tessera/sdk pack` → `tessera-sdk-0.1.0.tgz`, sha256 `d5b3a21f0f9cee56ed22e82b688cb1230a5d455ec93b3db50cc9aeec4d0896a1` (gitignored; contains dist + src + README + package.json).
+
+Visual/browser evidence: n/a — library/service packet; live-chain evidence quoted above and in the report.
+
+Contract/migration/security implications: `docs/`, `schemas/`, `shared/`, `fixtures/`, `programs/tessera`, Morpheus untouched (verified via `git status`); program binary rebuilt byte-identical. Only additive error-code extension in `packages/types`. No secrets committed — all live-run keypairs were ephemeral in-memory; keypair files are gitignored. Localnet finality is labeled chain-commitment truth, not mainnet permanence; devnet was not exercised (needs funded sponsor + ops decision).
+
+External gates and smallest needed founder action: none for T04 itself. Devnet run needs a funded devnet sponsor wallet (founder action, T09). Relayer production hardening (auth/TLS/HSM custody, high-throughput store) remains T07/T09 scope.
+
+Saved commit/artifact and next ready packet: single commit on `packet/t04` (not merged). **T06 ready** (explorer consumes the SDK port); T07 can now attack the real relayer/SDK surface; T09 consumes the measured sponsor costs.
+
+## Session 8 — 2026-09-13 — T06 generic explorer and non-audio demonstration
+
+Date / agent / branch / packet: 2026-09-13 / Devin implementation agent / `packet/t06` / T06 (continued — a prior agent was killed early leaving an uncommitted scaffold; inspected, kept, corrected, finished).
+
+Actual files and behavior implemented:
+- `apps/explorer/` (Vite 7.3.6 + React 19.3.0 + TS, read-only, no wallet/ticker/Morpheus concepts): source panel (bundle `.zip`/lone `bundle.json` drop+picker, node-address inspect scoped to loaded data, in-tab demo); chain context (genesis/program/project/mode/exporter/record count/leaf); ARIA `tree` with roving tabindex and full keyboard control — every node inspectable without a canvas; selected-version facts incl. claim bps, residual in→out, effective units, issued total, exact as-is ratio, custody, digests, references, clickable ancestors; as-is payout table (exact `num/den` authority + display-only %, outside-chain naming) re-denominating per selected version; settlement preview via `allocateMinorUnits` with conservation line; per-check verification panel with plain-language help and banned-phrase-free statuses; export buttons (bundle bytes + report JSON) with honest "download unavailable" fallback. All loads go through `packages/evidence` readers/verifier; all economics through `packages/math` — no reimplemented logic.
+- `apps/explorer/src/demo/stems.ts`: "Night Circuit" non-audio demo — 5 signed music-stem contributions (root 2000 bps; sibling drum/bass branches 3000/2500 bps; melody 1500; mix 1000 with cross-branch references), real local port + real bundle writer + RELEASE_ANCHOR release manifest; selected leaf denominates at 571.6e9 issued. Fixture-grade throwaway keys, local simulated mode labels.
+- `tests/explorer/` (24 Vitest cases, jsdom + real WebCrypto): demo load, exact ratios, re-denomination incl. hash tracking, root-collapse, settlement DOM-vs-library equality + conservation + malformed/boundary rejections, per-check WARN/identity/finality non-claims + banned-phrase DOM scan, keyboard navigation/selection, pasted-address hit/miss, zip + manifest-only + non-bundle + tampered loads, download-unavailable honesty, model-level loader/tree/economics/settlement coverage.
+- `apps/explorer/e2e/` (7 Playwright cases, `@playwright/test` 1.63.0 pinned, real Chromium 153 against `vite preview` of the built bundle): demo labels, nested-click regression, keyboard-only flow, file-picker round-trip, 320px no-horizontal-scroll, reduced-motion, committed screenshots `e2e/artifacts/*.png`. `test:e2e` is deliberately outside `pnpm -r test` (browserless CI stays green).
+- `reports/explorer-qa.md`; BACKLOG T06 → DONE; REPO_MAP implementation rows.
+
+Bugs found by the tests in the inherited scaffold (verified failing first, then fixed — evidence the suite tests behavior, not renders):
+- nested treeitem `<li>` click bubbled to ancestors' `onClick` — clicking a child selected the root; fixed with `stopPropagation` (e2e regression test).
+- `settlementPreview` passed decimal strings to `allocateMinorUnits`, whose strict `integer()` guard rejects strings — converted to bigint for amount + weights after digit validation.
+- `pattern="[0-9]*"` on the amount input let native validation block submits silently before the app's honest `INVALID_AMOUNT` message; `pattern` removed so the explicit error path is reachable/tested (verified: jsdom enforces pattern on submit).
+- roving-focus state could lag a programmatic `.focus()` by a render; `keyDown` now resolves the event's actual target treeitem first, `onFocus` syncs state (guarded against focusin bubbling from descendant treeitems).
+
+Commands run and exact results: `pnpm install` exit 0 (11 projects); `pnpm -r build` exit 0 (4 tsc packages + apps/cli tsc + `vite build` → dist JS 344.20 kB/gzip 108.32 kB); `pnpm -r test` exit 0 — tests/math **169/169**, tests/signatures **110/110**, tests/evidence **50/50**, tests/explorer **24/24**; `pnpm -r typecheck` exit 0 (10 projects); `pnpm lint` exit 0 (0 warnings/0 errors, 82 files). `pnpm exec playwright --version` → not found initially (no dep); installed pinned `@playwright/test@1.63.0` + `playwright install chromium` (chromium/headless-shell 1243; cache held only ≤1234). `pnpm --filter @tessera/explorer test:e2e` → **7 passed (12.6s)**. Preview port note: `vite preview` bound `::1` on this host — config uses `localhost:4817` (4173 was already serving an unrelated process).
+
+Visual/browser evidence: `apps/explorer/e2e/artifacts/explorer-desktop.png` (1280×900) + `explorer-320px.png` (320×800 full page) committed; real-browser assertions in `e2e/smoke.spec.ts` cover labels, tree, table, keyboard, file input, responsive and reduced-motion paths.
+
+Contract/migration/security implications: none — `docs/`, `schemas/`, `shared/`, `fixtures/`, `packages/` sources untouched (verified via `git status`); explorer consumes them read-only via src aliases (same convention as tests/*). Packet path deviation: none — `apps/explorer/**`, `tests/explorer/**`, `reports/explorer-qa.md` all as targeted. New pinned deps: react/react-dom 19.3.0, vite 7.3.6, @vitejs/plugin-react 5.2.0, vitest/jsdom/RTL chain (tests), @playwright/test 1.63.0 (e2e only). No secrets; demo keys are deterministic throwaway fixtures labeled as such.
+
+External gates and smallest needed founder action: none for T06. Not implemented (later packets): live RPC source/node lookup beyond the loaded bundle (needs T04 adapter), progressive loading beyond the reader's existing zip caps, graph canvas (optional enhancement — table/tree path already exposes every node).
+
+Saved commit/artifact and next ready packet: single commit on `packet/t06` (not merged). **T04 remains the unblock for live reads**; T07 can now attack the explorer's bundle surface; T10 receives the independent generic demo + explorer as specified.
+
+
 ## Session 7 — 2026-09-12 — T05 independent evidence export, verifier and recovery
 
 Date / agent / branch / packet: 2026-09-13 / Devin implementation agent / `packet/t05` / T05.

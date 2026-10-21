@@ -1,0 +1,30 @@
+{
+  "name": "@tessera/relayer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Bounded sponsor relayer for Tessera writes (local/devnet only). Compiles its own transaction from a reviewed intent, enforces allowlist + hard lamport caps, verifies user signatures, then co-signs as fee payer. Never accepts client-supplied wire transactions for sponsor signing.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "tessera-relayer": "./dist/main.js"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "node dist/main.js"
+  },
+  "dependencies": {
+    "@tessera/sdk": "workspace:*",
+    "@tessera/types": "workspace:*"
+  }
+}
